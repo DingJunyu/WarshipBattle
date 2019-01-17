@@ -22,11 +22,17 @@ public:
 	void SetMainPart() { isMainPart = true; }
 
 private:
+	//パーツのHP
 	int heartPoint;
+	int MaxHeartPoint;
+	//パーツの相対位置とサイズ
 	double relativeCoordX;
 	double relativeCoordY;
 	double length;
 	double width;
+	//パーツはも壊れたか
 	bool damaged;
-	bool isMainPart;
+	bool isMainPart;//このパーツは大事なパーツだか
+	double armorOntheSide;
+	double armorOntheTop;
 };

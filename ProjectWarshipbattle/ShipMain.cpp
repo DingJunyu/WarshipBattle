@@ -4,7 +4,7 @@
 
 ShipMain::ShipMain()
 {
-	alive = true;
+
 }
 
 
