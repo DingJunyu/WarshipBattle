@@ -13,7 +13,7 @@ ShipCrashParts::~ShipCrashParts()
 {
 }
 
-void ShipCrashParts::MinusHP(double damage) {
+void ShipCrashParts::MinusHP(int damage) {
 	//パーツのHPが減る時は生きる状態を確認
 	heartPoint -= damage;
 	if (heartPoint <= 0)

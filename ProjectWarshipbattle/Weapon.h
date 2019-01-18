@@ -3,12 +3,30 @@ class Weapon
 {
 public:
 	Weapon();
+	Weapon(double RCX, double RCZ, double L, double W,
+		double ROZ, double ROY,int MHP,double AOS,double AOT) :
+		relativeCoordX(RCX),relativeCoordZ(RCZ),length(L),
+		width(W),radianOnZ(ROZ),radianOnY(ROY),heartPoint(MHP),
+		maxHeartPoint(MHP),armorOntheSide(AOS),armorOntheTop(AOT){}
 	~Weapon();
 
-	//問い合わせ関数
+	//データ問い合わせ関数
 	int ReferNumbefofGuns() { return numberofGuns; }
 	int ReferReloadTime() { return reloadTime; }
 	int ReferLastShootedTime() { return lastShootedTime; }
+	double ReferCalibre() { return calibre; }
+	double ReferRelativeCoordX() { return relativeCoordX; }
+	double ReferRelativeCoordZ() { return relativeCoordZ; }
+	double ReferLength() { return length; }
+	double ReferWidth() { return width; }
+	double ReferRadianOnZ() { return radianOnZ; }
+	double ReferRadianOnY() { return radianOnY; }
+	double ReferHP() { return heartPoint; }
+	double ReferMaxHP() { return maxHeartPoint; }
+	double ReferArmorOntheSide() { return armorOntheSide; }
+	double ReferArmorOntheTop() { return armorOntheTop; }
+
+	//状態問い合わせ関数
 	bool ReferShootable();//射撃できればtrueを戻す
 
 
@@ -22,7 +40,7 @@ private:
 	int *turrentHandle;//画像データ保存用
 	
 	double relativeCoordX;
-	double relativeCoordY;
+	double relativeCoordZ;
 	double length;
 	double width;
 	double radianOnZ;//水平面の角度

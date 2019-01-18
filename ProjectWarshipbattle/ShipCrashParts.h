@@ -2,24 +2,28 @@
 class ShipCrashParts
 {
 public:
-	ShipCrashParts();
+	ShipCrashParts(bool mainPart) :isMainPart(mainPart) {}
 	~ShipCrashParts();
 
+	//データ問い合わせ関数
 	double ReferRelativeCoordX() { return relativeCoordX; }
-	double ReferRelativeCoordY() { return relativeCoordY; }
+	double ReferRelativeCoordZ() { return relativeCoordZ; }
 	double ReferLength() { return length; }
 	double ReferWidth() { return width; }
-	bool ReferDamaged() { return damaged; }
 	int ReferHeartPoint() { return heartPoint; }
+
+	//状態問い合わせ関数
+	bool ReferDamaged() { return damaged; }
 	bool ReferMainPart() { return isMainPart; }
 
-	void MinusHP(double damage);
+	//操作関数
+	void MinusHP(int damage);
 
+	//初期化関数など
 	void SetRelativeCoordX(double RCX) { relativeCoordX = RCX; }
-	void SetRelativeCoordY(double RCY) { relativeCoordY = RCY; }
+	void SetRelativeCoordZ(double RCZ) { relativeCoordZ = RCZ; }
 	void SetLength(double L) { length = L; }
 	void SetWidth(double W) { width = W; }
-	void SetMainPart() { isMainPart = true; }
 
 private:
 	//パーツのHP
@@ -27,7 +31,7 @@ private:
 	int MaxHeartPoint;
 	//パーツの相対位置とサイズ
 	double relativeCoordX;
-	double relativeCoordY;
+	double relativeCoordZ;
 	double length;
 	double width;
 	//パーツはも壊れたか

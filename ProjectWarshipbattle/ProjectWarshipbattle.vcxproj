@@ -150,17 +150,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AllMovableObjects.cpp" />
+    <ClCompile Include="Ammo.cpp" />
+    <ClCompile Include="AntiAir.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="Morale.cpp" />
     <ClCompile Include="ShipCrashParts.cpp" />
     <ClCompile Include="ShipMain.cpp" />
+    <ClCompile Include="Torpedo.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AllMovableObjects.h" />
+    <ClInclude Include="Ammo.h" />
+    <ClInclude Include="AntiAir.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="Morale.h" />
     <ClInclude Include="ShipCrashParts.h" />
     <ClInclude Include="ShipMain.h" />
+    <ClInclude Include="Torpedo.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

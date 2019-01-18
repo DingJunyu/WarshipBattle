@@ -1,12 +1,13 @@
 #pragma once
 #include"AllMovableObjects.h"
-class ShipMain
+#include"ShipCrashParts.h"
+class ShipMain :
+	public AllMovableObjects
 {
 public:
-	ShipMain();
+	ShipMain() : AllMovableObjects(true, false) {}
 	~ShipMain();
 
 private:
-	AllMovableObjects ShipBase;
-
+	ShipCrashParts * MainParts;
 };
