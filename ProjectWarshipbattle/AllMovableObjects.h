@@ -7,8 +7,8 @@ const double MIN_AIR_RESISTANCE = 0.5;
 class AllMovableObjects
 {
 public:
-	AllMovableObjects(bool fly, bool pla):flyable(fly),
-		plane(pla),alive(true){}
+	AllMovableObjects(bool fly, bool pla, bool poi) : flyable(fly),
+		plane(pla), alive(true), point(poi) {}
 	~AllMovableObjects();
 
 	//データ問い合わせ関数
@@ -20,6 +20,12 @@ public:
 	double ReferAirResistance() { return airResistance; }
 	double ReferRadianOnZ() { return radianOnZ; }
 	double ReferRadianOnY() { return radianOnY; }
+
+	//当たり判定用問い合わせ
+	double ReferLeft() { return coordX - width; }
+	double ReferRight() { return coordX; }
+	double ReferUpper() { return coordZ - length; }
+	double ReferLower() { return coordZ; }
 
 	//状態問い合わせ関数
 	bool ReferAlive() { return alive; }
@@ -54,5 +60,10 @@ private:
 
 	bool flyable;//これは飛べるものか（重力影響の有無）
 	bool plane;//これは飛べるものだが、重力を克服して飛ぶことができる
+
+	/*長方形を利用して簡単な当たり判定を行う*/
+	bool point;
+	double length;
+	double width;
 };
 

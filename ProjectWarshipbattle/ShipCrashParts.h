@@ -2,7 +2,8 @@
 class ShipCrashParts
 {
 public:
-	ShipCrashParts(bool mainPart) :isMainPart(mainPart) {}
+	ShipCrashParts(bool mainPart, double dft) :isMainPart(mainPart),
+		draft(dft) {}
 	~ShipCrashParts();
 
 	//データ問い合わせ関数
@@ -33,7 +34,9 @@ private:
 	double relativeCoordX;
 	double relativeCoordZ;
 	double length;
+	double draft;
 	double width;
+	double height;//高さ-当たり判定用
 	//パーツはも壊れたか
 	bool damaged;
 	bool isMainPart;//このパーツは大事なパーツだか

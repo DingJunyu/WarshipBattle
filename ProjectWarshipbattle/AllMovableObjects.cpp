@@ -20,7 +20,7 @@ void AllMovableObjects::Move() {
 void AllMovableObjects::FallingDown() {
 	if (coordZ > 0 && flyable && !plane) {
 		speedOnY -= GRAVITATIONAL_ACCELERATION;
-	}	
+	}
 }
 
 void AllMovableObjects::SetSpeed(double Spe) {
