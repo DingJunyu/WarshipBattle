@@ -4,7 +4,7 @@ class Bomb :
 	public AllMovableObjects
 {
 public:
-	Bomb() : AllMovableObjects(true, false, true) {}
+	Bomb() : AllMovableObjects(true, false, true, true) {}
 	~Bomb();
 
 private:

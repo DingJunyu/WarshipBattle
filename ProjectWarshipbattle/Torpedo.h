@@ -4,7 +4,7 @@ class Torpedo :
 	public AllMovableObjects
 {
 public:
-	Torpedo() : AllMovableObjects(true, false, true) {}
+	Torpedo() : AllMovableObjects(true, false, true, true) {}
 	~Torpedo();
 
 private:

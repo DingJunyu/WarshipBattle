@@ -4,7 +4,7 @@ class Ammo :
 	public AllMovableObjects
 {
 public:
-	Ammo() : AllMovableObjects(true, false, true) {}
+	Ammo() : AllMovableObjects(true, false, true, true) {}
 	~Ammo();
 };
 

@@ -8,7 +8,7 @@ class ShipMain :
 	public AllMovableObjects
 {
 public:
-	ShipMain() : AllMovableObjects(false, false, false) {}
+	ShipMain() : AllMovableObjects(false, false, false, true) {}
 	~ShipMain();
 
 	void RegistrateShipCrashParts();

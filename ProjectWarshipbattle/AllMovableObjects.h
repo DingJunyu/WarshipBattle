@@ -7,8 +7,8 @@ const double MIN_AIR_RESISTANCE = 0.5;
 class AllMovableObjects
 {
 public:
-	AllMovableObjects(bool fly, bool pla, bool poi) : flyable(fly),
-		plane(pla), alive(true), point(poi) {}
+	AllMovableObjects(bool fly, bool pla, bool poi,bool Cb) : flyable(fly),
+		plane(pla), alive(true), point(poi), crashable(Cb) {}
 	~AllMovableObjects();
 
 	//データ問い合わせ関数
@@ -37,12 +37,13 @@ public:
 
 	//状態設置関数
 	void NewCoordX(double X) { coordX = X; }
-	void NewCoordY(double Y) { coordY = Y; }
+	void NewCoordZ(double Z) { coordZ = Z; }
 	void SetRadianOnZ(double ROZ) { radianOnZ = ROZ; }
 	void SetRadianOnY(double ROY) { radianOnY = ROY; }
 	void Killed() { alive = false; }
 	void SetSpeed(double Spe);
 	void SetAirResistance(double AR) { airResistance = AR; }
+	void UnsetPlane() { plane = false; }
 	
 
 private:
@@ -58,12 +59,20 @@ private:
 	double radianOnY;//行く方向(垂直)
 	bool alive;//生きる状態
 
+	/*継承先で値を与える*/
 	bool flyable;//これは飛べるものか（重力影響の有無）
 	bool plane;//これは飛べるものだが、重力を克服して飛ぶことができる
 
 	/*長方形を利用して簡単な当たり判定を行う*/
-	bool point;
+	/*継承先で値を与える*/
+	bool point;//点と判断する時は長さなどを使わない
 	double length;
 	double width;
+
+	//当たり判定が必要かどうか
+	bool crashable;
+	
+	//画像のハンドル
+	int *PictureHandle;
 };
 

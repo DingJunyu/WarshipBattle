@@ -37,3 +37,13 @@ enum PlaneWeaponType {
 	TORPEDO_PW,
 	MACHINE_GUN_PW
 };
+
+enum PlaneStatus {
+	FLYING = 401,
+	FIGHTING,
+	TAKINGOFF,
+	LANDING,
+	FALLING,
+	SPEEDUP,
+	SPEEDDOWN
+};
