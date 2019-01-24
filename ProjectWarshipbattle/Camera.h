@@ -1,4 +1,5 @@
 #pragma once
+const double ZOOM_RATE = 1.0f;
 class Camera
 {
 public:
@@ -6,8 +7,8 @@ public:
 	~Camera();
 
 	//カメラ座標問い合わせ
-	double ReferCameraX;
-	double ReferCameraZ;
+	double ReferCameraX() { return cameraX; }
+	double ReferCameraZ() { return cameraZ; }
 
 	//データ設置関数
 	double SetScreenSizeX(double SSX) { screenSizeX = SSX; }
@@ -15,16 +16,24 @@ public:
 	double SetMapSizeX(double MSX) { mapSizeX = MSX; }
 	double SetMapSizeY(double MSZ) { mapSIzeZ = MSZ; }
 
+	//カメラ倍率設定
+	void ZoomIn() { zoomRatio += ZOOM_RATE; }
+	void ZoomOut() { zoomRatio -= ZOOM_RATE; }
+	//カメラ倍率問い合わせ
+	double ReferZoomRatio() { return zoomRatio; }
+
 private:
 	double cameraX;
 	double cameraZ;
 
-	int CameraType;
+	int cameraType;
 
 	double mapSizeX;
 	double mapSIzeZ;
 
 	double screenSizeX;
 	double screenSizeZ;
+
+	double zoomRatio;
 };
 

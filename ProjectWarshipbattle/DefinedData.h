@@ -21,7 +21,7 @@ enum CameraType {
 
 enum Discoverd {
 	DISCOVERD = 0,//名前まで知る
-	APPROACH,//どの級まで知る
+	APPROACH,//どの型まで知る
 	DETECTED,//種類を知る
 	UNDETECTED //全く知らない
 };
@@ -46,4 +46,10 @@ enum PlaneStatus {
 	FALLING,
 	SPEEDUP,
 	SPEEDDOWN
+};
+
+enum CameraType {
+	MAIN = 501,
+	TARGET,
+	FOLLOW
 };

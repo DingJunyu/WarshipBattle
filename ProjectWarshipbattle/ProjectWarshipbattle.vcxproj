@@ -160,6 +160,7 @@
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="Lock.cpp" />
     <ClCompile Include="Morale.cpp" />
+    <ClCompile Include="PictureLoader.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="ShipCrashParts.cpp" />
     <ClCompile Include="ShipMain.cpp" />
@@ -177,9 +178,11 @@
     <ClInclude Include="BombLoader.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DefinedData.h" />
+    <ClInclude Include="HeaderForMain.h" />
     <ClInclude Include="IncludeForAll.h" />
     <ClInclude Include="Lock.h" />
     <ClInclude Include="Morale.h" />
+    <ClInclude Include="PictureLoader.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="ShipCrashParts.h" />
     <ClInclude Include="ShipMain.h" />
