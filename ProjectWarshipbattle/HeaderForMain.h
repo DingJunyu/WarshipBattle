@@ -18,3 +18,7 @@
 #include"Weapon.h"
 
 #include"DxLib.h"
+
+#include"IngameDataManagement.h"
+#include"FrameControl.h"
+#include"TeamDeathMatchControl.h"
