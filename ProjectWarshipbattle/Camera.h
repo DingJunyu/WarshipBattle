@@ -3,7 +3,7 @@ const double ZOOM_RATE = 1.0f;
 class Camera
 {
 public:
-	Camera();
+	Camera(int CT): cameraType(CT) {}
 	~Camera();
 
 	//ƒJƒƒ‰À•W–â‚¢‡‚í‚¹

@@ -1,14 +1,5 @@
 #include "ShipCrashParts.h"
 
-
-
-ShipCrashParts::ShipCrashParts()//‰Šú‰»
-{
-	damaged = false;
-	isMainPart = false;
-}
-
-
 ShipCrashParts::~ShipCrashParts()
 {
 }

@@ -74,5 +74,6 @@ private:
 	
 	//‰æ‘œ‚Ìƒnƒ“ƒhƒ‹
 	int *PictureHandle;
+	int *ShadowHandle;
 };
 

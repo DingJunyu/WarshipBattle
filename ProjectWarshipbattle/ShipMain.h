@@ -12,7 +12,7 @@ public:
 	~ShipMain();
 
 	void RegistrateShipCrashParts();
-	void InifThisShip();
+	void InifThisShip(int *ShipHandle,int ShipNum);
 
 
 private:
@@ -24,6 +24,8 @@ private:
 
 	double draft;
 	int ShipType;
+
+	int shipHandle[SerialNumberOfShipHandle::ARRAY_SIZE];
 	
 	std::string name;
 };

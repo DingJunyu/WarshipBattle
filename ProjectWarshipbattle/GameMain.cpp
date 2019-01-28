@@ -29,11 +29,14 @@ void SingleGame_DeathMatch_Progress() {
 	IngameDataManagement IDM;
 	FrameControl FC;
 	TeamDeathMatchControl TDMC;
+	Camera MainCamera(CameraType::MAIN);
 
+	/*初期化*/
 	PL.AllInif();
 	IDM.registerTeamA(PL);
 	IDM.registerTeamB(PL);
 	
+	/*ゲームメインプログレス*/
 	while (!TDMC.GameOver()) {
 		IDM.CrashDecision();
 		IDM.HitDecision();
@@ -41,6 +44,8 @@ void SingleGame_DeathMatch_Progress() {
 		IDM.DrawAll();
 		FC.Wait();
 	}
+	/*結果発表*/
 	TDMC.DrawBoard();
+	/*メモリ解放*/
 	PL.FREE_ALL();
 }

@@ -3,7 +3,10 @@ class ShipCrashParts
 {
 public:
 	ShipCrashParts(bool mainPart, double dft) :isMainPart(mainPart),
-		draft(dft) {}
+		draft(dft) {
+		damaged = false;
+		isMainPart = false;
+	}
 	~ShipCrashParts();
 
 	//ƒf[ƒ^–â‚¢‡‚í‚¹ŠÖ”

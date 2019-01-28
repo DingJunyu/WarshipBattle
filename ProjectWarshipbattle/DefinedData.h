@@ -1,4 +1,5 @@
 #pragma once
+//船型の番号
 enum ShipType {
 	DESTROYER = 10001,
 	LIGHT_CRUISER,
@@ -10,6 +11,8 @@ enum ShipType {
 	CVE
 };
 
+
+//カメラ種類番号
 enum CameraType {
 	MAIN = 100,
 	SHIP = 101,
@@ -53,3 +56,31 @@ enum CameraType {
 	TARGET,
 	FOLLOW
 };
+
+enum SerialNumberOfShipHandle {
+	SHIP_HANDLE = 0,
+	SHIP_SHADOW_HANDLE,
+	SHIP_SIDEVIEW_HANDLE,
+	SHIP_SINKING,
+	ARRAY_SIZE = 20
+};
+
+enum SerialNumberOfMapObjectHandle {
+	MO_HANDLE = 0,
+	MO_MINI_VER_HANDLE,
+	MO_SHADOW_HANDLE,
+	MO_SIZE_X,
+	MO_SIZE_Z
+};
+
+/*各種類の船の数*/
+namespace COUNT_OF_EVERYTYPE {
+	const int DESTROYER_TYPE_COUNT = 0;
+	const int LIGHT_CRUSIER_TYPE_COUNT = 0;
+	const int HEAVEY_CRUSIER_TYPE_COUNT = 0;
+	const int BATTLE_CRUSIER_TYPE_COUNT = 1;
+	const int BATTLESHIP_TYPE_COUNT = 0;
+	const int AIRCRAFT_CARRIER_TYPE_COUNT = 0;
+	const int LIGHT_AIRCRAFT_CARRIER_TYPE_COUNT = 0;
+	const int CVE_TYPE_COUNT = 0;
+}

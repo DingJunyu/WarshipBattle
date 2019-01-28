@@ -1,5 +1,6 @@
 #pragma once
 #include"DxLib.h"
+#include"DefinedData.h"
 
 class PictureLoader
 {
@@ -8,17 +9,23 @@ public:
 	~PictureLoader();
 
 	/*初期化関数*/
-	void AllInif();
+	void AllInif() { MemorySecure(); LoadPicture(); }
+
+	/*メモリ回収*/
+	/*必ず最後に使う！！！*/
+	void FREE_ALL() { FreePicture(); FreeMemory(); }
+
+private:
+	/*初期化関数*/
+	void MemorySecure();
+	void LoadPicture();
 
 	/*メモリ回収*/
 	void FreeMemory();
 	void FreePicture();
-	void FREE_ALL() { FreeMemory(); FreePicture(); }
 
-private:
 	/*船画像データ*/
-	/*a[x][0]は船の画像データ、[1][2]はサイズ、[4]は側面図、
-	[5]は影、[6]からは沈む動画*/
+	/*参考：DefinedData.h-SerialNumberOfShipHandle*/
 	int **destroyerHandle;
 	int **lightCruiserHandle;
 	int **heaveyCruiserHandle;
@@ -27,13 +34,11 @@ private:
 	int **aircraftCarrierHandle;
 	int **lightAircraftCarrierHandle;
 	int **CVEHandle;
+	int ShipSizeX;
+	int ShipSizeZ;
 
 	/*マップオブジェクトデータ*/
-	int *mapObjectHandle;
-	int *mapObjectOnMiniMapHandle;
-	int *mapObjectShadowHandle;
-	int *MOX;
-	int *MOY;
+	int **mapObjectHandle;
 
 	/*マップデータ*/
 	/*ハンドル*/

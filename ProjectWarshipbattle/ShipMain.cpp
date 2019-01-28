@@ -3,3 +3,7 @@
 ShipMain::~ShipMain()
 {
 }
+
+void ShipMain::InifThisShip(int *ShipHandle,int ShipNum) {
+
+}
