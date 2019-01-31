@@ -14,6 +14,23 @@ public:
 	/*メモリ回収*/
 	/*必ず最後に使う！！！*/
 	void FREE_ALL() { FreePicture(); FreeMemory(); }
+	
+	//問い合わせ関数
+	//船
+	int ReferShipSizeX() { return shipSizeX; }
+	int ReferShipSizeZ() { return shipSizeZ; }
+
+	int ReferBattleCrusierHandle(int x) {
+		return battleCruiserHandle
+		[x-ShipType::BATTLE_CRUISER*RESERVED_NUMBER_FOR_SHIPS]
+		[SerialNumberOfShipHandle::SHIP_HANDLE];
+	}
+
+	//マップ
+	int ReferMapX() { return mapX; }
+	int ReferMapZ() { return mapZ; }
+
+	int ReferMapHandle() { return mapHandle; }
 
 private:
 	/*初期化関数*/
@@ -34,25 +51,25 @@ private:
 	int **aircraftCarrierHandle;
 	int **lightAircraftCarrierHandle;
 	int **CVEHandle;
-	int ShipSizeX;
-	int ShipSizeZ;
+	int shipSizeX;
+	int shipSizeZ;
 
 	/*マップオブジェクトデータ*/
 	int **mapObjectHandle;
 
 	/*マップデータ*/
 	/*ハンドル*/
-	int *mapHandle;
+	int mapHandle;
 	/*サイズ*/
-	int *mapX;
-	int *mapY;
+	int mapX;
+	int mapZ;
 
 	/*弾データ*/
 	/*ハンドル*/
 	int **ammoHandle;
 	/*サイズ*/
 	int *ammoX;
-	int *ammoY;
+	int *ammoZ;
 
 	/*UIデータ*/
 	/*UIベース*/

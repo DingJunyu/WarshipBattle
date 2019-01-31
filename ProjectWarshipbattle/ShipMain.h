@@ -22,7 +22,7 @@ private:
 	Weapon * MainWeapon;
 	Weapon * SubWeapon;
 
-	double draft;
+	double draft;//ãiêÖ
 	int ShipType;
 
 	int shipHandle[SerialNumberOfShipHandle::ARRAY_SIZE];

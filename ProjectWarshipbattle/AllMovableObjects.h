@@ -35,6 +35,9 @@ public:
 	void FallingDown();
 	void SpeedDownbyAirResistance();
 
+	//•`‰æŠÖ”
+	void Draw(int CX,int CZ);
+
 	//ó‘Ôİ’uŠÖ”
 	void NewCoordX(double X) { coordX = X; }
 	void NewCoordZ(double Z) { coordZ = Z; }

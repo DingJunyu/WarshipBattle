@@ -1,14 +1,24 @@
 #pragma once
+#include"DefinedData.h"
 const double ZOOM_RATE = 1.0f;
 class Camera
 {
 public:
-	Camera(int CT): cameraType(CT) {}
+	Camera(int CT): cameraType(CT),realCameraX(Screen::SCREEN_X/2),
+		realCameraZ(Screen::SCREEN_Z/2)
+		{
+		/*TEST*/
+		cameraX = 400;
+		cameraZ = 200;
+	}
 	~Camera();
 
 	//カメラ座標問い合わせ
 	double ReferCameraX() { return cameraX; }
 	double ReferCameraZ() { return cameraZ; }
+
+	void SetCameraX(double CX) { cameraX = CX; }
+	void SetCameraZ(double CZ) { cameraZ = CZ; }
 
 	//データ設置関数
 	double SetScreenSizeX(double SSX) { screenSizeX = SSX; }
@@ -16,6 +26,8 @@ public:
 	double SetMapSizeX(double MSX) { mapSizeX = MSX; }
 	double SetMapSizeY(double MSZ) { mapSIzeZ = MSZ; }
 
+	//カメラ座標設定
+	void GetXZ(int X, int Z) { GetX(X); GetZ(Z); }
 	//カメラ倍率設定
 	void ZoomIn() { zoomRatio += ZOOM_RATE; }
 	void ZoomOut() { zoomRatio -= ZOOM_RATE; }
@@ -23,8 +35,14 @@ public:
 	double ReferZoomRatio() { return zoomRatio; }
 
 private:
+	void GetX(int X) { cameraX = X; }
+	void GetZ(int Z) { cameraZ = Z; }
+
 	double cameraX;
 	double cameraZ;
+
+	const int realCameraX;
+	const int realCameraZ;
 
 	int cameraType;
 

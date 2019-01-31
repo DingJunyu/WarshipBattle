@@ -10,7 +10,7 @@ public:
 	bool Usable() { return ammoRemain != 0 ? true : false; }
 
 	//’e‚È‚Ç‚ğ”­Ë‚µ‚Äc’e‚ªŒ¸‚é
-	int UseAmmo() { ammoRemain--; }
+    void UseAmmo() { ammoRemain--; }
 
 	//‰Šú‰»i’e‚Ì”j
 	void SetAmmo(int Amount) { ammoRemain = Amount; maxAmmo = Amount; }

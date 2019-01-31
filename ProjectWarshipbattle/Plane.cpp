@@ -6,11 +6,11 @@ Plane::~Plane()
 
 void Plane::CalSpeed() {
 	switch (status) {
-	case FLYING:
-	case FIGHTING:
-	case TAKINGOFF:
-	case LANDING:
-	case FALLING:
+	case FLYING:break;
+	case FIGHTING:break;
+	case TAKINGOFF:break;
+	case LANDING:break;
+	case FALLING:break;
 	}
 }
 

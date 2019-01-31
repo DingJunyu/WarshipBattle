@@ -1,14 +1,26 @@
 #pragma once
+namespace Screen {
+	const int SCREEN_X = 1280;
+	const int SCREEN_Z = 720;
+	const int COLOR = 32;
+}
+
+//コントローラー用指令集
+enum CommandSerial {
+
+};
+
 //船型の番号
+const int RESERVED_NUMBER_FOR_SHIPS = 1000;
 enum ShipType {
-	DESTROYER = 10001,
-	LIGHT_CRUISER,
-	HEAVEY_CRUISER,
-	BATTLE_CRUISER,
-	BATTLESHIP,
-	AIRCRAFT_CARRIER,
-	LIGHT_AIRCRAFT_CARRIER,
-	CVE
+	DESTROYER = 1,//1
+	LIGHT_CRUISER,//2
+	HEAVEY_CRUISER,//3
+	BATTLE_CRUISER,//4
+	BATTLESHIP,//5
+	AIRCRAFT_CARRIER,//6
+	LIGHT_AIRCRAFT_CARRIER,//7
+	CVE//8
 };
 
 
@@ -51,12 +63,6 @@ enum PlaneStatus {
 	SPEEDDOWN
 };
 
-enum CameraType {
-	MAIN = 501,
-	TARGET,
-	FOLLOW
-};
-
 enum SerialNumberOfShipHandle {
 	SHIP_HANDLE = 0,
 	SHIP_SHADOW_HANDLE,
@@ -83,4 +89,9 @@ namespace COUNT_OF_EVERYTYPE {
 	const int AIRCRAFT_CARRIER_TYPE_COUNT = 0;
 	const int LIGHT_AIRCRAFT_CARRIER_TYPE_COUNT = 0;
 	const int CVE_TYPE_COUNT = 0;
+}
+
+/*船の番号*/
+namespace ShipSerial {
+	const int BATTLE_CRUSIER_LVWZOV = 4000;
 }

@@ -34,6 +34,15 @@ void PictureLoader::LoadPicture() {
 	battleCruiserHandle[0][SerialNumberOfShipHandle::SHIP_HANDLE] =
 	LoadGraph
 	("GraphicData/Ship_TopView/BattleCrusier/BattleCrusier_TopView_00_Lvtzow.png");
+
+	/*ŠC*/
+	mapHandle =
+	LoadGraph("GraphicData/Sea/Sea.jpg");
+
+	/*‰æ‘œƒTƒCƒY‚ðŽæ“¾*/
+	GetGraphSize(battleCruiserHandle[0][SerialNumberOfShipHandle::SHIP_HANDLE],
+		&shipSizeX, &shipSizeZ);
+	GetGraphSize(mapHandle, &mapX, &mapZ);
 }
 
 void PictureLoader::FreePicture() {
@@ -43,4 +52,5 @@ void PictureLoader::FreePicture() {
 		DeleteGraph(
 			battleCruiserHandle[i][SerialNumberOfShipHandle::SHIP_HANDLE]);
 	}
+	DeleteGraph(mapHandle);
 }

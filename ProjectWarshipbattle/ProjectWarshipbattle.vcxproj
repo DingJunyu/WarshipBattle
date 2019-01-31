@@ -157,8 +157,11 @@
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="BombLoader.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="EffectPoint.cpp" />
     <ClCompile Include="EffectProgressing.cpp" />
+    <ClCompile Include="Engine.cpp" />
     <ClCompile Include="FrameControl.cpp" />
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="IngameDataManagement.cpp" />
@@ -167,6 +170,7 @@
     <ClCompile Include="PictureLoader.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="ShipCrashParts.cpp" />
+    <ClCompile Include="ShipData.cpp" />
     <ClCompile Include="ShipMain.cpp" />
     <ClCompile Include="TeamDeathMatchControl.cpp" />
     <ClCompile Include="Torpedo.cpp" />
@@ -182,9 +186,12 @@
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="BombLoader.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="DefinedData.h" />
     <ClInclude Include="EffectPoint.h" />
     <ClInclude Include="EffectProgressing.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="FrameControl.h" />
     <ClInclude Include="HeaderForMain.h" />
     <ClInclude Include="IncludeForAll.h" />
@@ -194,6 +201,7 @@
     <ClInclude Include="PictureLoader.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="ShipCrashParts.h" />
+    <ClInclude Include="ShipData.h" />
     <ClInclude Include="ShipMain.h" />
     <ClInclude Include="TeamDeathMatchControl.h" />
     <ClInclude Include="Torpedo.h" />
