@@ -1,58 +1,87 @@
 #include "IngameDataManagement.h"
 
-IngameDataManagement::IngameDataManagement()
-{
-}
-
-
 IngameDataManagement::~IngameDataManagement()
 {
 }
 
-void IngameDataManagement::Update(Camera CM, PictureLoader PL) {
+void IngameDataManagement::Update() {
+	MainCamera.GetXZ(ReferPlayerX(), ReferPlayerZ());
+	Control();
+	MoveAll();
 //	CrashDecision();
 //	HitDecision();
 //	DeleteUseless();
-	DrawAll(CM.ReferCameraX(), CM.ReferCameraZ(), PL);
+	DrawAll();
+	FC.Wait();
 }
 
-void IngameDataManagement::DrawAll(double CX,double CZ, PictureLoader PL) {
+void IngameDataManagement::DrawAll() {
 	SetDrawScreen(DX_SCREEN_BACK);
 	ClearDrawScreen();
 
-	DrawSea(CX, CZ, PL);
-//	DrawShips(CX, CZ, PL);
-//	DrawPlanes(CX, CZ, PL);
-//	DrawAmmo(CX, CZ, PL);
-//	DrawBomb(CX, CZ, PL);
-//	DrawTorpedo(CX, CZ, PL);
+	DrawSea();
+	DrawShips();
+//	DrawPlanes();
+//	DrawAmmo();
+//	DrawBomb();
+//	DrawTorpedo();
 
 	ScreenFlip();
 }
 
-void IngameDataManagement::DrawShips(double CX, double CZ, PictureLoader PL) {
+void IngameDataManagement::DrawShips() {
 	//—FŒR‚ð•`‰æ‚·‚é 
-	/*
 	for (auto mark = alliesFleet.begin();
 		mark != alliesFleet.end(); mark++) {
 		if (mark->ReferAlive()) {
-			mark->Draw(CX,CZ);
+			mark->Draw(MainCamera);
 		}
-	}*/
+	}
 }
 
-void IngameDataManagement::DrawSea(double CX, double CZ, PictureLoader PL) {
+void IngameDataManagement::DrawSea() {
 	int MX = PL.ReferMapX();
 	int MZ = PL.ReferMapZ();
-	int numOnX = Screen::SCREEN_X / MX + 2;
-	int numOnZ = Screen::SCREEN_Z / MZ + 2;
-	int startX = -(Screen::SCREEN_X % MX);
-	int startZ = -(Screen::SCREEN_Z % MZ);
+	//‚Å‚«‚é‚¾‚¯‘½‚ß‚É‚µ‚Ü‚µ‚½
+	int numOnX = Screen::SCREEN_X / MX + 3;
+	int numOnZ = Screen::SCREEN_Z / MZ + 3;
+	int startX = -(Screen::SCREEN_X % MX) + 
+		(int)(MainCamera.ReferCameraX())%MX;
+	int startZ = -(Screen::SCREEN_Z % MZ) +
+		(int)(MainCamera.ReferCameraZ())%MZ;
 
 	for (int i = 0; i < numOnX; i++) {
 		for (int j = 0; j < numOnZ; j++) {
 			DrawGraph(startX + MX * i, startZ + MZ * j,
-				PL.ReferMapHandle(), FALSE);
+				*PL.ReferMapHandle(), FALSE);
 		}
+	}
+}
+
+void IngameDataManagement::TEST() {
+	alliesFleet.push_back(ShipMain());
+	auto ship = alliesFleet.begin();
+	ship->InifThisShip(PL.ReferBattleCrusierHandle(4000), 4000);
+	ship->NewCoordX(400);
+	ship->NewCoordZ(200);
+	ship->SetLength(PL.ReferShipSizeX());
+	ship->SetWidth(PL.ReferShipSizeZ());
+	ship->TEST();
+}
+
+void IngameDataManagement::Control() {
+	auto ship = alliesFleet.begin();
+	ship->ControlThisShip(CT.GetCommand());
+}
+
+void IngameDataManagement::MoveAll() {
+	MoveShips();
+}
+
+void IngameDataManagement::MoveShips() {
+	for (auto ship = alliesFleet.begin();
+		ship != alliesFleet.end();
+		ship++) {
+		ship->Move();
 	}
 }

@@ -31,27 +31,23 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 void SingleGame_DeathMatch_Progress() {
 	
 	//ゲーム管理の部品を宣言
-	PictureLoader PL;
 	IngameDataManagement IDM;
-	FrameControl FC;
 	TeamDeathMatchControl TDMC;
-	Camera MainCamera(CameraType::MAIN);
 
 	/*初期化*/
-	PL.AllInif();
+	IDM.PL.AllInif();
 //	IDM.registerTeamA(PL);
 //	IDM.registerTeamB(PL);
-	
+	IDM.TEST();
+
 	/*ゲームメインプログレス*/
 	while (!TDMC.GameOver(IDM.TeamDestroyed())) {
-//		MainCamera.GetXZ(IDM.ReferPlayerX(), IDM.ReferPlayerZ());
-		IDM.Update(MainCamera,PL);
-		FC.Wait();
+		IDM.Update();
 		if (CheckHitKey(KEY_INPUT_RETURN) == 1)
 			break;
 	}
 	/*結果発表*/
 //	TDMC.DrawBoard(IDM);
 	/*メモリ解放*/
-	PL.FREE_ALL();
+	IDM.PL.FREE_ALL();
 }

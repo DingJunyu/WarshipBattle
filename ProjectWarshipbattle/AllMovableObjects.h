@@ -1,14 +1,16 @@
 #pragma once
 #include<cmath>
-const double GRAVITATIONAL_ACCELERATION = 9.80665;
-const int GRAVITATIONAL_ACCELERATION_INT = 10;
-const double MIN_AIR_RESISTANCE = 0.5;
+#include"DefinedData.h"
+#include"Camera.h"
+#include"DxLib.h"
 
 class AllMovableObjects
 {
 public:
 	AllMovableObjects(bool fly, bool pla, bool poi,bool Cb) : flyable(fly),
-		plane(pla), alive(true), point(poi), crashable(Cb) {}
+		plane(pla), alive(true), point(poi), crashable(Cb) {
+		radianChangePerFrame = 0;
+	}
 	~AllMovableObjects();
 
 	//データ問い合わせ関数
@@ -36,13 +38,17 @@ public:
 	void SpeedDownbyAirResistance();
 
 	//描画関数
-	void Draw(int CX,int CZ);
+	void SetPictureHandle(int *p) { pictureHandle = p; }
+	void Draw(Camera CM);
 
 	//状態設置関数
 	void NewCoordX(double X) { coordX = X; }
 	void NewCoordZ(double Z) { coordZ = Z; }
 	void SetRadianOnZ(double ROZ) { radianOnZ = ROZ; }
+	void SetRadianChangePerFrame(double RCPF) { radianChangePerFrame = RCPF; }
 	void SetRadianOnY(double ROY) { radianOnY = ROY; }
+	void SetLength(double L) { length = L; }
+	void SetWidth(double W) { width = W; }
 	void Killed() { alive = false; }
 	void SetSpeed(double Spe);
 	void SetAirResistance(double AR) { airResistance = AR; }
@@ -59,6 +65,7 @@ private:
 	double speedOnY;
 	double airResistance;//空気抵抗
 	double radianOnZ;//行く方向(水平)
+	double radianChangePerFrame;
 	double radianOnY;//行く方向(垂直)
 	bool alive;//生きる状態
 
@@ -76,7 +83,7 @@ private:
 	bool crashable;
 	
 	//画像のハンドル
-	int *PictureHandle;
-	int *ShadowHandle;
+	int *pictureHandle;
+	int *shadowHandle;
 };
 

@@ -20,8 +20,8 @@ public:
 	int ReferShipSizeX() { return shipSizeX; }
 	int ReferShipSizeZ() { return shipSizeZ; }
 
-	int ReferBattleCrusierHandle(int x) {
-		return battleCruiserHandle
+	int *ReferBattleCrusierHandle(int x) {
+		return &battleCruiserHandle
 		[x-ShipType::BATTLE_CRUISER*RESERVED_NUMBER_FOR_SHIPS]
 		[SerialNumberOfShipHandle::SHIP_HANDLE];
 	}
@@ -30,7 +30,7 @@ public:
 	int ReferMapX() { return mapX; }
 	int ReferMapZ() { return mapZ; }
 
-	int ReferMapHandle() { return mapHandle; }
+	int *ReferMapHandle() { return &mapHandle; }
 
 private:
 	/*‰Šú‰»ŠÖ”*/

@@ -5,17 +5,14 @@ class Camera
 {
 public:
 	Camera(int CT): cameraType(CT),realCameraX(Screen::SCREEN_X/2),
-		realCameraZ(Screen::SCREEN_Z/2)
-		{
-		/*TEST*/
-		cameraX = 400;
-		cameraZ = 200;
-	}
+		realCameraZ(Screen::SCREEN_Z/2) {}
 	~Camera();
 
 	//カメラ座標問い合わせ
 	double ReferCameraX() { return cameraX; }
 	double ReferCameraZ() { return cameraZ; }
+	double ReferRealCameraX() { return realCameraX; }
+	double ReferRealCameraZ() { return realCameraZ; }
 
 	void SetCameraX(double CX) { cameraX = CX; }
 	void SetCameraZ(double CZ) { cameraZ = CZ; }
@@ -27,7 +24,7 @@ public:
 	double SetMapSizeY(double MSZ) { mapSIzeZ = MSZ; }
 
 	//カメラ座標設定
-	void GetXZ(int X, int Z) { GetX(X); GetZ(Z); }
+	void GetXZ(double X, double Z) { GetX(X); GetZ(Z); }
 	//カメラ倍率設定
 	void ZoomIn() { zoomRatio += ZOOM_RATE; }
 	void ZoomOut() { zoomRatio -= ZOOM_RATE; }
@@ -35,14 +32,14 @@ public:
 	double ReferZoomRatio() { return zoomRatio; }
 
 private:
-	void GetX(int X) { cameraX = X; }
-	void GetZ(int Z) { cameraZ = Z; }
+	void GetX(double X) { cameraX = X; }
+	void GetZ(double Z) { cameraZ = Z; }
 
 	double cameraX;
 	double cameraZ;
 
-	const int realCameraX;
-	const int realCameraZ;
+	double realCameraX;
+	double realCameraZ;
 
 	int cameraType;
 

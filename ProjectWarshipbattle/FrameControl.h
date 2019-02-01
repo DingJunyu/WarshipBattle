@@ -4,7 +4,7 @@ class FrameControl
 {
 public:
 	FrameControl() :
-		FRAMES_PER_SECOND(60),
+		FRAMES_PER_SECOND(20),
 		SKIP_TICKS(1000 / FRAMES_PER_SECOND),
 	    next_game_tick(GetTickCount()),
 		sleep_time(10) {}

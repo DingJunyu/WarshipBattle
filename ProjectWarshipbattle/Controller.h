@@ -1,5 +1,6 @@
 #pragma once
 #include"DefinedData.h"
+#include"DxLib.h"
 class Controller
 {
 public:
@@ -7,6 +8,8 @@ public:
 	~Controller();
 
 	int GetCommand();
-
+private:
+	int Action;
+	char KeyBuf[256];
 };
 

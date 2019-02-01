@@ -13,13 +13,21 @@
 #include"Torpedo.h"
 #include"PictureLoader.h"
 #include"ShipData.h"
+#include"FrameControl.h"
+#include"Controller.h"
 class IngameDataManagement
 {
 public:
-	IngameDataManagement();
+	IngameDataManagement() :MainCamera(CameraType::MAIN) {}
 	~IngameDataManagement();
 
-	void Update(Camera CM, PictureLoader PL);
+	//他のコントローラー
+	PictureLoader PL;
+	FrameControl FC;
+	Camera MainCamera;
+	Controller CT;
+
+	void Update();
 
 	//ゲームを初期化操作
 	//ここの関数にファイル操作も含む
@@ -33,8 +41,8 @@ public:
 	void DeleteUseless();
 
 	//カメラ用座標問い合わせ
-//	double ReferPlayerX() { return alliesFleet[0].ReferCoordX(); }
-//	double ReferPlayerZ() { return alliesFleet[0].ReferCoordZ(); }
+	double ReferPlayerX() { return alliesFleet[0].ReferCoordX(); }
+	double ReferPlayerZ() { return alliesFleet[0].ReferCoordZ(); }
 
 	//GameController問い合わせ
 	int ReferRemainedAlliesNum();
@@ -49,17 +57,27 @@ public:
 	//統計データ
 	int ShootCount();//実現はあとでいい
 
+	//すべてのテストはここで行う
+	void TEST();
+
+	void Control();
 
 	//画像描く
-	void DrawAll(double CX, double CZ, PictureLoader PL);
+	void DrawAll();
+
+	void MoveAll();
 	
 private:
-	void DrawSea(double CX,double CZ, PictureLoader PL);
-	void DrawShips(double CX, double CZ, PictureLoader PL);
-	void DrawPlanes(double CX, double CZ, PictureLoader PL);
-	void DrawAmmo(double CX, double CZ, PictureLoader PL);
-	void DrawBomb(double CX, double CZ, PictureLoader PL);
-	void DrawTorpedo(double CX, double CZ, PictureLoader PL);
+	//描く関数
+	void DrawSea();
+	void DrawShips();
+	void DrawPlanes();
+	void DrawAmmo();
+	void DrawBomb();
+	void DrawTorpedo();
+	
+	//移動関数
+	void MoveShips();
 
 	int shootCount;
 	int hitCount;

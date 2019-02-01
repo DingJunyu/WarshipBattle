@@ -7,7 +7,10 @@ namespace Screen {
 
 //コントローラー用指令集
 enum CommandSerial {
-
+	INCREASE_OUTPUT = 20001,
+	DECREASE_OUTPUT,
+	TURN_RIGHT,
+	TURN_LEFT
 };
 
 //船型の番号
@@ -94,4 +97,12 @@ namespace COUNT_OF_EVERYTYPE {
 /*船の番号*/
 namespace ShipSerial {
 	const int BATTLE_CRUSIER_LVWZOV = 4000;
+}
+
+/*数学&物理定義*/
+namespace MathAndPhysics {
+	const double GRAVITATIONAL_ACCELERATION = 9.80665;
+	const int GRAVITATIONAL_ACCELERATION_INT = 10;
+	const double MIN_AIR_RESISTANCE = 0.5;
+	const double PI = 3.14159265358;
 }
