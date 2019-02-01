@@ -56,7 +56,7 @@ void ShipMain::ChangeDirect(bool right) {
 	if (currentRadian < -maxRadian)
 		currentRadian = -maxRadian;
 
-	currentRadian *= (ReferSpeedOnZ() / maxSpeed);
+//	currentRadian *= (ReferSpeedOnZ() / maxSpeed);
 
 	SetRadianChangePerFrame(currentRadian);
 }
@@ -73,8 +73,8 @@ void ShipMain::ControlThisShip(int Command) {;
 }
 
 void ShipMain::TEST() {
-	maxSpeed = 8;
-	maxAcc = 0.2;
+	maxSpeed = 2;
+	maxAcc = 0.05;
 	minAccPercentageeLostToSpeedPercentage = 0.2;
 	accPercentageLostToSpeedPercentage = 0.1;
 	SetSpeed(0);
@@ -82,5 +82,5 @@ void ShipMain::TEST() {
 	maxRadian = MathAndPhysics::PI / 60;
 	radianChangePerFrame = MathAndPhysics::PI / 1800;
 	currentRadian = 0;
-	minAccNeedatMaxSpeed = 0.000001;
+	minAccNeedatMaxSpeed = 0.0000001;
 }
