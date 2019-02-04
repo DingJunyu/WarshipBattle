@@ -13,15 +13,19 @@ void AllMovableObjects::Move() {
 		}
 		coordY += speedOnY;
 	}
-	coordX -= speedOnZ * cos(radianOnZ);
-	coordZ -= speedOnZ * sin(radianOnZ);
-	if (speedOnZ != 0) {
-		radianOnZ += radianChangePerFrame/10;
+
+	if (speedOnZ != 0 && radianChangePerFrame != 0) {
+		radianOnZ += (radianChangePerFrame/100) * speedOnZ;
 	}
-	if (radianOnZ > 2*MathAndPhysics::PI)
-		radianOnZ -= 2*MathAndPhysics::PI;
-	if (radianOnZ < -2*MathAndPhysics::PI)
-		radianOnZ += 2*MathAndPhysics::PI;
+	if (radianOnZ > (MathAndPhysics::PI * 2)) {
+		radianOnZ -= (MathAndPhysics::PI * 2);
+	}
+	if (radianOnZ < - (MathAndPhysics::PI * 2)) {
+		radianOnZ += (MathAndPhysics::PI * 2);
+	}
+
+	coordX += speedOnZ * cos(radianOnZ);
+	coordZ += speedOnZ * sin(radianOnZ);
 }
 
 void AllMovableObjects::FallingDown() {
@@ -58,7 +62,7 @@ void AllMovableObjects::Draw(Camera CM) {
 	double zOnScreen;
 	xOnScreen = CM.ReferRealCameraX();
 	zOnScreen = CM.ReferRealCameraZ();
-	DrawRotaGraph3(xOnScreen, zOnScreen, length / 2
-		, width / 2, 0.125, 0.125,
+	DrawRotaGraph3((int)xOnScreen, (int)zOnScreen, (int)(length / 2)
+		, (int)(width) / 2, 0.125, 0.125,
 		radianOnZ, *pictureHandle, TRUE, FALSE);
 }

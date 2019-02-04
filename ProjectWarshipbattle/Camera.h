@@ -13,6 +13,8 @@ public:
 	double ReferCameraZ() { return cameraZ; }
 	double ReferRealCameraX() { return realCameraX; }
 	double ReferRealCameraZ() { return realCameraZ; }
+	double ReferPrintOutX() { return cameraX - Screen::SCREEN_X/2; }
+	double ReferPrintOutZ() { return cameraZ - Screen::SCREEN_Z / 2; }
 
 	void SetCameraX(double CX) { cameraX = CX; }
 	void SetCameraZ(double CZ) { cameraZ = CZ; }
@@ -40,6 +42,9 @@ private:
 
 	double realCameraX;
 	double realCameraZ;
+
+	double printOutX;
+	double printOutZ;
 
 	int cameraType;
 

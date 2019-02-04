@@ -7,10 +7,12 @@ namespace Screen {
 
 //コントローラー用指令集
 enum CommandSerial {
+	TEST_VIEW_ON = 20000,
 	INCREASE_OUTPUT = 20001,
 	DECREASE_OUTPUT,
 	TURN_RIGHT,
-	TURN_LEFT
+	TURN_LEFT,
+	TURN_RETURN
 };
 
 //船型の番号

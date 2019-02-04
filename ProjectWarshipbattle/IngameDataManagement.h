@@ -2,6 +2,7 @@
 //標準ヘッダー
 #include<list>
 #include<vector>
+#include<stdlib.h>
 //DXヘッダー
 #include"DxLib.h"
 //自作ヘッダー
@@ -15,10 +16,13 @@
 #include"ShipData.h"
 #include"FrameControl.h"
 #include"Controller.h"
+#include"FunctionsForCal.h"
 class IngameDataManagement
 {
 public:
-	IngameDataManagement() :MainCamera(CameraType::MAIN) {}
+	IngameDataManagement() :MainCamera(CameraType::MAIN) {
+		TEST_SHOW_ON = true;
+	}
 	~IngameDataManagement();
 
 	//他のコントローラー
@@ -64,6 +68,7 @@ public:
 
 	//画像描く
 	void DrawAll();
+	void TEST_DRAW();
 
 	void MoveAll();
 	
@@ -84,6 +89,8 @@ private:
 
 	int numOfMapOnX;
 	int numOfMapOnZ;
+
+	bool TEST_SHOW_ON;
 
 	std::vector<ShipMain> alliesFleet;
 	std::vector<ShipMain> enemyFleet;

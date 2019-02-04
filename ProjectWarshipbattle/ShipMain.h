@@ -10,19 +10,29 @@ class ShipMain :
 public:
 	ShipMain() : AllMovableObjects(false, false, false, true) {
 		currentAccPercentage = 0;
+		returnToCenter = false;
 	}
 	~ShipMain();
 
+	//初期化
 	void RegistrateShipCrashParts();
 	void InifThisShip(int *ShipHandle,int ShipNum);
+
+	//コントロール
 	void ControlThisShip(int Command);
 
+	//移動関連
 	void ChangeAccPercentage(bool up);
 	void CalSpeed();
 	void ChangeDirect(bool right);
-	void CalDirect();
+	void ReturnDirectChange() { returnToCenter = ! returnToCenter; }
+	void Alignment();
 
 	void TEST();
+
+	//問い合わせ
+	bool ReferReturnOn() { return returnToCenter; }
+	double ReferChangingRadian() { return currentRadian; }
 
 private:
 	ShipCrashParts * MainParts;
@@ -48,6 +58,7 @@ private:
 	double maxRadian;
 	double currentRadian;
 	double radianChangePerFrame;
+	bool returnToCenter;
 	
 	std::string name;
 };
