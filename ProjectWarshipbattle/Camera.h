@@ -1,5 +1,6 @@
 #pragma once
 #include"DefinedData.h"
+#include"IncludeForAll.h"
 const double ZOOM_RATE = 1.0f;
 class Camera
 {
@@ -13,8 +14,8 @@ public:
 	double ReferCameraZ() { return cameraZ; }
 	double ReferRealCameraX() { return realCameraX; }
 	double ReferRealCameraZ() { return realCameraZ; }
-	double ReferPrintOutX() { return cameraX - Screen::SCREEN_X/2; }
-	double ReferPrintOutZ() { return cameraZ - Screen::SCREEN_Z / 2; }
+	double ReferPrintOutX(double PS) { return fmod(cameraX, PS); }
+	double ReferPrintOutZ(double PS) { return fmod(cameraZ, PS); }
 
 	void SetCameraX(double CX) { cameraX = CX; }
 	void SetCameraZ(double CZ) { cameraZ = CZ; }

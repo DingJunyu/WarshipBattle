@@ -33,6 +33,7 @@ public:
 	//–â‚¢‡‚í‚¹
 	bool ReferReturnOn() { return returnToCenter; }
 	double ReferChangingRadian() { return currentRadian; }
+	double ReferOutPutRate() { return currentAccPercentage; }
 
 private:
 	ShipCrashParts * MainParts;

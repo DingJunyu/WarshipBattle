@@ -58,18 +58,18 @@ void IngameDataManagement::DrawSea() {
 	else {
 		centerGraphStartZ =  -
 			MainCamera.ReferPrintOutZ(halfMapZ);
-		graphTopZ = MainCamera.ReferPrintOutZ(PL.ReferMapZ());
+		graphTopZ = 0;
 	}
 
 	if (MainCamera.ReferPrintOutX(PL.ReferMapX()) < halfMapX) {
-		centerGraphStartX = -
-			MainCamera.ReferPrintOutX(halfMapX);
+		centerGraphStartX = PL.ReferMapX() -
+			MainCamera.ReferPrintOutX(PL.ReferMapX());
 		graphTopX = 0;
 	}
 	else{
 		centerGraphStartX = PL.ReferMapX() -
-			MainCamera.ReferPrintOutX(halfMapX);
-		graphTopX = MainCamera.ReferPrintOutX(PL.ReferMapX());
+			MainCamera.ReferPrintOutX(PL.ReferMapX()) - halfMapX;
+		graphTopX = 0;
 	}
 
 	DrawRectGraph(
