@@ -42,53 +42,58 @@ void IngameDataManagement::DrawShips() {
 }
 
 void IngameDataManagement::DrawSea() {
-	double halfMapX = PL.ReferMapX() / 2;
-	double halfMapZ = PL.ReferMapZ() / 2;
+	double mapX = PL.ReferMapX();
+	double mapZ = PL.ReferMapZ();
 
-	double centerGraphStartX;
-	double centerGraphStartZ;
-	double graphTopX;
-	double graphTopZ;
+	double MCPOX = MainCamera.ReferPrintOutX(mapX);
+	double MCPOZ = MainCamera.ReferPrintOutZ(mapZ);
 
-	if (MainCamera.ReferPrintOutZ(PL.ReferMapZ()) < halfMapZ) {
-		centerGraphStartZ =  -
-			MainCamera.ReferPrintOutZ(halfMapZ);
-		graphTopZ = 0;
-	}
-	else {
-		centerGraphStartZ =  -
-			MainCamera.ReferPrintOutZ(halfMapZ);
-		graphTopZ = MainCamera.ReferPrintOutZ(PL.ReferMapZ());
-	}
+	int graphNumOnX;
+	int graphNumOnZ;
 
-	if (MainCamera.ReferPrintOutX(PL.ReferMapX()) < halfMapX) {
-		centerGraphStartX = -
-			MainCamera.ReferPrintOutX(halfMapX);
-		graphTopX = 0;
-	}
-	else{
-		centerGraphStartX = PL.ReferMapX() -
-			MainCamera.ReferPrintOutX(halfMapX);
-		graphTopX = MainCamera.ReferPrintOutX(PL.ReferMapX());
-	}
+	graphNumOnX = (int)(MainCamera.ReferCameraX() / mapX);
+	graphNumOnZ = (int)(MainCamera.ReferCameraZ() / mapZ);
+
+	//¶ã
+	DrawRectGraph(
+		(int)(graphNumOnX*mapX),
+		(int)(graphNumOnZ*mapZ),
+		(int)MCPOX,
+		(int)MCPOZ,
+		(int)Screen::SCREEN_X, (int)Screen::SCREEN_Z,
+		*PL.ReferMapHandle(), FALSE, FALSE);
 
 	DrawRectGraph(
-		(int)centerGraphStartX,
-		(int)centerGraphStartZ,
-		(int)graphTopX,
-		(int)graphTopZ, 
-		PL.ReferMapX(), PL.ReferMapZ(),
+		(int)((graphNumOnX + 1)*mapX),
+		(int)(graphNumOnZ*mapZ),
+		(int)0,
+		(int)MCPOZ,
+		(int)mapX, (int)mapZ - MCPOZ,
 		*PL.ReferMapHandle(), FALSE, FALSE);
-	
 
+	DrawRectGraph(
+		(int)((graphNumOnX + 2)*mapX),
+		(int)(graphNumOnZ*mapZ),
+		(int)0,
+		(int)MCPOZ,
+		(int)mapX, (int)mapZ - MCPOZ,
+		*PL.ReferMapHandle(), FALSE, FALSE);
+
+	DrawRectGraph(
+		(int)((graphNumOnX + 1) * mapX),
+		(int)((graphNumOnZ + 1) * mapZ),
+		(int)0,
+		(int)0,
+		(int)mapX, (int)mapZ,
+		*PL.ReferMapHandle(), FALSE, FALSE);
 }
 
 void IngameDataManagement::TEST() {
 	alliesFleet.push_back(ShipMain());
 	auto ship = alliesFleet.begin();
 	ship->InifThisShip(PL.ReferBattleCrusierHandle(4000), 4000);
-	ship->NewCoordX(400);
-	ship->NewCoordZ(200);
+	ship->NewCoordX(3200);
+	ship->NewCoordZ(1500);
 	ship->SetLength(PL.ReferShipSizeX());
 	ship->SetWidth(PL.ReferShipSizeZ());
 	ship->TEST();
