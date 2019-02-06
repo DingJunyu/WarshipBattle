@@ -2,8 +2,7 @@
 class ShipCrashParts
 {
 public:
-	ShipCrashParts(bool mainPart, double dft) :isMainPart(mainPart),
-		draft(dft) {
+	ShipCrashParts() {
 		damaged = false;
 		isMainPart = false;
 	}
@@ -19,6 +18,8 @@ public:
 	//ó‘Ô–â‚¢‡‚í‚¹ŠÖ”
 	bool ReferDamaged() { return damaged; }
 	bool ReferMainPart() { return isMainPart; }
+
+	void SetMainPart() { isMainPart = true; }
 
 	//‘€ìŠÖ”
 	void MinusHP(int damage);

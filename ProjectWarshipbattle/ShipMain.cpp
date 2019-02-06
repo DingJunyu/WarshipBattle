@@ -7,6 +7,7 @@ ShipMain::~ShipMain()
 void ShipMain::InifThisShip(int *ShipHandle, int *SShadowH ,int ShipNum) {
 	SetPictureHandle(ShipHandle);
 	SetShadowHandle(SShadowH);
+	MemorySecure();
 }
 
 void ShipMain::ChangeAccPercentage(bool up) {
@@ -113,4 +114,24 @@ void ShipMain::TEST() {
 	radianChangePerFrame = MathAndPhysics::PI / 1800;
 	currentRadian = 0;
 	minAccNeedatMaxSpeed = 0.0000001;
+
+	
+}
+
+void ShipMain::MemorySecure() {
+	MainParts = new ShipCrashParts [10];
+	SubParts = new ShipCrashParts[10];
+
+	MainWeapon = new Weapon[10];
+	SubWeapon = new Weapon[10];
+
+	EP = new EffectPoint[6];
+}
+
+void ShipMain::DestroyMemory() {
+	delete[] MainParts;
+	delete[] SubParts;
+	delete[] MainWeapon;
+	delete[] SubWeapon;
+	delete[] EP;
 }

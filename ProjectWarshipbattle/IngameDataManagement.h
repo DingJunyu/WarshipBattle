@@ -105,5 +105,6 @@ private:
 	std::list<Ammo> shellList;
 	std::list<Bomb> bombList;
 	std::list<Torpedo> torpedoList;
+	std::list<Effect> bubbleList;
 };
 

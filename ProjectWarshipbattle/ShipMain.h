@@ -5,6 +5,7 @@
 #include"IncludeForAll.h"
 #include"Weapon.h"
 #include"Camera.h"
+#include"EffectPoint.h"
 class ShipMain :
 	public AllMovableObjects
 {
@@ -18,6 +19,7 @@ public:
 	//èâä˙âª
 	void RegistrateShipCrashParts();
 	void InifThisShip(int *ShipHandle,int *SShadowH,int ShipNum);
+	void DestroyMemory();
 
 	void DrawShip(Camera CM);
 
@@ -44,6 +46,10 @@ private:
 
 	Weapon * MainWeapon;
 	Weapon * SubWeapon;
+
+	EffectPoint * EP;
+
+	void MemorySecure();
 
 	double draft;//ãiêÖ
 	int shipType;
