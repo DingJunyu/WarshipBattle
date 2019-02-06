@@ -159,6 +159,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectPoint.cpp" />
     <ClCompile Include="EffectProgressing.cpp" />
     <ClCompile Include="Engine.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DefinedData.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectPoint.h" />
     <ClInclude Include="EffectProgressing.h" />
     <ClInclude Include="Engine.h" />

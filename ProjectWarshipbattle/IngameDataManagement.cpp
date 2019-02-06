@@ -20,7 +20,9 @@ void IngameDataManagement::DrawAll() {
 	ClearDrawScreen();
 
 	DrawSea();
+
 	DrawShips();
+	UI.DrawUI();
 //	DrawPlanes();
 //	DrawAmmo();
 //	DrawBomb();
@@ -48,51 +50,94 @@ void IngameDataManagement::DrawSea() {
 	double MCPOX = MainCamera.ReferPrintOutX(mapX);
 	double MCPOZ = MainCamera.ReferPrintOutZ(mapZ);
 
-	int graphNumOnX;
-	int graphNumOnZ;
+	int graphNumOnX = 2;
+	int graphNumOnZ = 2;
 
 	graphNumOnX = (int)(MainCamera.ReferCameraX() / mapX);
 	graphNumOnZ = (int)(MainCamera.ReferCameraZ() / mapZ);
 
-	//左上
-	DrawRectGraph(
-		(int)(graphNumOnX*mapX),
-		(int)(graphNumOnZ*mapZ),
-		(int)MCPOX,
-		(int)MCPOZ,
-		(int)Screen::SCREEN_X, (int)Screen::SCREEN_Z,
-		*PL.ReferMapHandle(), FALSE, FALSE);
+	//一枚の画像を使って連続描く
+	{
+		DrawRectGraph(//左上
+			(int)(-MCPOX - mapX),
+			(int)(-MCPOZ - mapZ),
+			(int)0,
+			(int)0,
+			(int)mapX, (int)mapZ,
+			*PL.ReferMapHandle(), FALSE, FALSE);
 
-	DrawRectGraph(
-		(int)((graphNumOnX + 1)*mapX),
-		(int)(graphNumOnZ*mapZ),
-		(int)0,
-		(int)MCPOZ,
-		(int)mapX, (int)mapZ - MCPOZ,
-		*PL.ReferMapHandle(), FALSE, FALSE);
+		DrawRectGraph(//上
+			(int)(-MCPOX),
+			(int)(-MCPOZ - mapZ),
+			(int)0,
+			(int)0,
+			(int)mapX, (int)mapZ,
+			*PL.ReferMapHandle(), FALSE, FALSE);
 
-	DrawRectGraph(
-		(int)((graphNumOnX + 2)*mapX),
-		(int)(graphNumOnZ*mapZ),
-		(int)0,
-		(int)MCPOZ,
-		(int)mapX, (int)mapZ - MCPOZ,
-		*PL.ReferMapHandle(), FALSE, FALSE);
+		DrawRectGraph(//右上
+			(int)(-MCPOX + mapX),
+			(int)(-MCPOZ - mapZ),
+			(int)0,
+			(int)0,
+			(int)mapX, (int)mapZ,
+			*PL.ReferMapHandle(), FALSE, FALSE);
 
-	DrawRectGraph(
-		(int)((graphNumOnX + 1) * mapX),
-		(int)((graphNumOnZ + 1) * mapZ),
-		(int)0,
-		(int)0,
-		(int)mapX, (int)mapZ,
-		*PL.ReferMapHandle(), FALSE, FALSE);
+		DrawRectGraph(//左
+			(int)(-MCPOX - mapX),
+			(int)(-MCPOZ),
+			(int)0,
+			(int)0,
+			(int)mapX, (int)mapZ,
+			*PL.ReferMapHandle(), FALSE, FALSE);
+
+		DrawRectGraph(//中
+			(int)(-MCPOX),
+			(int)(-MCPOZ),
+			(int)0,
+			(int)0,
+			(int)mapX, (int)mapZ,
+			*PL.ReferMapHandle(), FALSE, FALSE);
+
+		DrawRectGraph(//右
+			(int)(-MCPOX + mapX),
+			(int)(-MCPOZ),
+			(int)0,
+			(int)0,
+			(int)mapX, (int)mapZ,
+			*PL.ReferMapHandle(), FALSE, FALSE);
+
+		DrawRectGraph(//左下
+			(int)(-MCPOX - mapX),
+			(int)(-MCPOZ + mapZ),
+			(int)0,
+			(int)0,
+			(int)mapX, (int)mapZ,
+			*PL.ReferMapHandle(), FALSE, FALSE);
+
+		DrawRectGraph(//下
+			(int)(-MCPOX),
+			(int)(-MCPOZ + mapZ),
+			(int)0,
+			(int)0,
+			(int)mapX, (int)mapZ,
+			*PL.ReferMapHandle(), FALSE, FALSE);
+
+		DrawRectGraph(//右下
+			(int)(-MCPOX + mapX),
+			(int)(-MCPOZ + mapZ),
+			(int)0,
+			(int)0,
+			(int)mapX, (int)mapZ,
+			*PL.ReferMapHandle(), FALSE, FALSE); 
+	}
 }
 
 void IngameDataManagement::TEST() {
 	alliesFleet.push_back(ShipMain());
 	auto ship = alliesFleet.begin();
-	ship->InifThisShip(PL.ReferBattleCrusierHandle(4000), 4000);
-	ship->NewCoordX(3200);
+	ship->InifThisShip(PL.ReferBattleCrusierHandle(4000), 
+		PL.ReferBattleCrusierShadowHandle(4000), 4000);
+	ship->NewCoordX(2200);
 	ship->NewCoordZ(1500);
 	ship->SetLength(PL.ReferShipSizeX());
 	ship->SetWidth(PL.ReferShipSizeZ());
@@ -121,7 +166,7 @@ void IngameDataManagement::TEST_DRAW() {
 	Cr = GetColor(255, 255, 255);
 	auto ship = alliesFleet.begin();
 	char CharNum[255];
-	_itoa_s((int)(ship->ReferSpeedOnZ() * 1000), CharNum, 10);
+	_gcvt_s(CharNum, ship->ReferSpeedOnZ()*100, 10);
 	DrawString(10, 10, "Speed", Cr);
 	DrawString(60, 10, CharNum, Cr);
 	if (ship->ReferReturnOn()) {
@@ -144,11 +189,20 @@ void IngameDataManagement::TEST_DRAW() {
 	DrawString(100, 110, CharNum, Cr);
 	_gcvt_s(CharNum, cos(ship->ReferRadianOnZ()), 10);
 	DrawString(10, 130, "Cos", Cr);
-	DrawString(100, 130, CharNum, Cr);
+	DrawString(50, 130, CharNum, Cr);
 	_gcvt_s(CharNum, sin(ship->ReferRadianOnZ()), 10);
 	DrawString(10, 150, "Sin", Cr);
-	DrawString(100, 150, CharNum, Cr);
+	DrawString(50, 150, CharNum, Cr);
 	_gcvt_s(CharNum, ship->ReferOutPutRate(), 10);
 	DrawString(10, 170, "OutPut", Cr);
 	DrawString(70, 170, CharNum, Cr);
 }	
+
+void IngameDataManagement::Inif() {
+	PL.AllInif();
+	UI.InifUI(&PL);
+}
+
+void IngameDataManagement::Free() {
+	PL.FREE_ALL();
+}

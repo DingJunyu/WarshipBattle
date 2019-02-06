@@ -22,8 +22,14 @@ public:
 
 	int *ReferBattleCrusierHandle(int x) {
 		return &battleCruiserHandle
-		[x-ShipType::BATTLE_CRUISER*RESERVED_NUMBER_FOR_SHIPS]
+		[x - ShipType::BATTLE_CRUISER*RESERVED_NUMBER_FOR_SHIPS]
 		[SerialNumberOfShipHandle::SHIP_HANDLE];
+	}
+
+	int *ReferBattleCrusierShadowHandle(int x) {
+		return &battleCruiserHandle
+			[x - ShipType::BATTLE_CRUISER*RESERVED_NUMBER_FOR_SHIPS]
+		[SerialNumberOfShipHandle::SHIP_SHADOW_HANDLE];
 	}
 
 	//マップ
@@ -31,6 +37,15 @@ public:
 	int ReferMapZ() { return mapZ; }
 
 	int *ReferMapHandle() { return &mapHandle; }
+
+	//UI
+	int *ReferMatHandle() { return &matHandle; }
+	int ReferMatHandleX() { return matHandleX; }
+	int ReferMatHandleZ() { return matHandleZ; }
+
+	int *ReferShipCardMatHandle() { return &shipCardMatHandle; }
+	int ReferShipCardMatHandleX() { return shipCardMatHandleX; }
+	int ReferShipCardMatHandleZ() { return shipCardMatHandleZ; }
 
 private:
 	/*初期化関数*/
@@ -73,9 +88,13 @@ private:
 
 	/*UIデータ*/
 	/*UIベース*/
-	int lowerBoardHandle;
-	int leftBoardHandle;
-	int rightBoardHandle;
+	int matHandle;
+	int matHandleX;
+	int matHandleZ;
+	int shipCardMatHandle;
+	int shipCardMatHandleX;
+	int shipCardMatHandleZ;
+
 	int miniMapBoardHandle;
 
 	/*艦マーク*/

@@ -22,6 +22,8 @@ public:
 	double ReferAirResistance() { return airResistance; }
 	double ReferRadianOnZ() { return radianOnZ; }
 	double ReferRadianOnY() { return radianOnY; }
+	double ReferLength() { return length; }
+	double ReferWidth() { return width; }
 
 	//“–‚½‚è”»’è—p–â‚¢‡‚í‚¹
 	double ReferLeft() { return coordX - width; }
@@ -39,6 +41,7 @@ public:
 
 	//•`‰æŠÖ”
 	void SetPictureHandle(int *p) { pictureHandle = p; }
+	void SetShadowHandle(int *p) { shadowHandle = p; }
 	void Draw(Camera CM);
 
 	//ó‘Ôİ’uŠÖ”

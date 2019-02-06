@@ -32,17 +32,27 @@ void PictureLoader::FreeMemory() {
 void PictureLoader::LoadPicture() {
 	/*ロード戦闘巡洋艦*/
 	battleCruiserHandle[0][SerialNumberOfShipHandle::SHIP_HANDLE] =
-	LoadGraph
-	("GraphicData/Ship_TopView/BattleCrusier/BattleCrusier_TopView_00_Lvtzow.png");
+	LoadGraph(
+	"GraphicData/Ship_TopView/BattleCrusier/BattleCrusier_TopView_00_Lvtzow.png");
+	GetGraphSize(battleCruiserHandle[0][SerialNumberOfShipHandle::SHIP_HANDLE],
+		&shipSizeX, &shipSizeZ);
+	battleCruiserHandle[0][SerialNumberOfShipHandle::SHIP_SHADOW_HANDLE] =
+	LoadGraph(
+	"GraphicData/Ship_Shadow/BattleCrusier/BattleCrusier_Shadow_01_Lvtzow.png");
 
 	/*海*/
 	mapHandle =
 	LoadGraph("GraphicData/Sea/Sea.jpg");
-
-	/*画像サイズを取得*/
-	GetGraphSize(battleCruiserHandle[0][SerialNumberOfShipHandle::SHIP_HANDLE],
-		&shipSizeX, &shipSizeZ);
 	GetGraphSize(mapHandle, &mapX, &mapZ);
+
+	/*UI*/
+	matHandle = LoadGraph(
+	"GraphicData/User_Interface/UI_Mat.jpg");
+	GetGraphSize(matHandle, &matHandleX, &matHandleZ);
+	shipCardMatHandle = LoadGraph(
+	"GraphicData/User_Interface/Ship_Card_Mat.jpg");
+	GetGraphSize(shipCardMatHandle, &shipCardMatHandleX, &shipCardMatHandleZ);
+
 }
 
 void PictureLoader::FreePicture() {
@@ -51,6 +61,12 @@ void PictureLoader::FreePicture() {
 		i++) {
 		DeleteGraph(
 			battleCruiserHandle[i][SerialNumberOfShipHandle::SHIP_HANDLE]);
+		DeleteGraph(
+			battleCruiserHandle[i][SerialNumberOfShipHandle::SHIP_SHADOW_HANDLE]);
 	}
+	/*マップ*/
 	DeleteGraph(mapHandle);
+	/*UI*/
+	DeleteGraph(matHandle);
+	DeleteGraph(shipCardMatHandle);
 }

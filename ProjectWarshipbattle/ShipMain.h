@@ -4,6 +4,7 @@
 #include"DefinedData.h"
 #include"IncludeForAll.h"
 #include"Weapon.h"
+#include"Camera.h"
 class ShipMain :
 	public AllMovableObjects
 {
@@ -16,7 +17,9 @@ public:
 
 	//初期化
 	void RegistrateShipCrashParts();
-	void InifThisShip(int *ShipHandle,int ShipNum);
+	void InifThisShip(int *ShipHandle,int *SShadowH,int ShipNum);
+
+	void DrawShip(Camera CM);
 
 	//コントロール
 	void ControlThisShip(int Command);
@@ -45,7 +48,7 @@ private:
 	double draft;//喫水
 	int shipType;
 
-	int shipHandle[SerialNumberOfShipHandle::ARRAY_SIZE];
+	int *shipHandle[SerialNumberOfShipHandle::ARRAY_SIZE];
 
 	/*エンジンシステムを実装する前に移動の部分は以下のデータを実現する*/
 	double maxSpeed;

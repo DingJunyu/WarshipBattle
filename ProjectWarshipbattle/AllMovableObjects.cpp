@@ -60,9 +60,17 @@ void AllMovableObjects::SpeedDownbyAirResistance() {
 void AllMovableObjects::Draw(Camera CM) {
 	double xOnScreen;
 	double zOnScreen;
+	int shadowDistanceOnX = 2;
+	int shadowDistanceOnZ = 2;
 	xOnScreen = CM.ReferRealCameraX();
 	zOnScreen = CM.ReferRealCameraZ();
-	DrawRotaGraph3((int)xOnScreen, (int)zOnScreen, (int)(length / 2)
-		, (int)(width) / 2, 0.125, 0.125,
+
+	DrawRotaGraph3((int)xOnScreen + shadowDistanceOnX, 
+		(int)zOnScreen + shadowDistanceOnZ, (int)(length / 2), 
+		(int)(width) / 2, 0.125, 0.125,
+		radianOnZ, *shadowHandle, TRUE, FALSE);
+
+	DrawRotaGraph3((int)xOnScreen, (int)zOnScreen, (int)(length / 2), 
+		(int)(width) / 2, 0.125, 0.125,
 		radianOnZ, *pictureHandle, TRUE, FALSE);
 }

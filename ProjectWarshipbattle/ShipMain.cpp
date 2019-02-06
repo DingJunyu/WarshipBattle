@@ -4,8 +4,9 @@ ShipMain::~ShipMain()
 {
 }
 
-void ShipMain::InifThisShip(int *ShipHandle,int ShipNum) {
+void ShipMain::InifThisShip(int *ShipHandle, int *SShadowH ,int ShipNum) {
 	SetPictureHandle(ShipHandle);
+	SetShadowHandle(SShadowH);
 }
 
 void ShipMain::ChangeAccPercentage(bool up) {
@@ -24,7 +25,7 @@ void ShipMain::CalSpeed() {
 	currentSpeed = ReferSpeedOnZ();
 
 	//前進の場合
-	if (currentAccPercentage > 0) {
+	if (currentAccPercentage >= 0) {
 		//加速度の計算
 		realAccPercentage = accPercentageLostToSpeedPercentage
 			* (1 - (currentSpeed / maxSpeed));
@@ -36,9 +37,19 @@ void ShipMain::CalSpeed() {
 
 		newSpeed = realAcc/100 + currentSpeed;
 		if (newSpeed > maxSpeed*currentAccPercentage) {
-			newSpeed -= 0.01;
+			if (currentAccPercentage != 0.0f)
+				newSpeed -= 0.001 / currentAccPercentage*
+				(newSpeed / maxSpeed * (1 - currentAccPercentage));
+			else
+				newSpeed -= 0.0015;
 		}
-		if (currentAccPercentage == 0 && abs(newSpeed) < 0.05)
+
+		if (currentRadian != 0) {
+			if (newSpeed > maxSpeed*currentAccPercentage*0.95)
+				newSpeed -= 0.001;
+		}
+
+		if (currentAccPercentage == 0 && abs(newSpeed) < 0.0005)
 			newSpeed = 0;
 		if (newSpeed > maxSpeed)
 			newSpeed = maxSpeed;

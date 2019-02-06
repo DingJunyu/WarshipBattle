@@ -20,6 +20,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	WINAPIの場合はほかの処理をしないといけない*/
 	SetMainWindowText("WarshipBattle");	
 	SetAlwaysRunFlag(TRUE);
+	srand((unsigned)time(NULL));
 
 	SingleGame_DeathMatch_Progress();
 
@@ -35,19 +36,17 @@ void SingleGame_DeathMatch_Progress() {
 	TeamDeathMatchControl TDMC;
 
 	/*初期化*/
-	IDM.PL.AllInif();
-//	IDM.registerTeamA(PL);
-//	IDM.registerTeamB(PL);
+	IDM.Inif();
 	IDM.TEST();
 
 	/*ゲームメインプログレス*/
 	while (!TDMC.GameOver(IDM.TeamDestroyed())) {
 		IDM.Update();
-		if (CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
 			break;
 	}
 	/*結果発表*/
 //	TDMC.DrawBoard(IDM);
 	/*メモリ解放*/
-	IDM.PL.FREE_ALL();
+	IDM.Free();
 }

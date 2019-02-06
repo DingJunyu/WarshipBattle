@@ -84,6 +84,11 @@ enum SerialNumberOfMapObjectHandle {
 	MO_SIZE_Z
 };
 
+enum TypeOfEffect {
+	EXPLOSION = 0,
+	BUBBLE
+};
+
 /*Šeí—Ş‚Ì‘D‚Ì”*/
 namespace COUNT_OF_EVERYTYPE {
 	const int DESTROYER_TYPE_COUNT = 0;

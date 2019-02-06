@@ -8,6 +8,7 @@
 //自作ヘッダー
 #include"DefinedData.h"
 #include"Camera.h"
+#include"UserInterface.h"
 #include"ShipMain.h"
 #include"Ammo.h"
 #include"Bomb.h"
@@ -25,18 +26,16 @@ public:
 	}
 	~IngameDataManagement();
 
-	//他のコントローラー
-	PictureLoader PL;
-	FrameControl FC;
-	Camera MainCamera;
-	Controller CT;
+
 
 	void Update();
 
 	//ゲームを初期化操作
 	//ここの関数にファイル操作も含む
+	void Inif();
 	void registerTeamA(PictureLoader PL);
 	void registerTeamB(PictureLoader PL);
+	void Free();
 
 	//データ操作
 	void CrashDecision();
@@ -73,6 +72,13 @@ public:
 	void MoveAll();
 	
 private:
+	//他のコントローラー
+	PictureLoader PL;
+	FrameControl FC;
+	Camera MainCamera;
+	Controller CT;
+	UserInterface UI;
+
 	//描く関数
 	void DrawSea();
 	void DrawShips();
