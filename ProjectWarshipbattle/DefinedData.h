@@ -114,3 +114,9 @@ namespace MathAndPhysics {
 	const double MIN_AIR_RESISTANCE = 0.5;
 	const double PI = 3.14159265358;
 }
+
+namespace MapSize {
+	const int xSize = 20000;
+	const int zSize = 20000;
+	const int safeZone = 1000;
+}

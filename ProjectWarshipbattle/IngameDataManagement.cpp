@@ -23,6 +23,7 @@ void IngameDataManagement::DrawAll() {
 
 	DrawShips();
 	UI.DrawUI();
+	DrawShipsOnMiniMap();
 //	DrawPlanes();
 //	DrawAmmo();
 //	DrawBomb();
@@ -40,6 +41,16 @@ void IngameDataManagement::DrawShips() {
 		mark != alliesFleet.end(); mark++) {
 		if (mark->ReferAlive()) {
 			mark->Draw(MainCamera);
+		}
+	}
+}
+
+void IngameDataManagement::DrawShipsOnMiniMap() {
+	for (auto mark = alliesFleet.begin();
+		mark != alliesFleet.end(); mark++) {
+		if (mark->ReferAlive()) {
+			UI.DrawShipOnTheMap(mark->ReferCoordX(),
+				mark->ReferCoordZ(), false);
 		}
 	}
 }

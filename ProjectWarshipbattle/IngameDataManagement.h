@@ -63,6 +63,7 @@ private:
 	//ï`Ç≠ä÷êî
 	void DrawSea();
 	void DrawShips();
+	void DrawShipsOnMiniMap();
 	void DrawPlanes();
 	void DrawAmmo();
 	void DrawBomb();

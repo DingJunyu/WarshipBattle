@@ -5,7 +5,7 @@ Effect::~Effect()
 }
 
 void Effect::Draw() {
-	DrawRotaGraph3(coordX, coordZ, graphX / 2, graphZ / 2,
+	DrawRotaGraph3((int)coordX, (int)coordZ, graphX / 2, graphZ / 2,
 		0.01, 0.01, radian,
 		*graphicHandle, TRUE, FALSE);
 	if (radian != targetRadian && abs(radian - targetRadian) > 

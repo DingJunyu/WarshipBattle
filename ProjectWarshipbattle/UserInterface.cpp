@@ -32,3 +32,23 @@ void UserInterface::DrawUI() {
 		Screen::SCREEN_X/2 + (int)mapPaperSize,
 		Screen::SCREEN_Z - 5, *miniMapPaper, FALSE);
 }
+
+void UserInterface::DrawShipOnTheMap(double X, double Z,bool enemy) {
+	
+	unsigned int enemyCr = GetColor(255, 0, 0);
+	unsigned int allyCr = GetColor(0, 0, 255);
+
+	unsigned int realCr = enemy ? enemyCr : allyCr;
+
+	double realX = abs((X + MapSize::xSize) /
+		(MapSize::xSize * 2)) * mapPaperSize * 2;
+	double realZ = abs((Z + MapSize::zSize) /
+		(MapSize::zSize * 2)) * mapPaperSize * 1.2f;
+	
+	DrawBox(
+		Screen::SCREEN_X / 2 - (int)mapPaperSize + (int)realX,
+		Screen::SCREEN_Z - (int)(((1.2 * (int)mapPaperSize) - realZ)),
+		Screen::SCREEN_X / 2 - (int)mapPaperSize + (int)realX + 10,
+		Screen::SCREEN_Z - (int)(((1.2 * (int)mapPaperSize) - realZ) - 5),
+		realCr,TRUE);
+}

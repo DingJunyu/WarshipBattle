@@ -2,6 +2,7 @@
 #include"DxLib.h"
 #include"PictureLoader.h"
 #include"DefinedData.h"
+#include<cmath>
 class UserInterface
 {
 public:
@@ -15,6 +16,8 @@ public:
 	void InifUI(PictureLoader *PL);
 
 	void DrawUI();
+
+	void DrawShipOnTheMap(double X, double Z, bool enemy);
 
 	void SetMat(int *M) { mat = M; }
 	

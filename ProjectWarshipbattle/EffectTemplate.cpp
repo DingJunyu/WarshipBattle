@@ -4,7 +4,6 @@ EffectTemplate::EffectTemplate()
 {
 }
 
-
 EffectTemplate::~EffectTemplate()
 {
 }
