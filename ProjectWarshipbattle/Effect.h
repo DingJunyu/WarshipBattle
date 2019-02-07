@@ -8,7 +8,7 @@ class Effect
 public:
 	Effect(bool Movable,  int continueTime, double R,
 		double TRadian, double RCPF,double Speed, double CX,
-		double CZ) :
+		double CZ,int *GH) :
 		movable(Movable),
 		timeUp(false), endTime(GetNowCount() + continueTime),
 		radian(R),targetRadian(TRadian),radianChangePerFrame(RCPF),
@@ -20,6 +20,8 @@ public:
 
 	//éûä‘Ç…âﬂÇ¨ÇΩÇÁè¡Ç∑
 	bool ReferTimeUp() { return timeUp; }
+
+	void SetGraphHandle(int *GH) { graphicHandle = GH; }
 
 private:
 	void Check();

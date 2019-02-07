@@ -86,7 +86,8 @@ enum SerialNumberOfMapObjectHandle {
 
 enum TypeOfEffect {
 	EXPLOSION = 0,
-	BUBBLE
+	BUBBLE,
+	SMOKE
 };
 
 /*Šeí—Ş‚Ì‘D‚Ì”*/

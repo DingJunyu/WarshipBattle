@@ -47,6 +47,9 @@ public:
 	int ReferShipCardMatHandleX() { return shipCardMatHandleX; }
 	int ReferShipCardMatHandleZ() { return shipCardMatHandleZ; }
 
+	int *ReferMiniMapMatHandle() { return &miniMapMatHandle; }
+	int *ReferMiniMapPaperHandle() { return &miniMapPaperHandle; }
+
 private:
 	/*初期化関数*/
 	void MemorySecure();
@@ -94,11 +97,14 @@ private:
 	int shipCardMatHandle;
 	int shipCardMatHandleX;
 	int shipCardMatHandleZ;
-
-	int miniMapBoardHandle;
+	int miniMapMatHandle;
+	int miniMapPaperHandle;
 
 	/*艦マーク*/
 	int **markForAllies;
 	int **markForEnemies;
+
+	/*エフェクト*/
+	int bubbleHandle;
 };
 

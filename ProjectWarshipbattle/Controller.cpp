@@ -25,7 +25,7 @@ int Controller::GetCommand() {
 		return CommandSerial::TURN_RETURN;
 
 	//テストビュー
-	if (KeyBuf[KEY_INPUT_F1] && GetInputChar(TRUE))
+	if (KeyBuf[KEY_INPUT_0] && GetInputChar(TRUE))
 		return CommandSerial::TEST_VIEW_ON;
 
 	//Debug

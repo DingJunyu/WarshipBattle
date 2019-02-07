@@ -53,6 +53,16 @@ void PictureLoader::LoadPicture() {
 	"GraphicData/User_Interface/Ship_Card_Mat.jpg");
 	GetGraphSize(shipCardMatHandle, &shipCardMatHandleX, &shipCardMatHandleZ);
 
+	/*ミニマップ*/
+	miniMapMatHandle = LoadGraph(
+	"GraphicData/User_Interface/MiniMap_Mat.jpg");
+	miniMapPaperHandle = LoadGraph(
+	"GraphicData/User_Interface/MiniMap_Paper.jpg");
+
+	/*エフェクト*/
+	bubbleHandle = LoadGraph(
+	"GraphiData/Effect/Bubble.png");
+
 }
 
 void PictureLoader::FreePicture() {
@@ -69,4 +79,6 @@ void PictureLoader::FreePicture() {
 	/*UI*/
 	DeleteGraph(matHandle);
 	DeleteGraph(shipCardMatHandle);
+	DeleteGraph(miniMapMatHandle);
+	DeleteGraph(miniMapPaperHandle);
 }

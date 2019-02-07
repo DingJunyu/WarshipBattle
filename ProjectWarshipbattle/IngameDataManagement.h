@@ -1,32 +1,12 @@
 #pragma once
-//標準ヘッダー
-#include<list>
-#include<vector>
-#include<stdlib.h>
-//DXヘッダー
-#include"DxLib.h"
-//自作ヘッダー
-#include"DefinedData.h"
-#include"Camera.h"
-#include"UserInterface.h"
-#include"ShipMain.h"
-#include"Ammo.h"
-#include"Bomb.h"
-#include"Torpedo.h"
-#include"PictureLoader.h"
-#include"ShipData.h"
-#include"FrameControl.h"
-#include"Controller.h"
-#include"FunctionsForCal.h"
+#include"HeaderForIngameDataManagement.h"
 class IngameDataManagement
 {
 public:
 	IngameDataManagement() :MainCamera(CameraType::MAIN) {
-		TEST_SHOW_ON = true;
+		TEST_SHOW_ON = false;
 	}
 	~IngameDataManagement();
-
-
 
 	void Update();
 
@@ -40,6 +20,7 @@ public:
 	//データ操作
 	void CrashDecision();
 	void HitDecision();//ゲームコントローラーに当たる数を返す
+	void GetNewEffect();
 
 	void DeleteUseless();
 
@@ -86,6 +67,7 @@ private:
 	void DrawAmmo();
 	void DrawBomb();
 	void DrawTorpedo();
+	void DrawEffect();
 	
 	//移動関数
 	void MoveShips();

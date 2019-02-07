@@ -161,6 +161,7 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectPoint.cpp" />
+    <ClCompile Include="EffectTemplate.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="FrameControl.cpp" />
     <ClCompile Include="FunctionsForCal.cpp" />
@@ -193,9 +194,11 @@
     <ClInclude Include="DefinedData.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectPoint.h" />
+    <ClInclude Include="EffectTemplate.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="FrameControl.h" />
     <ClInclude Include="FunctionsForCal.h" />
+    <ClInclude Include="HeaderForIngameDataManagement.h" />
     <ClInclude Include="HeaderForMain.h" />
     <ClInclude Include="IncludeForAll.h" />
     <ClInclude Include="IngameDataManagement.h" />

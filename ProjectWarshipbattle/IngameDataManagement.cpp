@@ -10,7 +10,7 @@ void IngameDataManagement::Update() {
 	MoveAll();
 //	CrashDecision();
 //	HitDecision();
-//	DeleteUseless();
+	DeleteUseless();
 	DrawAll();
 	FC.Wait();
 }
@@ -27,9 +27,10 @@ void IngameDataManagement::DrawAll() {
 //	DrawAmmo();
 //	DrawBomb();
 //	DrawTorpedo();
+	DrawEffect();
 	if (TEST_SHOW_ON)
 		TEST_DRAW();
-
+	
 	ScreenFlip();
 }
 
@@ -132,6 +133,14 @@ void IngameDataManagement::DrawSea() {
 	}
 }
 
+void IngameDataManagement::DrawEffect() {
+	for (auto bubble = bubbleList.begin();
+		bubble != bubbleList.end();
+		bubble++) {
+		bubble->Draw();
+	}
+}
+
 void IngameDataManagement::TEST() {
 	alliesFleet.push_back(ShipMain());
 	auto ship = alliesFleet.begin();
@@ -145,8 +154,15 @@ void IngameDataManagement::TEST() {
 }
 
 void IngameDataManagement::Control() {
+	int answer = CT.GetCommand();
 	auto ship = alliesFleet.begin();
-	ship->ControlThisShip(CT.GetCommand());
+
+	/*船を操作*/
+	ship->ControlThisShip(answer);
+
+	/*テストビュー*/
+	if (answer == CommandSerial::TEST_VIEW_ON)
+		TEST_SHOW_ON = !TEST_SHOW_ON;
 }
 
 void IngameDataManagement::MoveAll() {
@@ -194,8 +210,8 @@ void IngameDataManagement::TEST_DRAW() {
 	DrawString(10, 150, "Sin", Cr);
 	DrawString(50, 150, CharNum, Cr);
 	_gcvt_s(CharNum, ship->ReferOutPutRate(), 10);
-	DrawString(10, 170, "OutPut", Cr);
-	DrawString(70, 170, CharNum, Cr);
+	DrawString(10, 170, "OutPutRate", Cr);
+	DrawString(110, 170, CharNum, Cr);
 }	
 
 void IngameDataManagement::Inif() {
@@ -205,4 +221,30 @@ void IngameDataManagement::Inif() {
 
 void IngameDataManagement::Free() {
 	PL.FREE_ALL();
+}
+
+void IngameDataManagement::GetNewEffect() {
+	/*進行中の水泡生成*/
+	for (auto ship = alliesFleet.begin();
+		ship != alliesFleet.end();
+		ship++) {
+		if (ship->ReferSpeedOnZ() != 0) {
+			bubbleList.push_back(ship->EP->NewEffect(ship->ReferRadianOnZ(),
+				ship->ReferSpeedOnZ(), ship->ReferCoordX(),
+				ship->ReferCoordZ()));
+		}
+	}
+}
+
+void IngameDataManagement::DeleteUseless() {
+	/*バブル*/
+	for (auto bubble = bubbleList.begin();
+		bubble != bubbleList.end();
+		bubble++) {
+		if (bubble->ReferTimeUp()) {
+			bubble = bubbleList.erase(bubble);
+		}
+		if (bubbleList.empty())
+			break;
+	}
 }

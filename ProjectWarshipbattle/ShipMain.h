@@ -6,6 +6,7 @@
 #include"Weapon.h"
 #include"Camera.h"
 #include"EffectPoint.h"
+#include"ShipData.h"
 class ShipMain :
 	public AllMovableObjects
 {
@@ -16,9 +17,12 @@ public:
 	}
 	~ShipMain();
 
+
+
 	//èâä˙âª
 	void RegistrateShipCrashParts();
 	void InifThisShip(int *ShipHandle,int *SShadowH,int ShipNum);
+	void SetEffectPoint(ShipData SD);
 	void DestroyMemory();
 
 	void DrawShip(Camera CM);
@@ -40,7 +44,6 @@ public:
 	double ReferChangingRadian() { return currentRadian; }
 	double ReferOutPutRate() { return currentAccPercentage; }
 
-private:
 	ShipCrashParts * MainParts;
 	ShipCrashParts * SubParts;
 
@@ -48,6 +51,7 @@ private:
 	Weapon * SubWeapon;
 
 	EffectPoint * EP;
+private:
 
 	void MemorySecure();
 

@@ -104,6 +104,7 @@ void ShipMain::ControlThisShip(int Command) {;
 }
 
 void ShipMain::TEST() {
+	/*移動関連*/
 	maxSpeed = 0.8;
 	maxAcc = 0.1;
 	minAccPercentageeLostToSpeedPercentage = 0.2;
@@ -115,6 +116,8 @@ void ShipMain::TEST() {
 	currentRadian = 0;
 	minAccNeedatMaxSpeed = 0.0000001;
 
+	/*エフェクト関連*/
+	//EP[0].Inif(100, 20, TypeOfEffect::BUBBLE, 20, true, 300,);
 	
 }
 

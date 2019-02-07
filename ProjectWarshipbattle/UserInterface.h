@@ -5,10 +5,11 @@
 class UserInterface
 {
 public:
-	UserInterface(): 
-		matStartX(0),matStartZ(Screen::SCREEN_Z/5),
-		leftSCMStartX(0),leftSCMStartZ(0),
-		rightSCMStartX(0),rightSCMStartZ(0){}
+	UserInterface() :
+		matStartX(0), matStartZ(Screen::SCREEN_Z / 4.5),
+		leftSCMStartX(0), leftSCMStartZ(0),
+		rightSCMStartX(0), rightSCMStartZ(0), mapMatSize(Screen::SCREEN_X / 8),
+		mapPaperSize(mapMatSize - 10) {}
 	~UserInterface();
 
 	void InifUI(PictureLoader *PL);
@@ -22,6 +23,9 @@ private:
 	int *mat;
 	int *shipCardMat;
 
+	int *miniMapMat;
+	int *miniMapPaper;
+
 	double matStartX;
 	double matStartZ;
 
@@ -29,5 +33,9 @@ private:
 	double leftSCMStartZ;
 	double rightSCMStartX;
 	double rightSCMStartZ;
+
+	double mapMatSize;
+	double mapPaperSize;
+	
 };
 
