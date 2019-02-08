@@ -9,8 +9,10 @@ public:
 	
 	Effect NewEffect(double r,double s,double x, double z);
 
-	void Inif(double RCX,double RCZ,int ET,int MACPF,bool MA,int CT,
-		int *Handle);
+	void InifCoordinate(double RCX,double RCZ, bool MA, int CT,int MACPF,
+		bool Spread,double ZoomMutliple,double ZoomRate);
+
+	void Inif(int ET, int *Handle);
 
 private:
 	double relativeCoordX;
@@ -23,6 +25,10 @@ private:
 
 	bool movable;
 	int continueTime;
+
+	bool spread;
+	double zoomMutliple;
+	double zoomRate;
 	
 };
 

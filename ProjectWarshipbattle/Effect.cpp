@@ -4,9 +4,15 @@ Effect::~Effect()
 {
 }
 
-void Effect::Draw() {
-	DrawRotaGraph3((int)coordX, (int)coordZ, graphX / 2, graphZ / 2,
-		0.01, 0.01, radian,
+void Effect::Draw(int x,int z) {
+	if (spread) {
+		zoomMutliple *= zoomRate;
+	}
+
+
+	DrawRotaGraph3((int)coordX - x, (int)coordZ - z, 
+		graphX / 2, graphZ / 2,
+		zoomMutliple, zoomMutliple, radian,
 		*graphicHandle, TRUE, FALSE);
 	if (radian != targetRadian && abs(radian - targetRadian) > 
 		radianChangePerFrame) {
@@ -24,6 +30,12 @@ void Effect::Check() {
 }
 
 void Effect::Move() {
+	if (rand()%2==0)
+		radian += (double)((rand() % 2) / 180.0f) * MathAndPhysics::PI;
+	else
+		radian -= (double)((rand() % 2) / 180.0f) * MathAndPhysics::PI;
+
 	coordX += cos(radian)*speed;
 	coordZ += sin(radian)*speed;
+
 }

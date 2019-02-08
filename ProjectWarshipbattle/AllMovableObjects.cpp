@@ -62,8 +62,8 @@ void AllMovableObjects::Draw(Camera CM) {
 	double zOnScreen;
 	int shadowDistanceOnX = 2;
 	int shadowDistanceOnZ = 2;
-	xOnScreen = CM.ReferRealCameraX();
-	zOnScreen = CM.ReferRealCameraZ();
+	xOnScreen = Screen::SCREEN_X / 2;
+	zOnScreen = Screen::SCREEN_Z / 2;
 
 	DrawRotaGraph3((int)xOnScreen + shadowDistanceOnX, 
 		(int)zOnScreen + shadowDistanceOnZ, (int)(length / 2), 

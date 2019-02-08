@@ -61,7 +61,9 @@ void PictureLoader::LoadPicture() {
 
 	/*エフェクト*/
 	bubbleHandle = LoadGraph(
-	"GraphiData/Effect/Bubble.png");
+	"GraphicData/Effect/Bubble.png");
+	smokeHandle = LoadGraph(
+	"GraphicData/Effect/Smoke.png");
 
 }
 
@@ -81,4 +83,7 @@ void PictureLoader::FreePicture() {
 	DeleteGraph(shipCardMatHandle);
 	DeleteGraph(miniMapMatHandle);
 	DeleteGraph(miniMapPaperHandle);
+	/*エフェクト*/
+	DeleteGraph(bubbleHandle);
+	DeleteGraph(smokeHandle);
 }

@@ -59,6 +59,7 @@ private:
 	Camera MainCamera;
 	Controller CT;
 	UserInterface UI;
+	EffectTemplate ET;
 
 	//ï`Ç≠ä÷êî
 	void DrawSea();
@@ -68,10 +69,12 @@ private:
 	void DrawAmmo();
 	void DrawBomb();
 	void DrawTorpedo();
-	void DrawEffect();
+	void DrawEffectUnderShips();
+	void DrawEffectBeyondShips();
 	
 	//à⁄ìÆä÷êî
 	void MoveShips();
+	void MoveEffects();
 
 	int shootCount;
 	int hitCount;
@@ -89,5 +92,6 @@ private:
 	std::list<Bomb> bombList;
 	std::list<Torpedo> torpedoList;
 	std::list<Effect> bubbleList;
+	std::list<Effect> smokeList;
 };
 

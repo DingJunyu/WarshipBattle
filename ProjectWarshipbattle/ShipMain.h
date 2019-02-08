@@ -7,6 +7,7 @@
 #include"Camera.h"
 #include"EffectPoint.h"
 #include"ShipData.h"
+#include"EffectTemplate.h"
 class ShipMain :
 	public AllMovableObjects
 {
@@ -21,7 +22,8 @@ public:
 
 	//初期化
 	void RegistrateShipCrashParts();
-	void InifThisShip(int *ShipHandle,int *SShadowH,int ShipNum);
+	void InifThisShip(int *ShipHandle,int *SShadowH,int ShipNum, 
+		EffectTemplate ET);
 	void SetEffectPoint(ShipData SD);
 	void DestroyMemory();
 
@@ -44,14 +46,22 @@ public:
 	double ReferChangingRadian() { return currentRadian; }
 	double ReferOutPutRate() { return currentAccPercentage; }
 
+	//エフェクト生成
+	Effect NewBubble(int num);
+	Effect NewSmoke(int num);
+
+private:
 	ShipCrashParts * MainParts;
 	ShipCrashParts * SubParts;
 
 	Weapon * MainWeapon;
 	Weapon * SubWeapon;
 
-	EffectPoint * EP;
-private:
+	EffectPoint * bubbleStartPoint;
+	int bubblePointCount;
+
+	EffectPoint * smokeStartPoint;
+	int smokePointCount;
 
 	void MemorySecure();
 

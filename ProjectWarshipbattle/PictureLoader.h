@@ -50,6 +50,10 @@ public:
 	int *ReferMiniMapMatHandle() { return &miniMapMatHandle; }
 	int *ReferMiniMapPaperHandle() { return &miniMapPaperHandle; }
 
+	//エフェクト
+	int *ReferBubbleHandle() { return &bubbleHandle; }
+	int *ReferSmokeHandle() { return &smokeHandle; }
+
 private:
 	/*初期化関数*/
 	void MemorySecure();
@@ -106,5 +110,6 @@ private:
 
 	/*エフェクト*/
 	int bubbleHandle;
+	int smokeHandle;
 };
 

@@ -5,8 +5,7 @@ const double ZOOM_RATE = 1.0f;
 class Camera
 {
 public:
-	Camera(int CT): cameraType(CT),realCameraX(Screen::SCREEN_X/2),
-		realCameraZ(Screen::SCREEN_Z/2) {}
+	Camera(int CT): cameraType(CT) {}
 	~Camera();
 
 	//カメラ座標問い合わせ
@@ -27,7 +26,11 @@ public:
 	double SetMapSizeY(double MSZ) { mapSIzeZ = MSZ; }
 
 	//カメラ座標設定
-	void GetXZ(double X, double Z) { GetX(X); GetZ(Z); }
+	void GetXZ(double X, double Z) { 
+		GetX(X); GetZ(Z);
+		realCameraX = cameraX - Screen::SCREEN_X / 2;
+		realCameraZ = cameraZ - Screen::SCREEN_Z / 2;
+	}
 	//カメラ倍率設定
 	void ZoomIn() { zoomRatio += ZOOM_RATE; }
 	void ZoomOut() { zoomRatio -= ZOOM_RATE; }

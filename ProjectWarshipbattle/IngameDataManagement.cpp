@@ -21,14 +21,16 @@ void IngameDataManagement::DrawAll() {
 
 	DrawSea();
 
+	DrawEffectUnderShips();
 	DrawShips();
+	DrawEffectBeyondShips();
 	UI.DrawUI();
 	DrawShipsOnMiniMap();
 //	DrawPlanes();
 //	DrawAmmo();
 //	DrawBomb();
 //	DrawTorpedo();
-	DrawEffect();
+	
 	if (TEST_SHOW_ON)
 		TEST_DRAW();
 	
@@ -46,6 +48,7 @@ void IngameDataManagement::DrawShips() {
 }
 
 void IngameDataManagement::DrawShipsOnMiniMap() {
+	//友軍艦隊
 	for (auto mark = alliesFleet.begin();
 		mark != alliesFleet.end(); mark++) {
 		if (mark->ReferAlive()) {
@@ -144,11 +147,22 @@ void IngameDataManagement::DrawSea() {
 	}
 }
 
-void IngameDataManagement::DrawEffect() {
+void IngameDataManagement::DrawEffectUnderShips() {
+	/*水泡演出*/
 	for (auto bubble = bubbleList.begin();
 		bubble != bubbleList.end();
 		bubble++) {
-		bubble->Draw();
+		bubble->Draw(MainCamera.ReferRealCameraX(),
+			MainCamera.ReferRealCameraZ());
+	}
+}
+
+void IngameDataManagement::DrawEffectBeyondShips() {
+	for (auto smoke = smokeList.begin();
+		smoke != smokeList.end();
+		smoke++) {
+		smoke->Draw(MainCamera.ReferRealCameraX(),
+			MainCamera.ReferRealCameraZ());
 	}
 }
 
@@ -156,7 +170,7 @@ void IngameDataManagement::TEST() {
 	alliesFleet.push_back(ShipMain());
 	auto ship = alliesFleet.begin();
 	ship->InifThisShip(PL.ReferBattleCrusierHandle(4000), 
-		PL.ReferBattleCrusierShadowHandle(4000), 4000);
+		PL.ReferBattleCrusierShadowHandle(4000), 4000, ET);
 	ship->NewCoordX(2200);
 	ship->NewCoordZ(1500);
 	ship->SetLength(PL.ReferShipSizeX());
@@ -164,6 +178,7 @@ void IngameDataManagement::TEST() {
 	ship->TEST();
 }
 
+/*コマンドを受け取って、新たなものを生成する*/
 void IngameDataManagement::Control() {
 	int answer = CT.GetCommand();
 	auto ship = alliesFleet.begin();
@@ -174,10 +189,13 @@ void IngameDataManagement::Control() {
 	/*テストビュー*/
 	if (answer == CommandSerial::TEST_VIEW_ON)
 		TEST_SHOW_ON = !TEST_SHOW_ON;
+
+	GetNewEffect();
 }
 
 void IngameDataManagement::MoveAll() {
 	MoveShips();
+	MoveEffects();
 }
 
 void IngameDataManagement::MoveShips() {
@@ -185,6 +203,19 @@ void IngameDataManagement::MoveShips() {
 		ship != alliesFleet.end();
 		ship++) {
 		ship->Move();
+	}
+}
+
+void IngameDataManagement::MoveEffects() {
+	for (auto bubble = bubbleList.begin();
+		bubble != bubbleList.end();
+		bubble++) {
+		bubble->Move();
+	}
+	for (auto smoke = smokeList.begin();
+		smoke != smokeList.end();
+		smoke++) {
+		smoke->Move();
 	}
 }
 
@@ -228,6 +259,7 @@ void IngameDataManagement::TEST_DRAW() {
 void IngameDataManagement::Inif() {
 	PL.AllInif();
 	UI.InifUI(&PL);
+	ET.InifEffectTemplate(&PL);
 }
 
 void IngameDataManagement::Free() {
@@ -239,10 +271,23 @@ void IngameDataManagement::GetNewEffect() {
 	for (auto ship = alliesFleet.begin();
 		ship != alliesFleet.end();
 		ship++) {
-		if (ship->ReferSpeedOnZ() != 0) {
-			bubbleList.push_back(ship->EP->NewEffect(ship->ReferRadianOnZ(),
-				ship->ReferSpeedOnZ(), ship->ReferCoordX(),
-				ship->ReferCoordZ()));
+		if (ship->ReferSpeedOnZ() > 0.02 && rand()%3==0 ) {
+			bubbleList.push_back(ship->NewBubble(0));
+			bubbleList.push_back(ship->NewBubble(1));
+			bubbleList.push_back(ship->NewBubble(2));
+			bubbleList.push_back(ship->NewBubble(3));
+			bubbleList.push_back(ship->NewBubble(4));
+		}
+	}
+	for (auto ship = alliesFleet.begin();
+		ship != alliesFleet.end();
+		ship++) {
+		if (ship->ReferCoordZ() != 0) {
+			if ((rand() % 8 < ship->ReferSpeedOnZ() * 10)
+				&& rand() % 4 == 0) {
+				smokeList.push_back(ship->NewSmoke(0));
+				smokeList.push_back(ship->NewSmoke(1));
+			}
 		}
 	}
 }
@@ -256,6 +301,15 @@ void IngameDataManagement::DeleteUseless() {
 			bubble = bubbleList.erase(bubble);
 		}
 		if (bubbleList.empty())
+			break;
+	}
+	for (auto smoke = smokeList.begin();
+		smoke != smokeList.end();
+		smoke++) {
+		if (smoke->ReferTimeUp()) {
+			smoke = smokeList.erase(smoke);
+		}
+		if (smokeList.empty())
 			break;
 	}
 }

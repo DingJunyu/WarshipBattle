@@ -4,10 +4,38 @@ ShipMain::~ShipMain()
 {
 }
 
-void ShipMain::InifThisShip(int *ShipHandle, int *SShadowH ,int ShipNum) {
+void ShipMain::InifThisShip(int *ShipHandle, int *SShadowH ,int ShipNum,
+	EffectTemplate ET) {
 	SetPictureHandle(ShipHandle);
 	SetShadowHandle(SShadowH);
+	//GetDataFromShipdata(ShipNum);
 	MemorySecure();
+
+	/*テスト部分も含む*/
+	for (int i = 0; i < 5; i++) {
+		bubbleStartPoint[i] = ET.CopyFromCreateBubble();
+		bubbleStartPoint[i].InifCoordinate(100, -3, true, 3000, 20, true,
+			0.15, 1.001);
+	}
+	bubbleStartPoint[1].InifCoordinate(-14, -18, true, 1500, 20, true,
+		0.15, 1.001);
+	bubbleStartPoint[2].InifCoordinate(-14, 8, true, 1500, 20, true,
+		0.15, 1.001);
+
+	bubbleStartPoint[3].InifCoordinate(-78, -11, true, 1500, 20, true,
+		0.15, 1.001);
+	bubbleStartPoint[4].InifCoordinate(-78, 1, true, 1500, 20, true,
+		0.15, 1.001);
+
+	for (int i = 0; i < 2; i++) {
+		smokeStartPoint[i] = ET.CopyFromCreateSmoke();
+		smokeStartPoint[i].InifCoordinate(4, -6, true, 2000, 20, true,
+			0.06, 1.005);
+	}
+	smokeStartPoint[0].InifCoordinate(4, -6, true, 2000, 20, true,
+		0.06, 1.005);
+	smokeStartPoint[1].InifCoordinate(-14, -6, true, 2000, 20, true,
+		0.06, 1.005);
 }
 
 void ShipMain::ChangeAccPercentage(bool up) {
@@ -104,6 +132,7 @@ void ShipMain::ControlThisShip(int Command) {;
 }
 
 void ShipMain::TEST() {
+	/*ここに入れたものは最後全部shipdataに統合する*/
 	/*移動関連*/
 	maxSpeed = 0.8;
 	maxAcc = 0.1;
@@ -117,8 +146,8 @@ void ShipMain::TEST() {
 	minAccNeedatMaxSpeed = 0.0000001;
 
 	/*エフェクト関連*/
-	//EP[0].Inif(100, 20, TypeOfEffect::BUBBLE, 20, true, 300,);
-	
+	bubblePointCount = 5;
+	smokePointCount = 2;
 }
 
 void ShipMain::MemorySecure() {
@@ -128,7 +157,8 @@ void ShipMain::MemorySecure() {
 	MainWeapon = new Weapon[10];
 	SubWeapon = new Weapon[10];
 
-	EP = new EffectPoint[6];
+	bubbleStartPoint = new EffectPoint[5];
+	smokeStartPoint = new EffectPoint[2];
 }
 
 void ShipMain::DestroyMemory() {
@@ -136,5 +166,24 @@ void ShipMain::DestroyMemory() {
 	delete[] SubParts;
 	delete[] MainWeapon;
 	delete[] SubWeapon;
-	delete[] EP;
+	delete[] bubbleStartPoint;
+	delete[] smokeStartPoint;
+}
+
+//エフェクト生成
+Effect ShipMain::NewBubble(int num) {
+	double newRadian = ReferRadianOnZ() - MathAndPhysics::PI;
+
+	return bubbleStartPoint[num].NewEffect(newRadian,
+		ReferSpeedOnZ(),
+		ReferCoordX(), ReferCoordZ());
+}
+
+Effect ShipMain::NewSmoke(int num) {
+	double newRadian = ReferRadianOnZ() - MathAndPhysics::PI;
+
+	newRadian += (double)((1 - rand() % 3) / 180.0f) * MathAndPhysics::PI;
+
+	return smokeStartPoint[num].NewEffect(newRadian, ReferSpeedOnZ(),
+		ReferCoordX(), ReferCoordZ());
 }

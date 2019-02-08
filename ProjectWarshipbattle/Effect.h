@@ -6,16 +6,20 @@
 class Effect
 {
 public:
-	Effect(bool Movable,  int continueTime, double R,
-		double TRadian, double RCPF,double Speed, double CX,
-		double CZ,int *GH) :
+	Effect(bool Movable, int continueTime, double R,
+		double TRadian, double RCPF, double Speed, double CX,
+		double CZ, int *GH, bool Spread, double ZM, double ZR) :
 		movable(Movable),
 		timeUp(false), endTime(GetNowCount() + continueTime),
-		radian(R),targetRadian(TRadian),radianChangePerFrame(RCPF),
-		speed(Speed),coordX(CX),coordZ(CZ){}
+		radian(R), targetRadian(TRadian), radianChangePerFrame(RCPF),
+		speed(Speed), coordX(CX), coordZ(CZ), graphicHandle(GH),
+		spread(Spread), zoomMutliple(ZM), zoomRate(ZR)
+	{
+		right = rand() % 2;
+	}
 	~Effect();
 
-	void Draw();
+	void Draw(int x, int z);
 	void Move();
 
 	//éûä‘Ç…âﬂÇ¨ÇΩÇÁè¡Ç∑
@@ -35,6 +39,7 @@ private:
 	double coordX;
 	double coordZ;
 	double speed;
+	bool right;
 	//âÊëúÉfÅ[É^
 	int *graphicHandle;
 	int graphX;
@@ -43,5 +48,9 @@ private:
 	//è¡é∏éûä‘
 	int endTime;
 	bool timeUp;
+
+	bool spread;
+	double zoomMutliple;
+	double zoomRate;
 };
 
