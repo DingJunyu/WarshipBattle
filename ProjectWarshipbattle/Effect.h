@@ -53,4 +53,3 @@ private:
 	double zoomMutliple;
 	double zoomRate;
 };
-

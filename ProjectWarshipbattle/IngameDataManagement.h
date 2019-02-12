@@ -60,6 +60,7 @@ private:
 	Controller CT;
 	UserInterface UI;
 	EffectTemplate ET;
+	SoundLoader SL;
 
 	//ï`Ç≠ä÷êî
 	void DrawSea();
@@ -94,4 +95,3 @@ private:
 	std::list<Effect> bubbleList;
 	std::list<Effect> smokeList;
 };
-

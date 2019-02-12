@@ -6,17 +6,17 @@ IngameDataManagement::~IngameDataManagement()
 
 void IngameDataManagement::Update() {
 	MainCamera.GetXZ(ReferPlayerX(), ReferPlayerZ());
-	Control();
-	MoveAll();
-//	CrashDecision();
-//	HitDecision();
-	DeleteUseless();
-	DrawAll();
-	FC.Wait();
+	Control();//コマンドを受け取って、船の状態を変更する
+	MoveAll();//船の状態による座標を変更する
+//	CrashDecision();//船の間のあたり判定
+//	HitDecision();//砲弾と船の間のあたり判定
+	DeleteUseless();//入らないものを消す
+	DrawAll();//全部更新した後画面を描く
+	FC.Wait();//60フレームに合わせるように待つ
 }
 
 void IngameDataManagement::DrawAll() {
-	SetDrawScreen(DX_SCREEN_BACK);
+	SetDrawScreen(DX_SCREEN_BACK);//裏画面に描画する
 	ClearDrawScreen();
 
 	DrawSea();
@@ -149,6 +149,7 @@ void IngameDataManagement::DrawSea() {
 
 void IngameDataManagement::DrawEffectUnderShips() {
 	/*水泡演出*/
+	if (!bubbleList.empty())
 	for (auto bubble = bubbleList.begin();
 		bubble != bubbleList.end();
 		bubble++) {
@@ -158,6 +159,7 @@ void IngameDataManagement::DrawEffectUnderShips() {
 }
 
 void IngameDataManagement::DrawEffectBeyondShips() {
+	if (!smokeList.empty())
 	for (auto smoke = smokeList.begin();
 		smoke != smokeList.end();
 		smoke++) {
@@ -207,11 +209,13 @@ void IngameDataManagement::MoveShips() {
 }
 
 void IngameDataManagement::MoveEffects() {
+	if(!bubbleList.empty())
 	for (auto bubble = bubbleList.begin();
 		bubble != bubbleList.end();
 		bubble++) {
 		bubble->Move();
 	}
+	if(!smokeList.empty())
 	for (auto smoke = smokeList.begin();
 		smoke != smokeList.end();
 		smoke++) {
@@ -223,6 +227,7 @@ void IngameDataManagement::TEST_DRAW() {
 	unsigned int Cr;
 	Cr = GetColor(255, 255, 255);
 	auto ship = alliesFleet.begin();
+	ship->TestDraw(MainCamera.ReferRealCameraX(),MainCamera.ReferRealCameraZ());
 	char CharNum[255];
 	_gcvt_s(CharNum, ship->ReferSpeedOnZ()*100, 10);
 	DrawString(10, 10, "Speed", Cr);
@@ -260,10 +265,12 @@ void IngameDataManagement::Inif() {
 	PL.AllInif();
 	UI.InifUI(&PL);
 	ET.InifEffectTemplate(&PL);
+	SL.Inif();
 }
 
 void IngameDataManagement::Free() {
 	PL.FREE_ALL();
+	SL.FreeAll();
 }
 
 void IngameDataManagement::GetNewEffect() {
@@ -271,7 +278,8 @@ void IngameDataManagement::GetNewEffect() {
 	for (auto ship = alliesFleet.begin();
 		ship != alliesFleet.end();
 		ship++) {
-		if (ship->ReferSpeedOnZ() > 0.02 && rand()%3==0 ) {
+		if (ship->ReferSpeedOnZ() > 0.02 && rand()%3==0 
+			&& rand()%100>ship->ReferSpeedOnZ()*10) {
 			bubbleList.push_back(ship->NewBubble(0));
 			bubbleList.push_back(ship->NewBubble(1));
 			bubbleList.push_back(ship->NewBubble(2));
@@ -282,7 +290,7 @@ void IngameDataManagement::GetNewEffect() {
 	for (auto ship = alliesFleet.begin();
 		ship != alliesFleet.end();
 		ship++) {
-		if (ship->ReferCoordZ() != 0) {
+		if (ship->ReferSpeedOnZ() != 0) {
 			if ((rand() % 8 < ship->ReferSpeedOnZ() * 10)
 				&& rand() % 4 == 0) {
 				smokeList.push_back(ship->NewSmoke(0));
@@ -294,22 +302,24 @@ void IngameDataManagement::GetNewEffect() {
 
 void IngameDataManagement::DeleteUseless() {
 	/*バブル*/
+	if (!bubbleList.empty())
 	for (auto bubble = bubbleList.begin();
 		bubble != bubbleList.end();
 		bubble++) {
 		if (bubble->ReferTimeUp()) {
 			bubble = bubbleList.erase(bubble);
 		}
-		if (bubbleList.empty())
+		if (bubbleList.empty() || bubble == bubbleList.end())
 			break;
 	}
+	if (!smokeList.empty())
 	for (auto smoke = smokeList.begin();
 		smoke != smokeList.end();
 		smoke++) {
 		if (smoke->ReferTimeUp()) {
 			smoke = smokeList.erase(smoke);
 		}
-		if (smokeList.empty())
+		if (smokeList.empty() || smoke == smokeList.end())
 			break;
 	}
 }

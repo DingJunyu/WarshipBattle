@@ -1,5 +1,6 @@
 #pragma once
 #include"Effect.h"
+#include"DxLib.h"
 
 class EffectPoint
 {
@@ -13,6 +14,7 @@ public:
 		bool Spread,double ZoomMutliple,double ZoomRate);
 
 	void Inif(int ET, int *Handle);
+	void TestDraw(double r, double s, double x, double CX, double CZ);
 
 private:
 	double relativeCoordX;
@@ -29,6 +31,5 @@ private:
 	bool spread;
 	double zoomMutliple;
 	double zoomRate;
-	
 };
 

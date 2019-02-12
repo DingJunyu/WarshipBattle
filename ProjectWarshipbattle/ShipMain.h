@@ -40,6 +40,7 @@ public:
 	void Alignment();
 
 	void TEST();
+	void TestDraw(double x,double z);
 
 	//ñ‚Ç¢çáÇÌÇπ
 	bool ReferReturnOn() { return returnToCenter; }

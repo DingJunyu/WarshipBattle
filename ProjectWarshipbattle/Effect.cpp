@@ -9,11 +9,23 @@ void Effect::Draw(int x,int z) {
 		zoomMutliple *= zoomRate;
 	}
 
+	double rotateX;
+	double rotateZ;
 
-	DrawRotaGraph3((int)coordX - x, (int)coordZ - z, 
+	rotateX = (double)graphX * zoomMutliple;
+	rotateZ = (double)graphZ * zoomMutliple;
+
+	double realX = cos(radian) * rotateX -
+		sin(radian) * rotateZ;
+	double realZ = cos(radian) * rotateZ +
+		sin(radian) * rotateX;
+
+	DrawRotaGraph3((int)coordX - x - (int)(rotateX),
+		(int)coordZ - z - (int)(rotateZ),
 		graphX / 2, graphZ / 2,
 		zoomMutliple, zoomMutliple, radian,
 		*graphicHandle, TRUE, FALSE);
+
 	if (radian != targetRadian && abs(radian - targetRadian) > 
 		radianChangePerFrame) {
 		if (radian < 0)

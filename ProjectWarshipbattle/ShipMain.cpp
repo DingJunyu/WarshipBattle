@@ -14,27 +14,27 @@ void ShipMain::InifThisShip(int *ShipHandle, int *SShadowH ,int ShipNum,
 	/*テスト部分も含む*/
 	for (int i = 0; i < 5; i++) {
 		bubbleStartPoint[i] = ET.CopyFromCreateBubble();
-		bubbleStartPoint[i].InifCoordinate(100, -3, true, 3000, 20, true,
+		bubbleStartPoint[i].InifCoordinate(100, 0, true, 3000, 20, true,
 			0.15, 1.001);
 	}
-	bubbleStartPoint[1].InifCoordinate(-14, -18, true, 1500, 20, true,
+	bubbleStartPoint[1].InifCoordinate(-14, -13, true, 1500, 20, true,
 		0.15, 1.001);
-	bubbleStartPoint[2].InifCoordinate(-14, 8, true, 1500, 20, true,
+	bubbleStartPoint[2].InifCoordinate(-14, 13, true, 1500, 20, true,
 		0.15, 1.001);
 
-	bubbleStartPoint[3].InifCoordinate(-78, -11, true, 1500, 20, true,
+	bubbleStartPoint[3].InifCoordinate(-78, -6, true, 1500, 20, true,
 		0.15, 1.001);
-	bubbleStartPoint[4].InifCoordinate(-78, 1, true, 1500, 20, true,
+	bubbleStartPoint[4].InifCoordinate(-78, 6, true, 1500, 20, true,
 		0.15, 1.001);
 
 	for (int i = 0; i < 2; i++) {
 		smokeStartPoint[i] = ET.CopyFromCreateSmoke();
-		smokeStartPoint[i].InifCoordinate(4, -6, true, 2000, 20, true,
+		smokeStartPoint[i].InifCoordinate(4, 0, true, 2000, 20, true,
 			0.06, 1.005);
 	}
-	smokeStartPoint[0].InifCoordinate(4, -6, true, 2000, 20, true,
+	smokeStartPoint[0].InifCoordinate(14, 0, true, 2000, 20, true,
 		0.06, 1.005);
-	smokeStartPoint[1].InifCoordinate(-14, -6, true, 2000, 20, true,
+	smokeStartPoint[1].InifCoordinate(-12, 0, true, 2000, 20, true,
 		0.06, 1.005);
 }
 
@@ -148,6 +148,17 @@ void ShipMain::TEST() {
 	/*エフェクト関連*/
 	bubblePointCount = 5;
 	smokePointCount = 2;
+}
+
+void ShipMain::TestDraw(double x, double z) {
+	for (int i = 0; i < 5; i++) {
+		bubbleStartPoint[i].TestDraw(ReferRadianOnZ(),ReferCoordX(),
+			ReferCoordZ(),x,z);
+	}
+	for (int i = 0; i < 2; i++) {
+		smokeStartPoint[i].TestDraw(ReferRadianOnZ(), ReferCoordX(),
+			ReferCoordZ(),x,z);
+	}
 }
 
 void ShipMain::MemorySecure() {
