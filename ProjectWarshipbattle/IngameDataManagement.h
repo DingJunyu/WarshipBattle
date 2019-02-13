@@ -1,5 +1,6 @@
 #pragma once
 #include"HeaderForIngameDataManagement.h"
+/*関数のプライベート化はこれからする*/
 class IngameDataManagement
 {
 public:
@@ -84,6 +85,10 @@ private:
 	int numOfMapOnZ;
 
 	bool TEST_SHOW_ON;
+	void SIMPLE_USER_INTERFACE();
+
+	/*音声関数*/
+	void CheckAndPlaySound();
 
 	std::vector<ShipMain> alliesFleet;
 	std::vector<ShipMain> enemyFleet;

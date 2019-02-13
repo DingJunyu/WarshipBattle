@@ -9,22 +9,26 @@ void Effect::Draw(int x,int z) {
 		zoomMutliple *= zoomRate;
 	}
 
-	double rotateX;
-	double rotateZ;
+	double rotateX = 0;
+	double rotateZ = 0;
 
-	rotateX = (double)graphX * zoomMutliple;
-	rotateZ = (double)graphZ * zoomMutliple;
+	//rotateX = (double)graphX;
+	//rotateZ = (double)graphZ;
 
-	double realX = cos(radian) * rotateX -
-		sin(radian) * rotateZ;
-	double realZ = cos(radian) * rotateZ +
-		sin(radian) * rotateX;
+	//double realX = cos(radian) * rotateX -
+	//	sin(radian) * rotateZ;
+	//double realZ = cos(radian) * rotateZ +
+	//	sin(radian) * rotateX;
 
 	DrawRotaGraph3((int)coordX - x - (int)(rotateX),
 		(int)coordZ - z - (int)(rotateZ),
 		graphX / 2, graphZ / 2,
-		zoomMutliple, zoomMutliple, radian,
+		zoomMutliple, zoomMutliple, radian - MathAndPhysics::PI/4,
 		*graphicHandle, TRUE, FALSE);
+
+	/*テスト用*/
+	/*unsigned int Cr = GetColor(0, 0, 255);
+	DrawPixel(coordX - x, coordZ - z, Cr);*/
 
 	if (radian != targetRadian && abs(radian - targetRadian) > 
 		radianChangePerFrame) {

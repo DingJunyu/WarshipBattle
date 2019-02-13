@@ -90,6 +90,12 @@ enum TypeOfEffect {
 	SMOKE
 };
 
+enum TypeOfHord {
+	LARGE,
+	MEDIUM,
+	SMALL
+};
+
 /*äeéÌóﬁÇÃëDÇÃêî*/
 namespace COUNT_OF_EVERYTYPE {
 	const int DESTROYER_TYPE_COUNT = 0;
@@ -120,3 +126,4 @@ namespace MapSize {
 	const int zSize = 20000;
 	const int safeZone = 1000;
 }
+

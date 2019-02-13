@@ -31,4 +31,16 @@ int Controller::GetCommand() {
 	//Debug
 	if (KeyBuf[KEY_INPUT_P])
 		WaitKey();
+
+	if (KeyBuf[KEY_INPUT_Z] && GetInputChar(TRUE)) {
+		PlaySoundMem(*shipHordHigh, DX_PLAYTYPE_BACK, TRUE);
+	}
+	if (KeyBuf[KEY_INPUT_C] && GetInputChar(TRUE)) {
+		PlaySoundMem(*shipHordLow, DX_PLAYTYPE_BACK, TRUE);
+	}
+}
+
+void Controller::Inif(SoundLoader *SL) {
+	shipHordHigh = SL->referShipHordLargeHigh();
+	shipHordLow = SL->referShipHordLargeLow();
 }

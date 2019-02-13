@@ -5,11 +5,12 @@ ShipMain::~ShipMain()
 }
 
 void ShipMain::InifThisShip(int *ShipHandle, int *SShadowH ,int ShipNum,
-	EffectTemplate ET) {
+	EffectTemplate ET, SoundLoader *SL) {
 	SetPictureHandle(ShipHandle);
 	SetShadowHandle(SShadowH);
 	//GetDataFromShipdata(ShipNum);
 	MemorySecure();
+	LoadSound(SL);
 
 	/*テスト部分も含む*/
 	for (int i = 0; i < 5; i++) {
@@ -67,15 +68,15 @@ void ShipMain::CalSpeed() {
 		newSpeed = realAcc/100 + currentSpeed;
 		if (newSpeed > maxSpeed*currentAccPercentage) {
 			if (currentAccPercentage != 0.0f)
-				newSpeed -= 0.001 / currentAccPercentage*
+				newSpeed -= 0.0001 / currentAccPercentage*
 				(newSpeed / maxSpeed * (1 - currentAccPercentage));
 			else
-				newSpeed -= 0.0015;
+				newSpeed -= 0.00015;
 		}
 
 		if (currentRadian != 0) {
-			if (newSpeed > maxSpeed*currentAccPercentage*0.95)
-				newSpeed -= 0.001;
+			if (newSpeed > maxSpeed*currentAccPercentage * 0.95)
+				newSpeed -= 0.0001;
 		}
 
 		if (currentAccPercentage == 0 && abs(newSpeed) < 0.0005)
@@ -118,7 +119,6 @@ void ShipMain::Alignment() {
 	SetRadianChangePerFrame(currentRadian);
 }
 
-
 void ShipMain::ControlThisShip(int Command) {;
 	switch (Command) {
 	case CommandSerial::INCREASE_OUTPUT:ChangeAccPercentage(true); break;
@@ -148,6 +148,8 @@ void ShipMain::TEST() {
 	/*エフェクト関連*/
 	bubblePointCount = 5;
 	smokePointCount = 2;
+
+	/*音声関連*/
 }
 
 void ShipMain::TestDraw(double x, double z) {
@@ -197,4 +199,51 @@ Effect ShipMain::NewSmoke(int num) {
 
 	return smokeStartPoint[num].NewEffect(newRadian, ReferSpeedOnZ(),
 		ReferCoordX(), ReferCoordZ());
+}
+
+/*音声関連*/
+void ShipMain::LoadSound(SoundLoader *SL) {
+	soundEngine = SL->referShipSoundEngine();
+	soundMoving = SL->referShipSoundMoving();
+	soundSlow = SL->referShipSoundSlow();
+	soundTurning = SL->referShipSoundTuring();
+
+	soundHordHigh = SL->referShipHordLargeHigh();
+	soundHordLow = SL->referShipHordLargeLow();
+}
+
+void ShipMain::CheckAndPlaySound() {
+	/*エンジン音*/
+	if (currentAccPercentage != 0 && CheckSoundMem(*soundEngine) == 0) {
+		PlaySoundMem(*soundEngine, DX_PLAYTYPE_LOOP, TRUE);
+	}
+	if (currentAccPercentage == 0 && CheckSoundMem(*soundEngine) != 0) {
+		StopSoundMem(*soundEngine);
+	}
+	/*水音*/
+	if (ReferSpeedOnZ() > 0 && ReferSpeedOnZ() < 0.2&&
+		CheckSoundMem(*soundSlow) == 0) {
+		PlaySoundMem(*soundSlow,DX_PLAYTYPE_LOOP,TRUE);
+	}
+	if ((ReferSpeedOnZ() < 0 || ReferSpeedOnZ() >= 0.2)&&
+		CheckSoundMem(*soundSlow) != 0) {
+		StopSoundMem(*soundSlow);
+	}
+
+	if (ReferSpeedOnZ() >= 0.2 && CheckSoundMem(*soundMoving) == 0) {
+		PlaySoundMem(*soundMoving, DX_PLAYTYPE_LOOP, TRUE);
+	}
+	if (ReferSpeedOnZ() < 0.2 && CheckSoundMem(*soundMoving) != 0) {
+		StopSoundMem(*soundMoving);
+	}
+
+	/*転向音*/
+	if (abs(currentRadian) > MathAndPhysics::PI / 30 &&
+		CheckSoundMem(*soundTurning) == 0) {
+		PlaySoundMem(*soundTurning, DX_PLAYTYPE_LOOP, TRUE);
+	}
+	if (abs(currentRadian) < MathAndPhysics::PI / 30 &&
+		CheckSoundMem(*soundTurning) != 0) {
+		StopSoundMem(*soundTurning);
+	}
 }

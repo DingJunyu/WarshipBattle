@@ -8,6 +8,7 @@
 #include"EffectPoint.h"
 #include"ShipData.h"
 #include"EffectTemplate.h"
+#include"SoundLoader.h"
 class ShipMain :
 	public AllMovableObjects
 {
@@ -23,7 +24,7 @@ public:
 	//初期化
 	void RegistrateShipCrashParts();
 	void InifThisShip(int *ShipHandle,int *SShadowH,int ShipNum, 
-		EffectTemplate ET);
+		EffectTemplate ET,SoundLoader *SL);
 	void SetEffectPoint(ShipData SD);
 	void DestroyMemory();
 
@@ -50,6 +51,8 @@ public:
 	//エフェクト生成
 	Effect NewBubble(int num);
 	Effect NewSmoke(int num);
+
+	void CheckAndPlaySound();
 
 private:
 	ShipCrashParts * MainParts;
@@ -86,4 +89,15 @@ private:
 	bool returnToCenter;
 	
 	std::string name;
+
+	/*音声関連*/
+	/*ホードの種類はまだ決まってないので今は使っていない*/
+	void LoadSound(SoundLoader *SL);
+	int *soundEngine;
+	int *soundMoving;
+	int *soundSlow;
+	int *soundTurning;
+	int HordType;
+	int *soundHordHigh;
+	int *soundHordLow;
 };

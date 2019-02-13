@@ -11,6 +11,7 @@ void IngameDataManagement::Update() {
 //	CrashDecision();//船の間のあたり判定
 //	HitDecision();//砲弾と船の間のあたり判定
 	DeleteUseless();//入らないものを消す
+	CheckAndPlaySound();
 	DrawAll();//全部更新した後画面を描く
 	FC.Wait();//60フレームに合わせるように待つ
 }
@@ -30,6 +31,9 @@ void IngameDataManagement::DrawAll() {
 //	DrawAmmo();
 //	DrawBomb();
 //	DrawTorpedo();
+
+	SIMPLE_USER_INTERFACE();
+
 	
 	if (TEST_SHOW_ON)
 		TEST_DRAW();
@@ -172,7 +176,7 @@ void IngameDataManagement::TEST() {
 	alliesFleet.push_back(ShipMain());
 	auto ship = alliesFleet.begin();
 	ship->InifThisShip(PL.ReferBattleCrusierHandle(4000), 
-		PL.ReferBattleCrusierShadowHandle(4000), 4000, ET);
+		PL.ReferBattleCrusierShadowHandle(4000), 4000, ET, &SL);
 	ship->NewCoordX(2200);
 	ship->NewCoordZ(1500);
 	ship->SetLength(PL.ReferShipSizeX());
@@ -227,8 +231,13 @@ void IngameDataManagement::TEST_DRAW() {
 	unsigned int Cr;
 	Cr = GetColor(255, 255, 255);
 	auto ship = alliesFleet.begin();
-	ship->TestDraw(MainCamera.ReferRealCameraX(),MainCamera.ReferRealCameraZ());
+	ship->TestDraw(MainCamera.ReferRealCameraX(),
+		MainCamera.ReferRealCameraZ());
 	char CharNum[255];
+
+	SetFontSize(15);
+	ChangeFont("HGｺﾞﾐｯｸM");
+
 	_gcvt_s(CharNum, ship->ReferSpeedOnZ()*100, 10);
 	DrawString(10, 10, "Speed", Cr);
 	DrawString(60, 10, CharNum, Cr);
@@ -266,6 +275,7 @@ void IngameDataManagement::Inif() {
 	UI.InifUI(&PL);
 	ET.InifEffectTemplate(&PL);
 	SL.Inif();
+	CT.Inif(&SL);
 }
 
 void IngameDataManagement::Free() {
@@ -278,7 +288,7 @@ void IngameDataManagement::GetNewEffect() {
 	for (auto ship = alliesFleet.begin();
 		ship != alliesFleet.end();
 		ship++) {
-		if (ship->ReferSpeedOnZ() > 0.02 && rand()%3==0 
+		if (ship->ReferSpeedOnZ() > 0.1 && rand() % 3==0 
 			&& rand()%100>ship->ReferSpeedOnZ()*10) {
 			bubbleList.push_back(ship->NewBubble(0));
 			bubbleList.push_back(ship->NewBubble(1));
@@ -290,7 +300,7 @@ void IngameDataManagement::GetNewEffect() {
 	for (auto ship = alliesFleet.begin();
 		ship != alliesFleet.end();
 		ship++) {
-		if (ship->ReferSpeedOnZ() != 0) {
+		if (ship->ReferOutPutRate() != 0) {
 			if ((rand() % 8 < ship->ReferSpeedOnZ() * 10)
 				&& rand() % 4 == 0) {
 				smokeList.push_back(ship->NewSmoke(0));
@@ -322,4 +332,42 @@ void IngameDataManagement::DeleteUseless() {
 		if (smokeList.empty() || smoke == smokeList.end())
 			break;
 	}
+}
+
+void IngameDataManagement::CheckAndPlaySound() {
+	auto ship = alliesFleet.begin();
+	ship->CheckAndPlaySound();
+}
+
+void IngameDataManagement::SIMPLE_USER_INTERFACE() {
+	unsigned int Cr;
+	Cr = GetColor(255, 255, 255);
+	auto ship = alliesFleet.begin();
+	char CharNum[255];
+
+	SetFontSize(20);
+	ChangeFont("HG行書体");
+
+	DrawString(100, 600, "速度:", Cr);
+	if (ship->ReferSpeedOnZ()*28.0f > 0.5f)
+		_gcvt_s(CharNum, ship->ReferSpeedOnZ()*28.0f, 2);
+	else if(ship->ReferSpeedOnZ()*28.0f > 10.0f)
+		_gcvt_s(CharNum, ship->ReferSpeedOnZ()*28.0f, 3);
+	else
+		_gcvt_s(CharNum, 0.0f, 2);
+	DrawString(180, 600, CharNum, Cr);
+	DrawString(220, 600, "Kt", Cr);
+
+	DrawString(100, 620, "出力", Cr);
+	_gcvt_s(CharNum, ship->ReferOutPutRate() * 100, 3);
+	DrawString(180, 620, CharNum, Cr);
+	DrawString(220, 620, "%", Cr);
+
+	DrawString(100, 660, "航行方向", Cr);
+	if (ship->ReferChangingRadian() > 0)
+		DrawString(200, 660, "右へ", Cr);
+	else if (ship->ReferChangingRadian() < 0)
+		DrawString(200, 660, "左へ", Cr);
+	else
+		DrawString(200, 660, "前方", Cr);
 }
