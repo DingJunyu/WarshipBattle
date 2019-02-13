@@ -54,12 +54,19 @@ public:
 
 	void CheckAndPlaySound();
 
+	/*ŽËŒ‚*/
+	int HowManyWeaponYouHave() { return MainWeaponCount; }
+	bool IsThisOneUsable(int Num, bool Main);
+	Ammo Shoot(int Num, bool Main);
+
 private:
 	ShipCrashParts * MainParts;
 	ShipCrashParts * SubParts;
 
 	Weapon * MainWeapon;
+	int MainWeaponCount;
 	Weapon * SubWeapon;
+	int SubWeaponCount;
 
 	EffectPoint * bubbleStartPoint;
 	int bubblePointCount;

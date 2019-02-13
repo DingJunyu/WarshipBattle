@@ -174,6 +174,7 @@ void ShipMain::MemorySecure() {
 	smokeStartPoint = new EffectPoint[2];
 }
 
+/*削除前に必ずこの関数を呼び出して！*/
 void ShipMain::DestroyMemory() {
 	delete[] MainParts;
 	delete[] SubParts;

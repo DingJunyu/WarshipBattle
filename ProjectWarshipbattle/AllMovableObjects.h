@@ -10,6 +10,7 @@ public:
 	AllMovableObjects(bool fly, bool pla, bool poi,bool Cb) : flyable(fly),
 		plane(pla), alive(true), point(poi), crashable(Cb) {
 		radianChangePerFrame = 0;
+		airResistanceActive = false;
 	}
 	~AllMovableObjects();
 
@@ -43,6 +44,7 @@ public:
 	void SetPictureHandle(int *p) { pictureHandle = p; }
 	void SetShadowHandle(int *p) { shadowHandle = p; }
 	void Draw(Camera CM);
+	void DrawSub(Camera CM);
 
 	//状態設置関数
 	void NewCoordX(double X) { coordX = X; }
@@ -66,6 +68,7 @@ private:
 	/*スピードは水平と垂直に分ける*/
 	double speedOnZ;
 	double speedOnY;
+	bool airResistanceActive;
 	double airResistance;//空気抵抗
 	double radianOnZ;//行く方向(水平)
 	double radianChangePerFrame;

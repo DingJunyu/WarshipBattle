@@ -1,4 +1,6 @@
 #pragma once
+#include"Ammo.h"
+#include"Torpedo.h"
 class Weapon
 {
 public:
@@ -28,7 +30,8 @@ public:
 
 	//ó‘Ô–â‚¢‡‚í‚¹ŠÖ”
 	bool ReferShootable();//ËŒ‚‚Å‚«‚ê‚Îtrue‚ğ–ß‚·
-
+	
+	Ammo Shoot(int x,int y);
 
 
 private:

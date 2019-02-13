@@ -6,6 +6,9 @@ class Ammo :
 public:
 	Ammo() : AllMovableObjects(true, false, true, true) {}
 	~Ammo();
+
+	double ReferDamage() { return damage; }
+	void SetData();
 	
 private:
 	double penetrateDepth;

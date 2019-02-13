@@ -5,7 +5,10 @@ AllMovableObjects::~AllMovableObjects()
 }
 
 void AllMovableObjects::Move() {
-	//2Dゲームですか、Y軸の移動も考える
+	if (airResistanceActive)
+		speedOnZ *= airResistance;
+
+	//2Dゲームですが、Y軸の移動も考える
 	if (flyable) {
 		if (!plane) {
 			FallingDown();
@@ -56,7 +59,7 @@ void AllMovableObjects::SpeedDownbyAirResistance() {
 		speedOnZ -= airResistance;
 	}
 }
-
+//自機描く時はこの関数を使う
 void AllMovableObjects::Draw(Camera CM) {
 	double xOnScreen;
 	double zOnScreen;
@@ -73,4 +76,23 @@ void AllMovableObjects::Draw(Camera CM) {
 	DrawRotaGraph3((int)xOnScreen, (int)zOnScreen, (int)(length / 2), 
 		(int)(width) / 2, 0.125, 0.125,
 		radianOnZ, *pictureHandle, TRUE, FALSE);
+}
+
+//自機以外のはこの関数を使う
+void AllMovableObjects::DrawSub(Camera CM) {
+	/*シャドーの距離計算はまだ*/
+	int shadowDistanceOnX = 2;
+	int shadowDistanceOnZ = 2;
+
+	DrawRotaGraph3((int)coordX - CM.ReferRealCameraX() + shadowDistanceOnX,
+		(int)coordZ - CM.ReferRealCameraZ() + shadowDistanceOnZ,
+		length / 2, width / 2,
+		0.125, 0.125, radianOnZ,
+		*shadowHandle, TRUE, FALSE);
+
+	DrawRotaGraph3((int)coordX - CM.ReferRealCameraX(),
+		(int)coordZ - CM.ReferRealCameraZ(),
+		length / 2, width / 2,
+		0.125, 0.125, radianOnZ,
+		*pictureHandle, TRUE, FALSE);
 }
