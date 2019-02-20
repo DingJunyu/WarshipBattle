@@ -5,7 +5,9 @@
 class PictureLoader
 {
 public:
-	PictureLoader();
+	PictureLoader() {
+		buttonAmount = 30;
+	}
 	~PictureLoader();
 
 	/*初期化関数*/
@@ -111,5 +113,9 @@ private:
 	/*エフェクト*/
 	int bubbleHandle;
 	int smokeHandle;
-};
 
+	//ボタン
+	int *buttonHandle;
+	int *buttonPressedHandle;
+	int buttonAmount;
+};

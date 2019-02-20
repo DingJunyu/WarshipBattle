@@ -18,4 +18,3 @@ private:
 	DWORD next_game_tick;
 	int sleep_time;
 };
-

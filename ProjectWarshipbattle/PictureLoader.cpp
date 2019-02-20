@@ -18,6 +18,10 @@ void PictureLoader::MemorySecure() {
 		battleCruiserHandle[i] 
 			= new int [SerialNumberOfShipHandle::ARRAY_SIZE];
 	}
+
+	//ボタン
+	buttonHandle = new int[buttonAmount];
+	buttonPressedHandle = new int[buttonAmount];
 }
 
 void PictureLoader::FreeMemory() {
@@ -27,6 +31,10 @@ void PictureLoader::FreeMemory() {
 		delete[] battleCruiserHandle[i];
 	}
 	delete[] battleCruiserHandle;
+
+	//ボタン
+	delete[] buttonHandle;
+	delete[] buttonPressedHandle;
 }
 
 void PictureLoader::LoadPicture() {
@@ -64,6 +72,8 @@ void PictureLoader::LoadPicture() {
 	"GraphicData/Effect/Bubble.png");
 	smokeHandle = LoadGraph(
 	"GraphicData/Effect/Smoke.png");
+
+	//ボタン
 
 }
 

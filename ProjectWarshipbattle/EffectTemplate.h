@@ -20,7 +20,5 @@ private:
 	/*エフェクトタイプはTypeOfEffectに参考*/
 	EffectPoint createBubble;
 	EffectPoint createSmoke;
-
-
 };
 

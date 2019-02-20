@@ -96,6 +96,15 @@ enum TypeOfHord {
 	SMALL
 };
 
+enum MainMenuButtonEvent {
+	//メインメニューボタン集
+	NEW_GAME = 0,
+	CONTINUE_GAME,
+	LOAD_GAME,
+	OPTION,
+	GAME_OVER
+};
+
 /*各種類の船の数*/
 namespace COUNT_OF_EVERYTYPE {
 	const int DESTROYER_TYPE_COUNT = 0;
