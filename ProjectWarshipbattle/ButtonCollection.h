@@ -4,11 +4,11 @@
 #include"SoundLoader.h"
 class ButtonCollection{
 public:
-	ButtonCollection(int bA):buttonAmount(20){}
+	ButtonCollection() {}
 	~ButtonCollection();
 
-	void Inif(PictureLoader *PL,SoundLoader *SL);
-	void Destroy();
+	void Inif(PictureLoader *PL);
+	void FREE();
 
 	Button * buttonContainer;
 

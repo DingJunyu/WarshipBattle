@@ -1,9 +1,5 @@
 #include "PictureLoader.h"
 
-PictureLoader::PictureLoader()
-{
-}
-
 PictureLoader::~PictureLoader()
 {
 }
@@ -20,8 +16,8 @@ void PictureLoader::MemorySecure() {
 	}
 
 	//ボタン
-	buttonHandle = new int[buttonAmount];
-	buttonPressedHandle = new int[buttonAmount];
+	buttonHandle = new int[ButtonEvent::BUTTON_AMOUNT];
+	buttonPressedHandle = new int[ButtonEvent::BUTTON_AMOUNT];
 }
 
 void PictureLoader::FreeMemory() {
@@ -74,6 +70,27 @@ void PictureLoader::LoadPicture() {
 	"GraphicData/Effect/Smoke.png");
 
 	//ボタン
+	//メインメニュー部分
+	buttonHandle[ButtonEvent::NEW_GAME] = LoadGraph(
+	"GraphicData/Button/Button_NewGame.png");
+	buttonHandle[ButtonEvent::CONTINUE_GAME] = LoadGraph(
+	"GraphicData/Button/Button_ContinueGame.png");
+	buttonHandle[ButtonEvent::LOAD_GAME] = LoadGraph(
+	"GraphicData/Button/Button_LoadGame.png");
+	buttonHandle[ButtonEvent::OPTION] = LoadGraph(
+	"GraphicData/Button/Button_Option.png");
+	buttonHandle[ButtonEvent::GAME_OVER] = LoadGraph(
+	"GraphicData/Button/Button_EndGame.png");
+
+	//タイトル関係
+	title = LoadGraph(
+	"GraphicData/Back_Ground/Title.png");
+	pressedToStart = LoadGraph(
+	"GraphicData/Back_Ground/Press_To_Start.png");
+	pressedToStartDown = LoadGraph(
+	"GraphicData/Back_Ground/Press_To_Start_Down.png");
+	backGround = LoadGraph(
+	"GraphicData/Back_Ground/Title_MainMenu_BackGround.jpg");
 
 }
 

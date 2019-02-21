@@ -22,6 +22,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetAlwaysRunFlag(TRUE);
 	srand((unsigned)time(NULL));
 
+	MainMenuController MMC;
+
+	MMC.Inif();
+	while (CheckHitKeyAll()==0) {
+		MMC.DrawTitle();
+	}
+
+	MMC.FREE();
 	SingleGame_DeathMatch_Progress();
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理

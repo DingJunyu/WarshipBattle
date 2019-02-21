@@ -5,12 +5,12 @@ class Button {
 public:
 	Button() {
 		pressed = false;
-		zoomMutliple = 1.0f;
+		zoomMultiple = 1.0f;
 	}
 	~Button();
 
-	void Inif(int *bH, int *bPH, double zM);
-	void SetXZ(double xP, double zP);
+	void Inif(int *bH, int *bPH);
+	void SetXZ(double xP, double zP, double zM);
 	void CheckXZ();
 
 	void DrawThisButton();
@@ -30,7 +30,7 @@ private:
 	int graphSizeX;
 	int graphSizeZ;
 
-	double zoomMutliple;
+	double zoomMultiple;
 
 	int time;
 	bool pressed;

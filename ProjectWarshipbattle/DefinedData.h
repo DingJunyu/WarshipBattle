@@ -96,7 +96,8 @@ enum TypeOfHord {
 	SMALL
 };
 
-enum MainMenuButtonEvent {
+enum ButtonEvent {
+	BUTTON_AMOUNT = 20,
 	//メインメニューボタン集
 	NEW_GAME = 0,
 	CONTINUE_GAME,

@@ -23,5 +23,6 @@
 #include"FrameControl.h"
 #include"TeamDeathMatchControl.h"
 #include"Controller.h"
+#include"MainMenuController.h"
 
 #include<time.h>

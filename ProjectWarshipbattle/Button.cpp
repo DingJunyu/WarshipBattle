@@ -3,18 +3,20 @@
 Button::~Button() {
 }
 
-void Button::Inif(int *bH, int *bPH,double zM) {
+void Button::Inif(int *bH, int *bPH) {
 	*buttonHandle = *bH;
 	*buttonHandle = *bPH;
 	GetGraphSize(*bH, &graphSizeX, &graphSizeZ);
 }
 
-void Button::SetXZ(double xP, double zP) {
+void Button::SetXZ(double xP, double zP, double zM) {
 	xPercent = xP;
 	zPercent = zP;
 
 	coordX = xP * Screen::SCREEN_X;
 	coordZ = zP * Screen::SCREEN_Z;
+
+	zoomMultiple = zM;
 }
 
 void Button::CheckXZ() {
@@ -23,8 +25,8 @@ void Button::CheckXZ() {
 }
 
 void Button::CheckMousePosition(int mouseX, int mouseZ) {
-	if (mouseX > coordX && mouseX < coordX + graphSizeX * zoomMutliple) {
-		if (mouseZ > coordZ && mouseZ < coordZ + graphSizeZ * zoomMutliple) {
+	if (mouseX > coordX && mouseX < coordX + graphSizeX * zoomMultiple) {
+		if (mouseZ > coordZ && mouseZ < coordZ + graphSizeZ * zoomMultiple) {
 			pressed = true;
 		}
 	}
@@ -33,9 +35,9 @@ void Button::CheckMousePosition(int mouseX, int mouseZ) {
 
 void Button::DrawThisButton() {
 	if (pressed)
-		DrawExtendGraph(coordX, coordZ, coordX + graphSizeX * zoomMutliple,
-			coordZ + graphSizeZ * zoomMutliple, *buttonHandle, TRUE);
+		DrawExtendGraph(coordX, coordZ, coordX + graphSizeX * zoomMultiple,
+			coordZ + graphSizeZ * zoomMultiple, *buttonHandle, TRUE);
 	else
-		DrawExtendGraph(coordX, coordZ, coordX + graphSizeX * zoomMutliple,
-			coordZ + graphSizeZ * zoomMutliple, *buttonPressedHandle, TRUE);
+		DrawExtendGraph(coordX, coordZ, coordX + graphSizeX * zoomMultiple,
+			coordZ + graphSizeZ * zoomMultiple, *buttonPressedHandle, TRUE);
 }

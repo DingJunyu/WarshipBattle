@@ -170,6 +170,7 @@
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="IngameDataManagement.cpp" />
     <ClCompile Include="Lock.cpp" />
+    <ClCompile Include="MainMenuController.cpp" />
     <ClCompile Include="Morale.cpp" />
     <ClCompile Include="PictureLoader.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="IncludeForAll.h" />
     <ClInclude Include="IngameDataManagement.h" />
     <ClInclude Include="Lock.h" />
+    <ClInclude Include="MainMenuController.h" />
     <ClInclude Include="Morale.h" />
     <ClInclude Include="PictureLoader.h" />
     <ClInclude Include="Plane.h" />
