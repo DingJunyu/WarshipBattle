@@ -18,6 +18,6 @@ public:
 private:
 	const int FRAMES_PER_SECOND;
 	const int SKIP_TICKS;
-	DWORD next_game_tick;
+	unsigned long next_game_tick;
 	int sleep_time;
 };

@@ -106,6 +106,23 @@ enum ButtonEvent {
 	GAME_OVER
 };
 
+namespace BUTTON_POSITION {
+	const double START_POSITION_ON_X = .2f;
+	const double NEW_GAME = .4f;
+	const double CONTINUE_GAME = .5f;
+	const double LOAD_GAME = .6f;
+	const double OPTION = .7f;
+	const double GAME_OVER = .8f;
+}
+
+enum ButtonEventForUserInterface {
+
+};
+
+namespace BUTTON_POSITION_UI {
+
+}
+
 /*äeéÌóﬁÇÃëDÇÃêî*/
 namespace COUNT_OF_EVERYTYPE {
 	const int DESTROYER_TYPE_COUNT = 0;

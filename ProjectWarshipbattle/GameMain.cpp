@@ -18,19 +18,33 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	/*ここにはウインドーズメッセージの問題がある、
 	DXLIBの場合は名前を変えれば解決できるが、
 	WINAPIの場合はほかの処理をしないといけない*/
-	SetMainWindowText("WarshipBattle");	
+	SetMainWindowText("WarshipBattle");
 	SetAlwaysRunFlag(TRUE);
 	srand((unsigned)time(NULL));
 
 	MainMenuController MMC;
+	int choice = -1;
+	bool endGame = false;
 
-	MMC.Inif();
-	while (CheckHitKeyAll()==0) {
-		MMC.DrawTitle();
+	while (!endGame) {
+		MMC.Inif();//メニュー部分初期化
+		MMC.DrawTitle();//タイトル描く
+		MMC.DrawLoading();
+		choice = -1;//選択を初期化
+
+		while (choice == -1) {
+			MMC.DrawMainMenu();//メインメニューを描く
+			choice = MMC.CheckChoice();//選択を確認・バー状態更新
+		}
+		MMC.FREE();//メニュー部分使ったメモリを解放
+		MMC.DrawLoading();
+		//メニューから取ったコマンドに合わせて関数を呼び出す
+		switch (choice) {
+		case ButtonEvent::NEW_GAME:
+			SingleGame_DeathMatch_Progress(); break;
+		case ButtonEvent::GAME_OVER:endGame = true; break;
+		}
 	}
-
-	MMC.FREE();
-	SingleGame_DeathMatch_Progress();
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 

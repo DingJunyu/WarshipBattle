@@ -4,7 +4,7 @@ ButtonCollection::~ButtonCollection(){
 }
 
 void ButtonCollection::Inif(PictureLoader *PL) {
-	buttonContainer = new Button[buttonAmount];
+	buttonContainer = new Button[ButtonEvent::BUTTON_AMOUNT];
 
 	//メインメニューボタンの初期化
 	buttonContainer[ButtonEvent::NEW_GAME].Inif(
@@ -29,6 +29,11 @@ void ButtonCollection::Inif(PictureLoader *PL) {
 	);
 }
 
+void ButtonCollection::InifForUserInterface(PictureLoader *PL) {
+
+}
+
+
 void ButtonCollection::FREE() {
-	delete [] buttonContainer;
+	delete[] buttonContainer;
 }

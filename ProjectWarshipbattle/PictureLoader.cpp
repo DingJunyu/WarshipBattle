@@ -73,14 +73,24 @@ void PictureLoader::LoadPicture() {
 	//メインメニュー部分
 	buttonHandle[ButtonEvent::NEW_GAME] = LoadGraph(
 	"GraphicData/Button/Button_NewGame.png");
+	buttonPressedHandle[ButtonEvent::NEW_GAME] = LoadGraph(
+	"GraphicData/Button/Button_Pressed_NewGame.png");
 	buttonHandle[ButtonEvent::CONTINUE_GAME] = LoadGraph(
 	"GraphicData/Button/Button_ContinueGame.png");
+	buttonPressedHandle[ButtonEvent::CONTINUE_GAME] = LoadGraph(
+	"GraphicData/Button/Button_Pressed_ContinueGame.png");
 	buttonHandle[ButtonEvent::LOAD_GAME] = LoadGraph(
 	"GraphicData/Button/Button_LoadGame.png");
+	buttonPressedHandle[ButtonEvent::LOAD_GAME] = LoadGraph(
+	"GraphicData/Button/Button_Pressed_LoadGame.png");
 	buttonHandle[ButtonEvent::OPTION] = LoadGraph(
 	"GraphicData/Button/Button_Option.png");
+	buttonPressedHandle[ButtonEvent::OPTION] = LoadGraph(
+	"GraphicData/Button/Button_Pressed_Option.png");
 	buttonHandle[ButtonEvent::GAME_OVER] = LoadGraph(
 	"GraphicData/Button/Button_EndGame.png");
+	buttonPressedHandle[ButtonEvent::GAME_OVER] = LoadGraph(
+	"GraphicData/Button/Button_Pressed_EndGame.png");
 
 	//タイトル関係
 	title = LoadGraph(
@@ -95,6 +105,7 @@ void PictureLoader::LoadPicture() {
 }
 
 void PictureLoader::FreePicture() {
+	/*戦艦*/
 	for (int i = 0;
 		i < COUNT_OF_EVERYTYPE::BATTLE_CRUSIER_TYPE_COUNT;
 		i++) {
@@ -102,6 +113,11 @@ void PictureLoader::FreePicture() {
 			battleCruiserHandle[i][SerialNumberOfShipHandle::SHIP_HANDLE]);
 		DeleteGraph(
 			battleCruiserHandle[i][SerialNumberOfShipHandle::SHIP_SHADOW_HANDLE]);
+	}
+	/*ボタン*/
+	for (int i = 0; i < ButtonEvent::BUTTON_AMOUNT; i++) {
+		DeleteGraph(buttonHandle[i]);
+		DeleteGraph(buttonPressedHandle[i]);
 	}
 	/*マップ*/
 	DeleteGraph(mapHandle);

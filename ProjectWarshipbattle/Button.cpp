@@ -4,9 +4,10 @@ Button::~Button() {
 }
 
 void Button::Inif(int *bH, int *bPH) {
-	*buttonHandle = *bH;
-	*buttonHandle = *bPH;
+	buttonHandle = bH;
+	buttonPressedHandle = bPH;
 	GetGraphSize(*bH, &graphSizeX, &graphSizeZ);
+	pressed = false;
 }
 
 void Button::SetXZ(double xP, double zP, double zM) {
@@ -34,10 +35,12 @@ void Button::CheckMousePosition(int mouseX, int mouseZ) {
 }
 
 void Button::DrawThisButton() {
-	if (pressed)
+	if (!pressed)
 		DrawExtendGraph(coordX, coordZ, coordX + graphSizeX * zoomMultiple,
 			coordZ + graphSizeZ * zoomMultiple, *buttonHandle, TRUE);
 	else
 		DrawExtendGraph(coordX, coordZ, coordX + graphSizeX * zoomMultiple,
 			coordZ + graphSizeZ * zoomMultiple, *buttonPressedHandle, TRUE);
+
+	pressed = false;
 }

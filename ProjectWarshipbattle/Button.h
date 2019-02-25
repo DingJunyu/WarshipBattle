@@ -17,6 +17,9 @@ public:
 	void CheckMousePosition(int mouseX, int mouseZ);
 	void ChangePressed() { pressed = !pressed; }
 
+	int ReferGraphSizeX() { return graphSizeX; }
+	int ReferGraphSizeZ() { return graphSizeZ; }
+
 private:
 	int coordX;
 	int coordZ;

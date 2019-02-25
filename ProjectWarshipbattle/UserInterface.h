@@ -2,6 +2,7 @@
 #include"DxLib.h"
 #include"PictureLoader.h"
 #include"DefinedData.h"
+#include"ButtonCollection.h"
 #include<cmath>
 class UserInterface
 {
@@ -23,6 +24,8 @@ public:
 	
 
 private:
+	ButtonCollection BC;
+
 	int *mat;
 	int *shipCardMat;
 

@@ -8,6 +8,7 @@ public:
 	~ButtonCollection();
 
 	void Inif(PictureLoader *PL);
+	void InifForUserInterface(PictureLoader *PL);
 	void FREE();
 
 	Button * buttonContainer;
