@@ -248,3 +248,7 @@ void ShipMain::CheckAndPlaySound() {
 		StopSoundMem(*soundTurning);
 	}
 }
+
+bool ShipMain::IsThisOneUsable(int Num, bool Main) {
+
+}

@@ -36,11 +36,13 @@ public:
 
 private:
 	int numberofGuns;//砲塔の連装数
-	int reloadTime;//再装填の時間
-	int lastShootedTime;//前回射撃した時間
+	unsigned int reloadTime;//再装填の時間
+	unsigned int lastShootedTime;//前回射撃した時間
 	double calibre;
 
 	int *turrentHandle;//画像データ保存用
+
+	double initialSpeed;//初速度
 	
 	double relativeCoordX;
 	double relativeCoordZ;
@@ -53,5 +55,4 @@ private:
 	int maxHeartPoint;
 	double armorOntheSide;
 	double armorOntheTop;
-
 };
