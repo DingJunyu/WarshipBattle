@@ -250,5 +250,15 @@ void ShipMain::CheckAndPlaySound() {
 }
 
 bool ShipMain::IsThisOneUsable(int Num, bool Main) {
+	if (Main)
+		return MainWeapon[Num].ReferShootable();
+	else
+		return SubWeapon[Num].ReferShootable();
+}
 
+Ammo ShipMain::Shoot(int Num, bool Main) {
+	if (Main)
+		return MainWeapon[Num].Shoot(ReferCoordX(),ReferCoordZ());
+	else
+		return SubWeapon[Num].Shoot(ReferCoordX(),ReferCoordZ());
 }
