@@ -18,6 +18,11 @@ void PictureLoader::MemorySecure() {
 	//ボタン
 	buttonHandle = new int[ButtonEvent::BUTTON_AMOUNT];
 	buttonPressedHandle = new int[ButtonEvent::BUTTON_AMOUNT];
+
+	//弾
+	ammoHandle = new int[AmmoType::TYPE_COUNT];
+	ammoX = new int[AmmoType::TYPE_COUNT];
+	ammoZ = new int[AmmoType::TYPE_COUNT];
 }
 
 void PictureLoader::FreeMemory() {
@@ -31,6 +36,11 @@ void PictureLoader::FreeMemory() {
 	//ボタン
 	delete[] buttonHandle;
 	delete[] buttonPressedHandle;
+
+	//弾
+	delete[] ammoHandle;
+	delete[] ammoX;
+	delete[] ammoZ;
 }
 
 void PictureLoader::LoadPicture() {
@@ -68,6 +78,10 @@ void PictureLoader::LoadPicture() {
 	"GraphicData/Effect/Bubble.png");
 	smokeHandle = LoadGraph(
 	"GraphicData/Effect/Smoke.png");
+
+	//弾
+	ammoHandle = LoadGraph(
+	"GraphicData/Shell/Shell.png");
 
 	//ボタン
 	//メインメニュー部分

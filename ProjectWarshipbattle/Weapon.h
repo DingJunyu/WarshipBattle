@@ -6,10 +6,12 @@ class Weapon
 public:
 	Weapon();
 	Weapon(double RCX, double RCZ, double L, double W,
-		double ROZ, double ROY,int MHP,double AOS,double AOT) :
+		double ROZ, double ROY,int MHP,double AOS,double AOT,
+		int *aH,int iS) :
 		relativeCoordX(RCX),relativeCoordZ(RCZ),length(L),
 		width(W),radianOnZ(ROZ),radianOnY(ROY),heartPoint(MHP),
-		maxHeartPoint(MHP),armorOntheSide(AOS),armorOntheTop(AOT){}
+		maxHeartPoint(MHP),armorOntheSide(AOS),armorOntheTop(AOT),
+		ammoHandle(aH), initialSpeed(iS) {}
 	~Weapon();
 
 	//データ問い合わせ関数
@@ -31,7 +33,7 @@ public:
 	//状態問い合わせ関数
 	bool ReferShootable();//射撃できればtrueを戻す
 	
-	Ammo Shoot(int x,int y);
+	Ammo Shoot(double x, double y);
 
 
 private:
@@ -41,6 +43,7 @@ private:
 	double calibre;
 
 	int *turrentHandle;//画像データ保存用
+	int *ammoHandle;
 
 	double initialSpeed;//初速度
 	

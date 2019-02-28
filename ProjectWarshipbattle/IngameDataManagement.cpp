@@ -7,6 +7,7 @@ IngameDataManagement::~IngameDataManagement()
 void IngameDataManagement::Update() {
 	MainCamera.GetXZ(ReferPlayerX(), ReferPlayerZ());
 	Control();//コマンドを受け取って、船の状態を変更する
+	GetNewEffect();
 	MoveAll();//船の状態による座標を変更する
 //	CrashDecision();//船の間のあたり判定
 //	HitDecision();//砲弾と船の間のあたり判定
@@ -151,30 +152,44 @@ void IngameDataManagement::DrawSea() {
 	}
 }
 
+/*船の下にあるエフェクトを描く*/
 void IngameDataManagement::DrawEffectUnderShips() {
 	/*水泡演出*/
 	if (!bubbleList.empty())
 	for (auto bubble = bubbleList.begin();
 		bubble != bubbleList.end();
 		bubble++) {
-		bubble->Draw(MainCamera.ReferRealCameraX(),
-			MainCamera.ReferRealCameraZ());
+		bubble->Draw((int)MainCamera.ReferRealCameraX(),
+			(int)MainCamera.ReferRealCameraZ());
 	}
 }
 
+/*船の上にあるエフェクトを描く*/
 void IngameDataManagement::DrawEffectBeyondShips() {
 	if (!smokeList.empty())
 	for (auto smoke = smokeList.begin();
 		smoke != smokeList.end();
 		smoke++) {
-		smoke->Draw(MainCamera.ReferRealCameraX(),
-			MainCamera.ReferRealCameraZ());
+		smoke->Draw((int)MainCamera.ReferRealCameraX(),
+			(int)MainCamera.ReferRealCameraZ());
 	}
+}
+
+void IngameDataManagement::DrawAmmo() {
+	if (!shellList.empty())
+		for (auto shell = shellList.begin();
+			shell != shellList.end();
+			shell++) {
+		shell->Draw((int)MainCamera.ReferRealCameraX(),
+			(int)MainCamera.ReferRealCameraZ());
+		}
 }
 
 void IngameDataManagement::TEST() {
 	alliesFleet.push_back(ShipMain());
 	auto ship = alliesFleet.begin();
+	//ここの部分は初期化関数とファイル読み込みはまだ出来ていない
+	//初期化関数は下のようにしたい
 	ship->InifThisShip(PL.ReferBattleCrusierHandle(4000), 
 		PL.ReferBattleCrusierShadowHandle(4000), 4000, ET, &SL);
 	ship->NewCoordX(2200);
@@ -187,16 +202,17 @@ void IngameDataManagement::TEST() {
 /*コマンドを受け取って、新たなものを生成する*/
 void IngameDataManagement::Control() {
 	int answer = CT.GetCommand();
-	auto ship = alliesFleet.begin();
+
+	if (answer == CommandSerial::NONE_COMMAND)
+		return;
 
 	/*船を操作*/
+	auto ship = alliesFleet.begin();
 	ship->ControlThisShip(answer);
 
 	/*テストビュー*/
 	if (answer == CommandSerial::TEST_VIEW_ON)
 		TEST_SHOW_ON = !TEST_SHOW_ON;
-
-	GetNewEffect();
 }
 
 void IngameDataManagement::MoveAll() {
@@ -310,12 +326,12 @@ void IngameDataManagement::GetNewEffect() {
 	}
 }
 
-void IngameDataManagement::DeleteUseless() {
+void IngameDataManagement::DeleteUselessEffect() {
 	/*バブル*/
 	if (!bubbleList.empty())
-	for (auto bubble = bubbleList.begin();
-		bubble != bubbleList.end();
-		bubble++) {
+		for (auto bubble = bubbleList.begin();
+			bubble != bubbleList.end();
+			bubble++) {
 		if (bubble->ReferTimeUp()) {
 			bubble = bubbleList.erase(bubble);
 		}
@@ -323,9 +339,9 @@ void IngameDataManagement::DeleteUseless() {
 			break;
 	}
 	if (!smokeList.empty())
-	for (auto smoke = smokeList.begin();
-		smoke != smokeList.end();
-		smoke++) {
+		for (auto smoke = smokeList.begin();
+			smoke != smokeList.end();
+			smoke++) {
 		if (smoke->ReferTimeUp()) {
 			smoke = smokeList.erase(smoke);
 		}
@@ -334,12 +350,18 @@ void IngameDataManagement::DeleteUseless() {
 	}
 }
 
+void IngameDataManagement::DeleteUseless() {
+	DeleteUselessEffect();
+	DeleteUselessAmmo();
+}
+
 void IngameDataManagement::CheckAndPlaySound() {
 	auto ship = alliesFleet.begin();
 	ship->CheckAndPlaySound();
 }
 
 void IngameDataManagement::SIMPLE_USER_INTERFACE() {
+	//テスト・展示用UI
 	unsigned int Cr;
 	Cr = GetColor(255, 255, 255);
 	auto ship = alliesFleet.begin();
@@ -370,4 +392,40 @@ void IngameDataManagement::SIMPLE_USER_INTERFACE() {
 		DrawString(200, 660, "左へ", Cr);
 	else
 		DrawString(200, 660, "前方", Cr);
+}
+
+void IngameDataManagement::TestShoot() {
+	FiringData FD;
+	//ゲーム中では、敵が射撃する時に全部trueにする
+	FD.isThisMainWeapon = true;
+	for (int i = 0; i < 8; i++) {
+		FD.selected[i] = true;
+	}
+	
+	auto ship = alliesFleet.begin();
+	InputNewAmmo(&*ship, FD);
+}
+
+void IngameDataManagement::InputNewAmmo(ShipMain *SM, FiringData FD) {
+	int weaponAmount = SM->ReferWeaponCount(FD.isThisMainWeapon);
+	for (int i = 0; i < weaponAmount; i++) {
+		if (FD.selected[i]) {
+			if (SM->IsThisOneUsable(i, FD.isThisMainWeapon)) {
+				shellList.push_back(SM->Shoot(i,FD.isThisMainWeapon));
+			}
+		}
+	}
+}
+
+void IngameDataManagement::DeleteUselessAmmo() {
+	if (!shellList.empty())
+		for (auto shell = shellList.begin();
+			shell != shellList.end();
+			shell++) {
+		if (shell->FallIntoWater()) {
+			shell = shellList.erase(shell);
+		}
+		if (shellList.empty() || shell == shellList.end())
+			break;
+	}
 }

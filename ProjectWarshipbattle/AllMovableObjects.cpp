@@ -84,15 +84,15 @@ void AllMovableObjects::DrawSub(Camera CM) {
 	int shadowDistanceOnX = 2;
 	int shadowDistanceOnZ = 2;
 
-	DrawRotaGraph3((int)coordX - CM.ReferRealCameraX() + shadowDistanceOnX,
-		(int)coordZ - CM.ReferRealCameraZ() + shadowDistanceOnZ,
-		length / 2, width / 2,
+	DrawRotaGraph3((int)(coordX - CM.ReferRealCameraX() + shadowDistanceOnX),
+		(int)(coordZ - CM.ReferRealCameraZ() + shadowDistanceOnZ),
+		(int)(length / 2), (int)(width / 2),
 		0.125, 0.125, radianOnZ,
 		*shadowHandle, TRUE, FALSE);
 
-	DrawRotaGraph3((int)coordX - CM.ReferRealCameraX(),
-		(int)coordZ - CM.ReferRealCameraZ(),
-		length / 2, width / 2,
+	DrawRotaGraph3((int)(coordX - CM.ReferRealCameraX()),
+		(int)(coordZ - CM.ReferRealCameraZ()),
+		(int)(length / 2), (int)(width / 2),
 		0.125, 0.125, radianOnZ,
 		*pictureHandle, TRUE, FALSE);
 }

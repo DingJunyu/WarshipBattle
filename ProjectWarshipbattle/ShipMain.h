@@ -47,6 +47,12 @@ public:
 	bool ReferReturnOn() { return returnToCenter; }
 	double ReferChangingRadian() { return currentRadian; }
 	double ReferOutPutRate() { return currentAccPercentage; }
+	int ReferWeaponCount(bool Main) { 
+		if (Main)
+			return MainWeaponCount;
+		else
+			return SubWeaponCount;
+	}
 
 	//エフェクト生成
 	Effect NewBubble(int num);

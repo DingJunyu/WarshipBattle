@@ -7,8 +7,9 @@ namespace Screen {
 
 //コントローラー用指令集
 enum CommandSerial {
-	TEST_VIEW_ON = 20000,
-	INCREASE_OUTPUT = 20001,
+	NONE_COMMAND = -1,
+	TEST_VIEW_ON = 0,
+	INCREASE_OUTPUT = 1,
 	DECREASE_OUTPUT,
 	TURN_RIGHT,
 	TURN_LEFT,
@@ -115,6 +116,14 @@ namespace BUTTON_POSITION {
 	const double GAME_OVER = .8f;
 }
 
+enum AmmoType {
+	TYPE_COUNT = 4,
+	SMALL_CALIBER = 0,
+	MEDIUM_CALIBER,
+	HEAVY_CALIBER,
+	HUGE_CALIBER
+};
+
 enum ButtonEventForUserInterface {
 
 };
@@ -122,6 +131,44 @@ enum ButtonEventForUserInterface {
 namespace BUTTON_POSITION_UI {
 
 }
+
+enum MouseEventCollection {
+
+};
+
+enum IngameButtonEventCollection {
+
+};
+
+/*座標の保存方式はこんな風にしたほうがいいが、
+時間上も問題があるので今回は挙げるだけで、
+実際のゲームに使ってない*/
+struct Coordinate2 {
+	int x;
+	int z;
+};
+
+struct Coordinate2d {
+	double x;
+	double z;
+};
+
+struct Coordinate3 {
+	int x;
+	int y;
+	int z;
+};
+
+struct Coordinate3d {
+	double x;
+	double y;
+	double z;
+};
+
+struct FiringData {
+	bool isThisMainWeapon;
+	bool selected[50];
+};
 
 /*各種類の船の数*/
 namespace COUNT_OF_EVERYTYPE {

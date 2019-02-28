@@ -9,13 +9,14 @@ public:
 		canBeDelete = false;
 	}
 	Ammo(double spe, double rad, double x, double z,
-		double radY) : 
+		double radY, int *aH) : 
 		AllMovableObjects(true, false, true, true){
 		SetSpeed(spe);
 		SetRadianOnZ(rad);
 		NewCoordX(x);
 		NewCoordZ(z);
 		SetRadianOnY(radY);
+		ammoHandle = aH;
 	}
 	~Ammo();
 
@@ -27,6 +28,10 @@ public:
 	void Draw(int x,int z);
 	//Á‚·‘O‚Ì“®‰æ‰‰o
 	void DrawDelete(int x, int z);
+	bool FallIntoWater() { 
+		if (ReferCoordY() <= 0)return true; 
+		else return false;
+	}
 	
 private:
 	double penetrateDepth;
@@ -40,6 +45,9 @@ private:
 	bool isUsable;
 	bool canBeDelete;
 
-	int *effectHandle;
+	int graphX;
+	int graphZ;
+
+	int *ammoHandle;
 };
 

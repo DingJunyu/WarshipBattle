@@ -48,5 +48,5 @@ void EffectPoint::TestDraw(double r, double x, double z,double CX,double CZ) {
 	realX = cos(r) * newX - sin(r) * newZ + x;
 	realZ = cos(r) * newZ + sin(r) * newX + z;
 
-	DrawPixel(realX - CX, realZ - CZ, Cr);
+	DrawPixel((int)(realX - CX), (int)(realZ - CZ), Cr);
 }

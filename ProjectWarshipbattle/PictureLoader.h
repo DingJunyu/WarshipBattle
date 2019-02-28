@@ -101,7 +101,7 @@ private:
 
 	/*弾データ*/
 	/*ハンドル*/
-	int **ammoHandle;
+	int *ammoHandle;
 	/*サイズ*/
 	int *ammoX;
 	int *ammoZ;

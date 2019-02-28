@@ -21,9 +21,16 @@ public:
 	//データ操作
 	void CrashDecision();
 	void HitDecision();//ゲームコントローラーに当たる数を返す
+
 	void GetNewEffect();
+	void DeleteUselessEffect();
 
 	void DeleteUseless();
+
+	//弾管理
+	void CheckSelectedWeapon();
+	void InputNewAmmo(ShipMain *SM, FiringData FD);
+	void DeleteUselessAmmo();
 
 	//カメラ用座標問い合わせ
 	double ReferPlayerX() { return alliesFleet[0].ReferCoordX(); }
@@ -78,12 +85,13 @@ private:
 	void MoveShips();
 	void MoveEffects();
 
+	//射撃テスト
+	void TestShoot();
+
 	int shootCount;
-	int hitCount;
+	int hitCount; 
 
-	int numOfMapOnX;
-	int numOfMapOnZ;
-
+	//テスト関連
 	bool TEST_SHOW_ON;
 	void SIMPLE_USER_INTERFACE();
 
