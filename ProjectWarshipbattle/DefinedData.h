@@ -143,27 +143,13 @@ enum IngameButtonEventCollection {
 /*座標の保存方式はこんな風にしたほうがいいが、
 時間上も問題があるので今回は挙げるだけで、
 実際のゲームに使ってない*/
-struct Coordinate2 {
-	int x;
-	int z;
+template <typename T>
+struct Coordinate {
+	T x;
+	T y;
+	T z;
 };
 
-struct Coordinate2d {
-	double x;
-	double z;
-};
-
-struct Coordinate3 {
-	int x;
-	int y;
-	int z;
-};
-
-struct Coordinate3d {
-	double x;
-	double y;
-	double z;
-};
 
 struct FiringData {
 	bool isThisMainWeapon;
