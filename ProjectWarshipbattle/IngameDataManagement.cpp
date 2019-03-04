@@ -177,12 +177,12 @@ void IngameDataManagement::DrawEffectBeyondShips() {
 
 void IngameDataManagement::DrawAmmo() {
 	if (!shellList.empty())
-		for (auto shell = shellList.begin();
-			shell != shellList.end();
-			shell++) {
+	for (auto shell = shellList.begin();
+		shell != shellList.end();
+		shell++) {
 		shell->Draw((int)MainCamera.ReferRealCameraX(),
 			(int)MainCamera.ReferRealCameraZ());
-		}
+	}
 }
 
 void IngameDataManagement::TEST() {
@@ -204,12 +204,11 @@ void IngameDataManagement::TEST() {
 void IngameDataManagement::Control() {
 	int answer = CT.GetCommand();
 
-	if (answer >= CommandSerial::INCREASE_OUTPUT && 
-		answer <= CommandSerial::TURN_RETURN) {
-		/*‘D‚ð‘€ì*/
-		auto ship = alliesFleet.begin();
-		ship->ControlThisShip(answer);
-	}
+
+	/*‘D‚ð‘€ì*/
+	auto ship = alliesFleet.begin();
+	ship->ControlThisShip(answer);
+
 
 	if (answer == CommandSerial::SHOOT) {
 		TestShoot();

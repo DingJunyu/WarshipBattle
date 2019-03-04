@@ -69,7 +69,7 @@ int MainMenu(){
 		}
 
 		MMC.FREE();
-		MMC.DrawLoading();
+		MMC.DrawLoading();//‚±‚ÌŠÖ”‚Í‚Ù‚©‚Ì•”•ª‚ÉˆÚ“®‚·‚éH
 
 		return choice;
 }
