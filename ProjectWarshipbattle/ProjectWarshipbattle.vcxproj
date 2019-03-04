@@ -172,6 +172,7 @@
     <ClCompile Include="Lock.cpp" />
     <ClCompile Include="MainMenuController.cpp" />
     <ClCompile Include="Morale.cpp" />
+    <ClCompile Include="OtherFunctions.cpp" />
     <ClCompile Include="PictureLoader.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="ShipCrashParts.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="Lock.h" />
     <ClInclude Include="MainMenuController.h" />
     <ClInclude Include="Morale.h" />
+    <ClInclude Include="OtherFunctions.h" />
     <ClInclude Include="PictureLoader.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="ShipCrashParts.h" />

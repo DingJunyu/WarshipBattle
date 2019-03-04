@@ -80,7 +80,7 @@ void PictureLoader::LoadPicture() {
 	"GraphicData/Effect/Smoke.png");
 
 	//’e
-	ammoHandle = LoadGraph(
+	ammoHandle[0] = LoadGraph(
 	"GraphicData/Shell/Shell.png");
 
 	//ƒ{ƒ^ƒ“

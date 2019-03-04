@@ -84,6 +84,7 @@ private:
 	//ˆÚ“®ŠÖ”
 	void MoveShips();
 	void MoveEffects();
+	void MoveAmmo();
 
 	//ËŒ‚ƒeƒXƒg
 	void TestShoot();

@@ -12,7 +12,7 @@ public:
 		radianChangePerFrame = 0;
 		airResistanceActive = false;
 	}
-	~AllMovableObjects();
+	virtual ~AllMovableObjects();
 
 	//データ問い合わせ関数
 	double ReferCoordX() { return coordX; }
@@ -49,6 +49,7 @@ public:
 	//状態設置関数
 	void NewCoordX(double X) { coordX = X; }
 	void NewCoordZ(double Z) { coordZ = Z; }
+	void NewCoordY(double Y) { coordY = Y; }
 	void SetRadianOnZ(double ROZ) { radianOnZ = ROZ; }
 	void SetRadianChangePerFrame(double RCPF) { radianChangePerFrame = RCPF; }
 	void SetRadianOnY(double ROY) { radianOnY = ROY; }

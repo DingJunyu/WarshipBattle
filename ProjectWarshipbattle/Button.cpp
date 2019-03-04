@@ -14,15 +14,15 @@ void Button::SetXZ(double xP, double zP, double zM) {
 	xPercent = xP;
 	zPercent = zP;
 
-	coordX = (int)xP * Screen::SCREEN_X;
-	coordZ = (int)zP * Screen::SCREEN_Z;
+	coordX = (int)(xP * Screen::SCREEN_X);
+	coordZ = (int)(zP * Screen::SCREEN_Z);
 
 	zoomMultiple = zM;
 }
 
 void Button::CheckXZ() {
-	coordX = (int)xPercent * Screen::SCREEN_X;
-	coordZ = (int)zPercent * Screen::SCREEN_Z;
+	coordX = (int)(xPercent * Screen::SCREEN_X);
+	coordZ = (int)(zPercent * Screen::SCREEN_Z);
 }
 
 void Button::CheckMousePosition(int mouseX, int mouseZ) {

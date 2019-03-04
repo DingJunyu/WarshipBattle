@@ -24,6 +24,10 @@ int Controller::GetCommand() {
 	if (KeyBuf[KEY_INPUT_X] && GetInputChar(TRUE))
 		return CommandSerial::TURN_RETURN;
 
+	//射撃
+	if (KeyBuf[KEY_INPUT_S] && GetInputChar(TRUE))
+		return CommandSerial::SHOOT;
+
 	//テストビュー
 	if (KeyBuf[KEY_INPUT_0] && GetInputChar(TRUE))
 		return CommandSerial::TEST_VIEW_ON;
@@ -38,6 +42,7 @@ int Controller::GetCommand() {
 	if (KeyBuf[KEY_INPUT_C] && GetInputChar(TRUE)) {
 		PlaySoundMem(*shipHordLow, DX_PLAYTYPE_BACK, TRUE);
 	}
+	return CommandSerial::NONE_COMMAND;
 }
 
 void Controller::Inif(SoundLoader *SL) {

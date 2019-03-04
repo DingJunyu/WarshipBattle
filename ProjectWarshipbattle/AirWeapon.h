@@ -3,7 +3,7 @@ class AirWeapon
 {
 public:
 	AirWeapon(int WT) :weaponType(WT) {}
-	~AirWeapon();
+	virtual ~AirWeapon();
 
 	//écíeêîñ‚Ç¢çáÇÌÇπ
 	int ReferAmmoRemained() { return ammoRemain; }

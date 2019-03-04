@@ -16,7 +16,7 @@ Ammo Weapon::Shoot(double x, double z) {
 	double realZ = cos(radianOnZ) * relativeCoordZ +
 		sin(radianOnZ) * relativeCoordX + z;
 
-	return Ammo(initialSpeed,radianOnZ,realX,realZ,radianOnY,
+	return Ammo(initialSpeed,radianOnZ,realX,realZ,high,radianOnY,
 		ammoHandle);
 }
 

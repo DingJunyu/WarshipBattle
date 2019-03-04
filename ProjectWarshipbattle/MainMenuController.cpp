@@ -52,7 +52,8 @@ void MainMenuController::DrawTitle() {
 		countForTitle++;
 		countForTitle %= 60;
 
-		if (CheckHitKeyAll() != 0 && GetInputChar(TRUE))
+		if ((CheckHitKeyAll() != 0 && GetInputChar(TRUE))
+			|| GetMouseInput() == MOUSE_INPUT_LEFT)
 			break;
 	}
 }
@@ -120,7 +121,7 @@ void MainMenuController::SetButtonPosition() {
 
 	for (int i = ButtonEvent::NEW_GAME; i <= ButtonEvent::GAME_OVER; i++) {
 		BC.buttonContainer[i].SetXZ(buttonPosition[i][0],
-			buttonPosition[i][1], 0.5f);
+			buttonPosition[i][1], buttonMultiple);
 	}
 }
 
@@ -138,10 +139,10 @@ int MainMenuController::CheckChoice(){
 	for (int i = ButtonEvent::NEW_GAME; i <= ButtonEvent::GAME_OVER; i++) {
 		if (mouseX > buttonPosition[i][0] * Screen::SCREEN_X &&
 			mouseX < buttonPosition[i][0] *
-			Screen::SCREEN_X + buttonSizeX &&
+			Screen::SCREEN_X + buttonSizeX * buttonMultiple &&
 			mouseZ > buttonPosition[i][1] * Screen::SCREEN_Z &&
 			mouseZ < buttonPosition[i][1] *
-			Screen::SCREEN_Z + buttonSizeZ) {
+			Screen::SCREEN_Z + buttonSizeZ * buttonMultiple) {
 
 			BC.buttonContainer[i].ChangePressed();
 

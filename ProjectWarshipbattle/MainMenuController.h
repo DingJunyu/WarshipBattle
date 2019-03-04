@@ -13,6 +13,7 @@ public:
 		firstTimeGetIntoMainMenu = true;
 		titleMultipleRateInTitle = 2;
 		titleMultipleRateInMainMenu = 4;
+		buttonMultiple = 0.5;
 	}
 	~MainMenuController();
 
@@ -39,6 +40,7 @@ private:
 	double buttonPosition[ButtonEvent::BUTTON_AMOUNT][2];
 	int buttonSizeX;
 	int buttonSizeZ;
+	double buttonMultiple;
 
 	int *backGroundHandle;
 	int *title;

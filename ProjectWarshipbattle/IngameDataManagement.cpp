@@ -29,7 +29,7 @@ void IngameDataManagement::DrawAll() {
 	UI.DrawUI();
 	DrawShipsOnMiniMap();
 //	DrawPlanes();
-//	DrawAmmo();
+	DrawAmmo();
 //	DrawBomb();
 //	DrawTorpedo();
 
@@ -197,18 +197,23 @@ void IngameDataManagement::TEST() {
 	ship->SetLength(PL.ReferShipSizeX());
 	ship->SetWidth(PL.ReferShipSizeZ());
 	ship->TEST();
+	ship->SetWeaponTest(&PL);
 }
 
 /*コマンドを受け取って、新たなものを生成する*/
 void IngameDataManagement::Control() {
 	int answer = CT.GetCommand();
 
-	if (answer == CommandSerial::NONE_COMMAND)
-		return;
+	if (answer >= CommandSerial::INCREASE_OUTPUT && 
+		answer <= CommandSerial::TURN_RETURN) {
+		/*船を操作*/
+		auto ship = alliesFleet.begin();
+		ship->ControlThisShip(answer);
+	}
 
-	/*船を操作*/
-	auto ship = alliesFleet.begin();
-	ship->ControlThisShip(answer);
+	if (answer == CommandSerial::SHOOT) {
+		TestShoot();
+	}
 
 	/*テストビュー*/
 	if (answer == CommandSerial::TEST_VIEW_ON)
@@ -218,6 +223,7 @@ void IngameDataManagement::Control() {
 void IngameDataManagement::MoveAll() {
 	MoveShips();
 	MoveEffects();
+	MoveAmmo();
 }
 
 void IngameDataManagement::MoveShips() {
@@ -240,6 +246,15 @@ void IngameDataManagement::MoveEffects() {
 		smoke != smokeList.end();
 		smoke++) {
 		smoke->Move();
+	}
+}
+
+void IngameDataManagement::MoveAmmo() {
+	if (!shellList.empty())
+		for (auto shell = shellList.begin();
+			shell != shellList.end();
+			shell++) {
+		shell->Move();
 	}
 }
 

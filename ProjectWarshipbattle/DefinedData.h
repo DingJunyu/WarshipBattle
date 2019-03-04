@@ -13,7 +13,8 @@ enum CommandSerial {
 	DECREASE_OUTPUT,
 	TURN_RIGHT,
 	TURN_LEFT,
-	TURN_RETURN
+	TURN_RETURN,
+	SHOOT
 };
 
 //ëDå^ÇÃî‘çÜ
@@ -108,12 +109,12 @@ enum ButtonEvent {
 };
 
 namespace BUTTON_POSITION {
-	const double START_POSITION_ON_X = .2f;
-	const double NEW_GAME = .4f;
-	const double CONTINUE_GAME = .5f;
-	const double LOAD_GAME = .6f;
-	const double OPTION = .7f;
-	const double GAME_OVER = .8f;
+	const double START_POSITION_ON_X = .2;
+	const double NEW_GAME = .4;
+	const double CONTINUE_GAME = .5;
+	const double LOAD_GAME = .6;
+	const double OPTION = .7;
+	const double GAME_OVER = .8;
 }
 
 enum AmmoType {

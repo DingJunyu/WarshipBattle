@@ -26,3 +26,5 @@
 #include"MainMenuController.h"
 
 #include<time.h>
+
+#include"OtherFunctions.h"

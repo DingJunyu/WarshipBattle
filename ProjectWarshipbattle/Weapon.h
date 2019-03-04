@@ -7,7 +7,7 @@ public:
 	Weapon();
 	Weapon(double RCX, double RCZ, double L, double W,
 		double ROZ, double ROY,int MHP,double AOS,double AOT,
-		int *aH,int iS) :
+		int *aH,int iS,double H) :
 		relativeCoordX(RCX),relativeCoordZ(RCZ),length(L),
 		width(W),radianOnZ(ROZ),radianOnY(ROY),heartPoint(MHP),
 		maxHeartPoint(MHP),armorOntheSide(AOS),armorOntheTop(AOT),
@@ -53,6 +53,8 @@ private:
 	double width;
 	double radianOnZ;//…•½–Ê‚ÌŠp“x
 	double radianOnY;//–Cg‚ÌŠp“x-->‚±‚ê‚Å–C’e—‰ºˆÊ’u‚ğ„’è‚·‚é
+
+	double high;
 
 	int heartPoint;
 	int maxHeartPoint;

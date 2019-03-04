@@ -67,6 +67,9 @@ public:
 	int *ReferPressedToStartDown() { return &pressedToStartDown; }
 	int *ReferBackGround() { return &backGround; }
 
+	//’e
+	int *ReferAmmoHandle(int x) { return &ammoHandle[x]; }
+
 private:
 	/*‰Šú‰»ŠÖ”*/
 	void MemorySecure();

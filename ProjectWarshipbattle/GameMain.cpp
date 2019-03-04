@@ -4,7 +4,7 @@
 void GameMain();
 void SingleGame_Mission_Progress();
 void SingleGame_DeathMatch_Progress();
-void MainMenu();
+int MainMenu();
 
 // プログラムは WinMain から始まります
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -22,22 +22,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetAlwaysRunFlag(TRUE);
 	srand((unsigned)time(NULL));
 
+	if (SetConsoleCtrlHandler((PHANDLER_ROUTINE)ctrlhandler, true)){}
+	else
+	{
+		return -1;
+	}
+
 	MainMenuController MMC;
 	int choice = -1;
 	bool endGame = false;
 
 	while (!endGame) {
-		MMC.Inif();//メニュー部分初期化
-		MMC.DrawTitle();//タイトル描く
-		MMC.DrawLoading();
-		choice = -1;//選択を初期化
 
-		while (choice == -1) {
-			MMC.DrawMainMenu();//メインメニューを描く
-			choice = MMC.CheckChoice();//選択を確認・バー状態更新
-		}
-		MMC.FREE();//メニュー部分使ったメモリを解放
-		MMC.DrawLoading();
+		choice = MainMenu();
+
 		//メニューから取ったコマンドに合わせて関数を呼び出す
 		switch (choice) {
 		case ButtonEvent::NEW_GAME:
@@ -49,6 +47,31 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 
 	return 0;				// ソフトの終了 
+}
+
+int MainMenu(){
+	MainMenuController MMC;
+	int choice = -1;
+
+		MMC.Inif();//メニュー部分初期化
+		MMC.DrawTitle();//タイトル描く
+		MMC.DrawLoading();
+		choice = -1;//選択を初期化
+
+		while (choice == -1) {
+			MMC.DrawMainMenu();//メインメニューを描く
+			choice = MMC.CheckChoice();//選択を確認・バー状態更新
+									   //メインメニューから脱出
+			if (CheckHitKey(KEY_INPUT_ESCAPE) == TRUE &&
+				GetInputChar(TRUE)) {
+				choice = ButtonEvent::GAME_OVER;
+			}
+		}
+
+		MMC.FREE();
+		MMC.DrawLoading();
+
+		return choice;
 }
 
 void SingleGame_DeathMatch_Progress() {

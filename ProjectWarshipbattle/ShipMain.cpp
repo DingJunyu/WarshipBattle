@@ -262,3 +262,14 @@ Ammo ShipMain::Shoot(int Num, bool Main) {
 	else
 		return SubWeapon[Num].Shoot(ReferCoordX(),ReferCoordZ());
 }
+
+void ShipMain::SetWeaponTest(PictureLoader *PL) {
+	MainWeaponCount = 8;
+	
+	Weapon Weapon(20.0,20.0,0.0,1.0,0.0,0.0,100,
+		50,50,PL->ReferAmmoHandle(0),5,10);
+	
+	for (int i = 0; i < 8; i++) {
+		MainWeapon[i] = Weapon;
+	}
+}

@@ -19,14 +19,14 @@ public:
 	}
 	~ShipMain();
 
-
-
 	//èâä˙âª
 	void RegistrateShipCrashParts();
 	void InifThisShip(int *ShipHandle,int *SShadowH,int ShipNum, 
 		EffectTemplate ET,SoundLoader *SL);
 	void SetEffectPoint(ShipData SD);
 	void DestroyMemory();
+	void SetWeaponTest(PictureLoader *PL);
+	void SetWeapon();
 
 	void DrawShip(Camera CM);
 
