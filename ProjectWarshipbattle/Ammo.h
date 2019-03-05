@@ -11,13 +11,14 @@ public:
 	Ammo(double spe, double rad, double x, double z, double y,
 		double radY, int *aH) : 
 		AllMovableObjects(true, false, true, true){
-		SetSpeed(spe);
 		SetRadianOnZ(rad);
 		NewCoordX(x);
 		NewCoordZ(z);
 		NewCoordY(y);
 		SetRadianOnY(radY);
+		SetSpeed(spe);
 		ammoHandle = aH;
+		SetData();
 	}
 	~Ammo();
 

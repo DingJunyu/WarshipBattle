@@ -266,8 +266,9 @@ Ammo ShipMain::Shoot(int Num, bool Main) {
 void ShipMain::SetWeaponTest(PictureLoader *PL) {
 	MainWeaponCount = 8;
 	
-	Weapon Weapon(20.0,20.0,10.0,10.0,0.0,1.0,100,
-		50,50,PL->ReferAmmoHandle(0),5,100000);
+	Weapon Weapon(20.0,20.0,10.0,10.0,
+		0.0,1.0,100,
+		50,50,PL->ReferAmmoHandle(0),40,1);
 	
 	for (int i = 0; i < 8; i++) {
 		MainWeapon[i] = Weapon;

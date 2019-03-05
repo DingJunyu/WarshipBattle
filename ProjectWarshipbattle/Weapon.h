@@ -11,7 +11,7 @@ public:
 		relativeCoordX(RCX),relativeCoordZ(RCZ),length(L),
 		width(W),radianOnZ(ROZ),radianOnY(ROY),heartPoint(MHP),
 		maxHeartPoint(MHP),armorOntheSide(AOS),armorOntheTop(AOT),
-		ammoHandle(aH), initialSpeed(iS) {}
+		ammoHandle(aH), initialSpeed(iS), high(H) {}
 	~Weapon();
 
 	//ÉfÅ[É^ñ‚Ç¢çáÇÌÇπä÷êî

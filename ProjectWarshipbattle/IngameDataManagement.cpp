@@ -24,14 +24,17 @@ void IngameDataManagement::DrawAll() {
 	DrawSea();
 
 	DrawEffectUnderShips();
+//	DrawTorpedo();
 	DrawShips();
 	DrawEffectBeyondShips();
-	UI.DrawUI();
-	DrawShipsOnMiniMap();
+
 //	DrawPlanes();
 	DrawAmmo();
 //	DrawBomb();
-//	DrawTorpedo();
+
+
+	UI.DrawUI();
+	DrawShipsOnMiniMap();
 
 	SIMPLE_USER_INTERFACE();
 

@@ -176,7 +176,7 @@ namespace ShipSerial {
 
 /*êîäw&ï®óùíËã`*/
 namespace MathAndPhysics {
-	const double GRAVITATIONAL_ACCELERATION = 9.80665;
+	const double GRAVITATIONAL_ACCELERATION = 0.00980665;
 	const int GRAVITATIONAL_ACCELERATION_INT = 10;
 	const double MIN_AIR_RESISTANCE = 0.5;
 	const double PI = 3.14159265358;

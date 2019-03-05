@@ -11,6 +11,7 @@ public:
 		plane(pla), alive(true), point(poi), crashable(Cb) {
 		radianChangePerFrame = 0;
 		airResistanceActive = false;
+		airResistance = 0.001;
 	}
 	virtual ~AllMovableObjects();
 
