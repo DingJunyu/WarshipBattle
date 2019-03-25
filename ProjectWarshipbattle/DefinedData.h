@@ -1,7 +1,7 @@
 #pragma once
 namespace Screen {
-	const int SCREEN_X = 1280;
-	const int SCREEN_Z = 720;
+	const int SCREEN_X = 1440;
+	const int SCREEN_Z = 900;
 	const int COLOR = 32;
 }
 
@@ -176,9 +176,9 @@ namespace ShipSerial {
 
 /*êîäw&ï®óùíËã`*/
 namespace MathAndPhysics {
-	const double GRAVITATIONAL_ACCELERATION = 0.00980665;
+	const double GRAVITATIONAL_ACCELERATION = 0.0980665 * 4;
 	const int GRAVITATIONAL_ACCELERATION_INT = 10;
-	const double MIN_AIR_RESISTANCE = 0.5;
+	const double MIN_AIR_RESISTANCE = 0.0005;
 	const double PI = 3.14159265358;
 }
 
@@ -186,5 +186,11 @@ namespace MapSize {
 	const int xSize = 20000;
 	const int zSize = 20000;
 	const int safeZone = 1000;
+}
+
+namespace RandomDataWhenShoot {
+	const double radianOnZ = MathAndPhysics::PI * (3 / 180);
+	const double radianOnY = MathAndPhysics::PI * (2 / 180);
+	const double speed = 2;
 }
 

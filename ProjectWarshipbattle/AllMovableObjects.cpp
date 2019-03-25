@@ -47,6 +47,7 @@ void AllMovableObjects::SetSpeed(double Spe) {
 		speedOnY = sin(radianOnY)*Spe;
 		speedOnZ = cos(radianOnY)*Spe;
 	}
+	speedOnZLargerThan0 = speedOnZ > 0 ? true : false;
 }
 
 void AllMovableObjects::SpeedDownbyAirResistance() {
@@ -55,8 +56,15 @@ void AllMovableObjects::SpeedDownbyAirResistance() {
 	else
 		airResistance = MathAndPhysics::MIN_AIR_RESISTANCE;
 
-	if (speedOnZ >= 0) {
+	if (speedOnZLargerThan0 && speedOnZ > 0) {
 		speedOnZ -= airResistance;
+		if (speedOnZ < 0)
+			speedOnZ = 0;
+	}
+	if (!speedOnZLargerThan0 && speedOnZ < 0) {
+		speedOnZ += airResistance;
+		if (speedOnZ > 0)
+			speedOnZ = 0;
 	}
 }
 //©‹@•`‚­‚Í‚±‚ÌŠÖ”‚ğg‚¤

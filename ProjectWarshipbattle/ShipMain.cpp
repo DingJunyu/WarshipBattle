@@ -258,19 +258,20 @@ bool ShipMain::IsThisOneUsable(int Num, bool Main) {
 
 Ammo ShipMain::Shoot(int Num, bool Main) {
 	if (Main)
-		return MainWeapon[Num].Shoot(ReferCoordX(),ReferCoordZ());
+		return MainWeapon[Num].Shoot(ReferCoordX(),ReferCoordZ(),ReferRadianOnZ());
 	else
-		return SubWeapon[Num].Shoot(ReferCoordX(),ReferCoordZ());
+		return SubWeapon[Num].Shoot(ReferCoordX(),ReferCoordZ(), ReferRadianOnZ());
 }
 
 void ShipMain::SetWeaponTest(PictureLoader *PL) {
 	MainWeaponCount = 8;
-	
-	Weapon Weapon(20.0,20.0,10.0,10.0,
-		0.0,1.0,100,
-		50,50,PL->ReferAmmoHandle(0),40,1);
+
 	
 	for (int i = 0; i < 8; i++) {
+		Weapon Weapon(20.0, 8.0 - i * 2, 10.0, 10.0,
+			0.0, 1.0, 100,
+			50, 12, PL->ReferAmmoHandle(0), 40, 1);
 		MainWeapon[i] = Weapon;
+		MainWeapon[i].SetCoolDownTime(1500);
 	}
 }

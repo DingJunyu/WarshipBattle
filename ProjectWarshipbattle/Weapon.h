@@ -11,7 +11,9 @@ public:
 		relativeCoordX(RCX),relativeCoordZ(RCZ),length(L),
 		width(W),radianOnZ(ROZ),radianOnY(ROY),heartPoint(MHP),
 		maxHeartPoint(MHP),armorOntheSide(AOS),armorOntheTop(AOT),
-		ammoHandle(aH), initialSpeed(iS), high(H) {}
+		ammoHandle(aH), initialSpeed(iS), high(H) {
+		lastShootedTime = 0;
+	}
 	~Weapon();
 
 	//ÉfÅ[É^ñ‚Ç¢çáÇÌÇπä÷êî
@@ -30,10 +32,14 @@ public:
 	double ReferArmorOntheSide() { return armorOntheSide; }
 	double ReferArmorOntheTop() { return armorOntheTop; }
 
+	void SetCoolDownTime(int time) { reloadTime = time; }
+	void TurnRight() { radianOnZ += MathAndPhysics::PI * (5 / 180); }
+	void TurnLeft() { radianOnZ -= MathAndPhysics::PI*(5 / 180); }
+
 	//èÛë‘ñ‚Ç¢çáÇÌÇπä÷êî
 	bool ReferShootable();//éÀåÇÇ≈Ç´ÇÍÇŒtrueÇñﬂÇ∑
 	
-	Ammo Shoot(double x, double y);
+	Ammo Shoot(double x, double y,double r);
 
 
 private:

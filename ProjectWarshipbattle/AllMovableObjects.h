@@ -70,6 +70,7 @@ private:
 	/*スピードは水平と垂直に分ける*/
 	double speedOnZ;
 	double speedOnY;
+	bool speedOnZLargerThan0;
 	bool airResistanceActive;
 	double airResistance;//空気抵抗
 	double radianOnZ;//行く方向(水平)
