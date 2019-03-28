@@ -7,4 +7,7 @@
 #include <fcntl.h>
 #include <dxlib.h>
 #include <signal.h>
+#include "DefinedData.h"
+#include <cmath>
 bool ctrlhandler(DWORD fdwctrltype);
+double Distance3D(Coordinate<double> A, Coordinate<double> B);

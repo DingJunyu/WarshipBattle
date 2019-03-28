@@ -16,9 +16,10 @@ public:
 	virtual ~AllMovableObjects();
 
 	//データ問い合わせ関数
-	double ReferCoordX() { return coordX; }
-	double ReferCoordY() { return coordY; }
-	double ReferCoordZ() { return coordZ; }
+	double ReferCoordX() { return coord.x; }
+	double ReferCoordY() { return coord.y; }
+	double ReferCoordZ() { return coord.z; }
+	Coordinate<double> ReferCoord() { return coord; }
 	double ReferSpeedOnZ() { return speedOnZ; }
 	double ReferSpeedOnY() { return speedOnY; }
 	double ReferAirResistance() { return airResistance; }
@@ -28,10 +29,10 @@ public:
 	double ReferWidth() { return width; }
 
 	//当たり判定用問い合わせ
-	double ReferLeft() { return coordX - width; }
-	double ReferRight() { return coordX; }
-	double ReferUpper() { return coordZ - length; }
-	double ReferLower() { return coordZ; }
+	double ReferLeft() { return coord.x - width; }
+	double ReferRight() { return coord.x; }
+	double ReferUpper() { return coord.z - length; }
+	double ReferLower() { return coord.z; }
 
 	//状態問い合わせ関数
 	bool ReferAlive() { return alive; }
@@ -48,9 +49,10 @@ public:
 	void DrawSub(Camera CM);
 
 	//状態設置関数
-	void NewCoordX(double X) { coordX = X; }
-	void NewCoordZ(double Z) { coordZ = Z; }
-	void NewCoordY(double Y) { coordY = Y; }
+	void NewCoordX(double X) { coord.x = X; }
+	void NewCoordZ(double Z) { coord.z = Z; }
+	void NewCoordY(double Y) { coord.y = Y; }
+	void SetCoord(Coordinate<double> NC) { coord = NC; }
 	void SetRadianOnZ(double ROZ) { radianOnZ = ROZ; }
 	void SetRadianChangePerFrame(double RCPF) { radianChangePerFrame = RCPF; }
 	void SetRadianOnY(double ROY) { radianOnY = ROY; }
@@ -64,9 +66,7 @@ public:
 
 private:
 	/*XZは水平座標、Yは高さ*/
-	double coordX;
-	double coordY;
-	double coordZ;
+	Coordinate<double> coord;
 	/*スピードは水平と垂直に分ける*/
 	double speedOnZ;
 	double speedOnY;

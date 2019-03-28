@@ -21,6 +21,7 @@ public:
 	//データ操作
 	void CrashDecision();
 	void HitDecision();//ゲームコントローラーに当たる数を返す
+	void SimpleHitDecision();
 
 	void GetNewEffect();
 	void DeleteUselessEffect();
@@ -69,6 +70,7 @@ private:
 	UserInterface UI;
 	EffectTemplate ET;
 	SoundLoader SL;
+	ClickableUserInterface CUI;
 
 	//描く関数
 	void DrawSea();

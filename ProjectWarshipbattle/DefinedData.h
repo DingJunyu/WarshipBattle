@@ -1,12 +1,13 @@
 #pragma once
 namespace Screen {
-	const int SCREEN_X = 1440;
-	const int SCREEN_Z = 900;
+	const int SCREEN_X = 1280;
+	const int SCREEN_Z = 760;
 	const int COLOR = 32;
 }
 
 //コントローラー用指令集
 enum CommandSerial {
+	COUNT = 30,
 	NONE_COMMAND = -1,
 	TEST_VIEW_ON = 0,
 	INCREASE_OUTPUT = 1,
@@ -14,7 +15,18 @@ enum CommandSerial {
 	TURN_RIGHT,
 	TURN_LEFT,
 	TURN_RETURN,
-	SHOOT
+	SHOOT,
+	TURRET_TURN_RIGHT,
+	TURRET_TURN_LEFT,
+	TURRET_PULLUP,
+	TURRET_PULLDOWN,
+	MENU,
+	BACK,
+	CONTINUE,
+	SETTING,
+	EXIT,
+	CHOOSE_MAIN,
+	CHOOSE_SUB
 };
 
 //船型の番号
@@ -117,6 +129,12 @@ namespace BUTTON_POSITION {
 	const double GAME_OVER = .8;
 }
 
+namespace BUTTON_POSITION_INGAME {
+	const double MENU_MULTI = 0.08;
+	const double MENU_X = 0.85;
+	const double MENU_Z = 0.02;
+}
+
 enum AmmoType {
 	TYPE_COUNT = 4,
 	SMALL_CALIBER = 0,
@@ -125,32 +143,13 @@ enum AmmoType {
 	HUGE_CALIBER
 };
 
-enum ButtonEventForUserInterface {
-
-};
-
-namespace BUTTON_POSITION_UI {
-
-}
-
-enum MouseEventCollection {
-
-};
-
-enum IngameButtonEventCollection {
-
-};
-
-/*座標の保存方式はこんな風にしたほうがいいが、
-時間上も問題があるので今回は挙げるだけで、
-実際のゲームに使ってない*/
+/*3D座標保存*/
 template <typename T>
 struct Coordinate {
 	T x;
 	T y;
 	T z;
 };
-
 
 struct FiringData {
 	bool isThisMainWeapon;

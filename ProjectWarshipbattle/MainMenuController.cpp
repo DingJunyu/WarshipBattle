@@ -16,6 +16,8 @@ void MainMenuController::Inif() {
 	//使うやつのサイズを取る
 	GetGraphSize(*title, &titleSizeX, &titleSizeZ);
 	GetGraphSize(*pressedToStart, &PTSSizeX, &PTSSizeZ);
+
+	SetButtonPosition();
 }
 
 void MainMenuController::DrawTitle() {
@@ -28,9 +30,9 @@ void MainMenuController::DrawTitle() {
 			*backGroundHandle, FALSE);
 		DrawExtendGraph(
 			Screen::SCREEN_X / 2 - titleSizeX / 4,
-			100,
+			(int)(0.1*Screen::SCREEN_Z),
 			Screen::SCREEN_X / 2 + titleSizeX / 4,
-			100 + titleSizeZ / 2,
+			0.1*Screen::SCREEN_Z + titleSizeZ / 2,
 			*title,
 			TRUE
 		);
@@ -41,9 +43,9 @@ void MainMenuController::DrawTitle() {
 
 		DrawExtendGraph(
 			Screen::SCREEN_X / 2 - PTSSizeX / 4,
-			500,
+			(int)(0.6*Screen::SCREEN_Z),
 			Screen::SCREEN_X / 2 + PTSSizeX / 4,
-			500 + PTSSizeZ / 2,
+			(int)(0.6*Screen::SCREEN_Z) + PTSSizeZ / 2,
 			*useThisPressedToStart,
 			TRUE
 		);
@@ -55,12 +57,14 @@ void MainMenuController::DrawTitle() {
 		if ((CheckHitKeyAll() != 0 && GetInputChar(TRUE))
 			|| GetMouseInput() == MOUSE_INPUT_LEFT)
 			break;
+
+		if (ProcessMessage() == -1)
+			break;
 	}
 }
 
 void MainMenuController::DrawMainMenu() {
 	if (firstTimeGetIntoMainMenu) {
-		SetButtonPosition();
 		FC.Reset();
 		firstTimeGetIntoMainMenu = false;
 	}
@@ -75,9 +79,9 @@ void MainMenuController::DrawMainMenu() {
 		BC.buttonContainer[i].DrawThisButton();
 	}
 
-	//ここの位置は適度に決めた
-	DrawExtendGraph(850,50,850+titleSizeX/4,50+titleSizeZ/4,
-		*title,TRUE);
+	DrawExtendGraph(.67*Screen::SCREEN_X, .1*Screen::SCREEN_Z, 
+		.67*Screen::SCREEN_X + titleSizeX / 4, .1*Screen::SCREEN_Z + titleSizeZ / 4,
+		*title, TRUE);
 
 	ScreenFlip();
 }
@@ -93,7 +97,7 @@ void MainMenuController::DrawLoading() {
 	Cr = GetColor(255, 255, 255);
 	SetFontSize(30);
 
-	DrawString(1100, 640, "LOADING...", Cr);
+	DrawString(0.85*Screen::SCREEN_X, 0.85*Screen::SCREEN_Z, "LOADING...", Cr);
 
 	ScreenFlip();
 }

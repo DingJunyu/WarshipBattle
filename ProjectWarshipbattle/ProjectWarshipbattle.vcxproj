@@ -159,6 +159,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonCollection.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ClickableUserInterface.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonCollection.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ClickableUserInterface.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DefinedData.h" />

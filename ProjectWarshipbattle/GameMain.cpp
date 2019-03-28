@@ -36,6 +36,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		choice = MainMenu();
 
+		if (ProcessMessage() == -1)
+			break;
+
 		//メニューから取ったコマンドに合わせて関数を呼び出す
 		switch (choice) {
 		case ButtonEvent::NEW_GAME:
@@ -66,6 +69,8 @@ int MainMenu(){
 				GetInputChar(TRUE)) {
 				choice = ButtonEvent::GAME_OVER;
 			}
+			if (ProcessMessage() == -1)
+				break;
 		}
 
 		MMC.FREE();
@@ -88,6 +93,9 @@ void SingleGame_DeathMatch_Progress() {
 	while (!TDMC.GameOver(IDM.TeamDestroyed())) {
 		IDM.Update();
 		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
+			break;
+
+		if (ProcessMessage() == -1)//エラー処理
 			break;
 	}
 	/*結果発表*/

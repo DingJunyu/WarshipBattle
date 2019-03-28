@@ -106,6 +106,46 @@ void PictureLoader::LoadPicture() {
 	buttonPressedHandle[ButtonEvent::GAME_OVER] = LoadGraph(
 	"GraphicData/Button/Button_Pressed_EndGame.png");
 
+	//ゲーム中身の部分
+	buttonIntheGame[CommandSerial::SHOOT] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/shoot_normal.png");
+	buttonPressedIntheGame[CommandSerial::SHOOT] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/shoot_pressed.png");
+	buttonIntheGame[CommandSerial::TURRET_TURN_RIGHT] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/turn_right_normal.png");
+	buttonPressedIntheGame[CommandSerial::TURRET_TURN_RIGHT] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/turn_right_pressed.png");
+	buttonIntheGame[CommandSerial::TURRET_TURN_LEFT] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/turn_left_normal.png");
+	buttonPressedIntheGame[CommandSerial::TURRET_TURN_LEFT] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/turn_left_pressed.png");
+	buttonIntheGame[CommandSerial::TURRET_PULLUP] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/pull_up_normal.png");
+	buttonPressedIntheGame[CommandSerial::TURRET_PULLUP] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/pull_up_pressed.png");
+	buttonIntheGame[CommandSerial::TURRET_PULLDOWN] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/pull_down_normal.png");
+	buttonPressedHandle[CommandSerial::TURRET_PULLDOWN] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/pull_down_pressed.png");
+
+	buttonIntheGame[CommandSerial::MENU] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/menu_normal.png");
+	buttonPressedIntheGame[CommandSerial::MENU] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/menu_pressed.png");
+	buttonIntheGame[CommandSerial::CONTINUE] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/continue_normal.png");
+	buttonPressedIntheGame[CommandSerial::CONTINUE] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/continue_pressed.png");
+	buttonIntheGame[CommandSerial::SETTING] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/option_normal.png");
+	buttonPressedHandle[CommandSerial::SETTING] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/option_pressed.png");
+	buttonIntheGame[CommandSerial::EXIT] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/endgame_normal.png");
+	buttonPressedIntheGame[CommandSerial::EXIT] = LoadGraph(
+	"GraphicData/Interactive_User_Interface/buttons/endgame_pressed.png");
+	
+
 	//タイトル関係
 	title = LoadGraph(
 	"GraphicData/Back_Ground/Title.png");

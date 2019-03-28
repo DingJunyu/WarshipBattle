@@ -36,6 +36,7 @@ int Controller::GetCommand() {
 	if (KeyBuf[KEY_INPUT_P])
 		WaitKey();
 
+	/*‚±‚±‚Ì‚à‚Ì‚ğV‚½‚ÈŠÖ”‚É®‡‚·‚é*/
 	if (KeyBuf[KEY_INPUT_Z] && GetInputChar(TRUE)) {
 		PlaySoundMem(*shipHordHigh, DX_PLAYTYPE_BACK, TRUE);
 	}

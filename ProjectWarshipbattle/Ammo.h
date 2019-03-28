@@ -9,8 +9,8 @@ public:
 		canBeDelete = false;
 	}
 	Ammo(double spe, double rad, double x, double z, double y,
-		double radY, int *aH) : 
-		AllMovableObjects(true, false, true, true){
+		double radY, int *aH,int SN) :
+		AllMovableObjects(true, false, true, true) {
 		SetRadianOnZ(rad);
 		NewCoordX(x);
 		NewCoordZ(z);
@@ -18,6 +18,7 @@ public:
 		SetRadianOnY(radY);
 		SetSpeed(spe);
 		ammoHandle = aH;
+		serialNumber = SN;
 		SetData();
 	}
 	~Ammo();
@@ -25,6 +26,7 @@ public:
 	double ReferDamage() { return damage; }
 	void CheckAlive();
 	void SetData();
+	int ReferSerialNumber() { return serialNumber; }
 	
 	//í èÌï`âÊ
 	void Draw(int x,int z);
@@ -51,5 +53,7 @@ private:
 	int graphZ;
 
 	int *ammoHandle;
+
+	int serialNumber;
 };
 

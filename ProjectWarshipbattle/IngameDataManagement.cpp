@@ -4,7 +4,10 @@ IngameDataManagement::~IngameDataManagement()
 {
 }
 
+/*メインルート*/
 void IngameDataManagement::Update() {
+	CUI.SetNormalStatus();/*ここはテストバージョン*/
+
 	MainCamera.GetXZ(ReferPlayerX(), ReferPlayerZ());
 	Control();//コマンドを受け取って、船の状態を変更する
 	GetNewEffect();
@@ -17,6 +20,9 @@ void IngameDataManagement::Update() {
 	FC.Wait();//60フレームに合わせるように待つ
 }
 
+/****************************************************/
+/*                     描画関連                     */
+/****************************************************/
 void IngameDataManagement::DrawAll() {
 	SetDrawScreen(DX_SCREEN_BACK);//裏画面に描画する
 	ClearDrawScreen();
@@ -37,6 +43,8 @@ void IngameDataManagement::DrawAll() {
 	DrawShipsOnMiniMap();
 
 	SIMPLE_USER_INTERFACE();
+
+	CUI.Draw();
 
 	
 	if (TEST_SHOW_ON)
@@ -188,6 +196,43 @@ void IngameDataManagement::DrawAmmo() {
 	}
 }
 
+void IngameDataManagement::SIMPLE_USER_INTERFACE() {
+	//テスト・展示用UI
+	unsigned int Cr;
+	Cr = GetColor(255, 255, 255);
+	auto ship = alliesFleet.begin();
+	char CharNum[255];
+
+	SetFontSize(20);
+	ChangeFont("HG行書体");
+
+	DrawString(100, 600, "速度:", Cr);
+	if (ship->ReferSpeedOnZ()*28.0f > 0.5f)
+		_gcvt_s(CharNum, ship->ReferSpeedOnZ()*28.0f, 2);
+	else if (ship->ReferSpeedOnZ()*28.0f > 10.0f)
+		_gcvt_s(CharNum, ship->ReferSpeedOnZ()*28.0f, 3);
+	else
+		_gcvt_s(CharNum, 0.0f, 2);
+	DrawString(180, 600, CharNum, Cr);
+	DrawString(220, 600, "Kt", Cr);
+
+	DrawString(100, 620, "出力", Cr);
+	_gcvt_s(CharNum, ship->ReferOutPutRate() * 100, 3);
+	DrawString(180, 620, CharNum, Cr);
+	DrawString(220, 620, "%", Cr);
+
+	DrawString(100, 660, "航行方向", Cr);
+	if (ship->ReferChangingRadian() > 0)
+		DrawString(200, 660, "右へ", Cr);
+	else if (ship->ReferChangingRadian() < 0)
+		DrawString(200, 660, "左へ", Cr);
+	else
+		DrawString(200, 660, "前方", Cr);
+}
+
+/****************************************************/
+/*                     テスト　                     */
+/****************************************************/
 void IngameDataManagement::TEST() {
 	alliesFleet.push_back(ShipMain());
 	auto ship = alliesFleet.begin();
@@ -203,6 +248,52 @@ void IngameDataManagement::TEST() {
 	ship->SetWeaponTest(&PL);
 }
 
+void IngameDataManagement::TEST_DRAW() {
+	unsigned int Cr;
+	Cr = GetColor(255, 255, 255);
+	auto ship = alliesFleet.begin();
+	ship->TestDraw(MainCamera.ReferRealCameraX(),
+		MainCamera.ReferRealCameraZ());
+	char CharNum[255];
+
+	SetFontSize(15);
+	ChangeFont("HGｺﾞﾐｯｸM");
+
+	_gcvt_s(CharNum, ship->ReferSpeedOnZ() * 100, 10);
+	DrawString(10, 10, "Speed", Cr);
+	DrawString(60, 10, CharNum, Cr);
+	if (ship->ReferReturnOn()) {
+		DrawString(10, 30, "Alignment On", Cr);
+	}
+	else {
+		DrawString(10, 30, "Alignment Off", Cr);
+	}
+	_gcvt_s(CharNum, ship->ReferChangingRadian(), 10);
+	DrawString(10, 50, "Radian(C)", Cr);
+	DrawString(100, 50, CharNum, Cr);
+	_gcvt_s(CharNum, ship->ReferCoordX(), 10);
+	DrawString(10, 70, "X", Cr);
+	DrawString(30, 70, CharNum, Cr);
+	_gcvt_s(CharNum, ship->ReferCoordZ(), 10);
+	DrawString(10, 90, "Z", Cr);
+	DrawString(30, 90, CharNum, Cr);
+	_gcvt_s(CharNum, ship->ReferRadianOnZ(), 10);
+	DrawString(10, 110, "Radian(R)", Cr);
+	DrawString(100, 110, CharNum, Cr);
+	_gcvt_s(CharNum, cos(ship->ReferRadianOnZ()), 10);
+	DrawString(10, 130, "Cos", Cr);
+	DrawString(50, 130, CharNum, Cr);
+	_gcvt_s(CharNum, sin(ship->ReferRadianOnZ()), 10);
+	DrawString(10, 150, "Sin", Cr);
+	DrawString(50, 150, CharNum, Cr);
+	_gcvt_s(CharNum, ship->ReferOutPutRate(), 10);
+	DrawString(10, 170, "OutPutRate", Cr);
+	DrawString(110, 170, CharNum, Cr);
+}
+
+/****************************************************/
+/*                   コントロール                   */
+/****************************************************/
 /*コマンドを受け取って、新たなものを生成する*/
 void IngameDataManagement::Control() {
 	int answer = CT.GetCommand();
@@ -222,6 +313,9 @@ void IngameDataManagement::Control() {
 		TEST_SHOW_ON = !TEST_SHOW_ON;
 }
 
+/****************************************************/
+/*                     移動関連                     */
+/****************************************************/
 void IngameDataManagement::MoveAll() {
 	MoveShips();
 	MoveEffects();
@@ -260,62 +354,37 @@ void IngameDataManagement::MoveAmmo() {
 	}
 }
 
-void IngameDataManagement::TEST_DRAW() {
-	unsigned int Cr;
-	Cr = GetColor(255, 255, 255);
-	auto ship = alliesFleet.begin();
-	ship->TestDraw(MainCamera.ReferRealCameraX(),
-		MainCamera.ReferRealCameraZ());
-	char CharNum[255];
-
-	SetFontSize(15);
-	ChangeFont("HGｺﾞﾐｯｸM");
-
-	_gcvt_s(CharNum, ship->ReferSpeedOnZ()*100, 10);
-	DrawString(10, 10, "Speed", Cr);
-	DrawString(60, 10, CharNum, Cr);
-	if (ship->ReferReturnOn()) {
-		DrawString(10, 30, "Alignment On", Cr);
-	}
-	else {
-		DrawString(10, 30, "Alignment Off", Cr);
-	}
-	_gcvt_s(CharNum, ship->ReferChangingRadian(), 10);
-	DrawString(10, 50, "Radian(C)", Cr);
-	DrawString(100, 50, CharNum, Cr);
-	_gcvt_s(CharNum, ship->ReferCoordX(), 10);
-	DrawString(10, 70, "X", Cr);
-	DrawString(30, 70, CharNum, Cr);
-	_gcvt_s(CharNum, ship->ReferCoordZ(), 10);
-	DrawString(10, 90, "Z", Cr);
-	DrawString(30, 90, CharNum, Cr);
-	_gcvt_s(CharNum, ship->ReferRadianOnZ(), 10);
-	DrawString(10, 110, "Radian(R)", Cr);
-	DrawString(100, 110, CharNum, Cr);
-	_gcvt_s(CharNum, cos(ship->ReferRadianOnZ()), 10);
-	DrawString(10, 130, "Cos", Cr);
-	DrawString(50, 130, CharNum, Cr);
-	_gcvt_s(CharNum, sin(ship->ReferRadianOnZ()), 10);
-	DrawString(10, 150, "Sin", Cr);
-	DrawString(50, 150, CharNum, Cr);
-	_gcvt_s(CharNum, ship->ReferOutPutRate(), 10);
-	DrawString(10, 170, "OutPutRate", Cr);
-	DrawString(110, 170, CharNum, Cr);
-}	
-
+/****************************************************/
+/*                    データ関連                    */
+/****************************************************/
 void IngameDataManagement::Inif() {
 	PL.AllInif();
 	UI.InifUI(&PL);
 	ET.InifEffectTemplate(&PL);
 	SL.Inif();
 	CT.Inif(&SL);
+	CUI.IngameInif(&PL,&SL);
 }
 
 void IngameDataManagement::Free() {
 	PL.FREE_ALL();
 	SL.FreeAll();
+	CUI.Free();
 }
 
+void IngameDataManagement::DeleteUseless() {
+	DeleteUselessEffect();
+	DeleteUselessAmmo();
+}
+
+void IngameDataManagement::CheckAndPlaySound() {
+	auto ship = alliesFleet.begin();
+	ship->CheckAndPlaySound();
+}
+
+/****************************************************/
+/*                  エフェクト関連                  */
+/****************************************************/
 void IngameDataManagement::GetNewEffect() {
 	/*進行中の水泡生成*/
 	for (auto ship = alliesFleet.begin();
@@ -367,49 +436,9 @@ void IngameDataManagement::DeleteUselessEffect() {
 	}
 }
 
-void IngameDataManagement::DeleteUseless() {
-	DeleteUselessEffect();
-	DeleteUselessAmmo();
-}
-
-void IngameDataManagement::CheckAndPlaySound() {
-	auto ship = alliesFleet.begin();
-	ship->CheckAndPlaySound();
-}
-
-void IngameDataManagement::SIMPLE_USER_INTERFACE() {
-	//テスト・展示用UI
-	unsigned int Cr;
-	Cr = GetColor(255, 255, 255);
-	auto ship = alliesFleet.begin();
-	char CharNum[255];
-
-	SetFontSize(20);
-	ChangeFont("HG行書体");
-
-	DrawString(100, 600, "速度:", Cr);
-	if (ship->ReferSpeedOnZ()*28.0f > 0.5f)
-		_gcvt_s(CharNum, ship->ReferSpeedOnZ()*28.0f, 2);
-	else if(ship->ReferSpeedOnZ()*28.0f > 10.0f)
-		_gcvt_s(CharNum, ship->ReferSpeedOnZ()*28.0f, 3);
-	else
-		_gcvt_s(CharNum, 0.0f, 2);
-	DrawString(180, 600, CharNum, Cr);
-	DrawString(220, 600, "Kt", Cr);
-
-	DrawString(100, 620, "出力", Cr);
-	_gcvt_s(CharNum, ship->ReferOutPutRate() * 100, 3);
-	DrawString(180, 620, CharNum, Cr);
-	DrawString(220, 620, "%", Cr);
-
-	DrawString(100, 660, "航行方向", Cr);
-	if (ship->ReferChangingRadian() > 0)
-		DrawString(200, 660, "右へ", Cr);
-	else if (ship->ReferChangingRadian() < 0)
-		DrawString(200, 660, "左へ", Cr);
-	else
-		DrawString(200, 660, "前方", Cr);
-}
+/****************************************************/
+/*                     射撃関連                     */
+/****************************************************/
 
 void IngameDataManagement::TestShoot() {
 	FiringData FD;
@@ -444,5 +473,40 @@ void IngameDataManagement::DeleteUselessAmmo() {
 		}
 		if (shellList.empty() || shell == shellList.end())
 			break;
+	}
+}
+
+/****************************************************/
+/*                     あたり判定                   */
+/****************************************************/
+void IngameDataManagement::SimpleHitDecision() {
+	if (!shellList.empty())
+		for (auto shell = shellList.begin();
+			shell != shellList.end();
+			shell++) {
+		if (!alliesFleet.empty())
+			for (auto ship = alliesFleet.begin();
+				ship != alliesFleet.end();
+				ship++) {
+			if (shell->ReferSerialNumber() != ship->ReferSerialNumber()) {
+				double distance;
+				distance = Distance3D(shell->ReferCoord(), ship->ReferCoord());
+				if (distance <= ship->ReferShipCrashR()) {
+			
+				}
+			}
+		}
+		if (!enemyFleet.empty())
+			for (auto ship = enemyFleet.begin();
+				ship != enemyFleet.end();
+				ship++) {
+			if (shell->ReferSerialNumber() != ship->ReferSerialNumber()) {
+				double distance;
+				distance = Distance3D(shell->ReferCoord(), ship->ReferCoord());
+				if (distance <= ship->ReferShipCrashR()) {
+
+				}
+			}
+		}
 	}
 }

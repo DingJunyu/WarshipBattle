@@ -5,6 +5,7 @@ class Button {
 public:
 	Button() {
 		pressed = false;
+		used = false;
 		zoomMultiple = 1.0f;
 	}
 	~Button();
@@ -37,4 +38,5 @@ private:
 
 	int time;
 	bool pressed;
+	bool used;
 };

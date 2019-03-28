@@ -28,3 +28,9 @@ bool ctrlhandler(DWORD fdwctrltype)
 		return false;
 	}
 }
+
+double Distance3D(Coordinate<double> A, Coordinate<double> B) {
+	double Distance;
+	Distance = sqrt(pow(A.x - B.x, 2) + pow(A.y - B.y, 2) + pow(A.z - B.z, 2));
+	return Distance;
+}

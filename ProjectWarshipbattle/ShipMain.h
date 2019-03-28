@@ -53,6 +53,8 @@ public:
 		else
 			return SubWeaponCount;
 	}
+	double ReferShipCrashR() { return shipCrashR; }
+	int ReferSerialNumber() { return serialNumber; }
 
 	//エフェクト生成
 	Effect NewBubble(int num);
@@ -68,6 +70,9 @@ public:
 private:
 	ShipCrashParts * MainParts;
 	ShipCrashParts * SubParts;
+	double shipCrashR;
+	/*自分の弾が自分に当たらないように使用する番号です*/
+	int serialNumber;
 
 	Weapon * MainWeapon;
 	int MainWeaponCount;
@@ -82,7 +87,7 @@ private:
 
 	void MemorySecure();
 
-	double draft;//喫水
+	double draft;//喫水:魚雷を使う時に使うデータです。
 	int shipType;
 
 	int *shipHandle[SerialNumberOfShipHandle::ARRAY_SIZE];

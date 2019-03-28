@@ -2,6 +2,8 @@
 #include"DefinedData.h"
 #include"SoundLoader.h"
 #include"DxLib.h"
+/*ここのコントローラーでは、キーボードの入力を受け取って信号に変更します。
+マウス操作などはClickableUserInterfaceに実現します*/
 class Controller
 {
 public:

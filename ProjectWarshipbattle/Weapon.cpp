@@ -27,8 +27,8 @@ Ammo Weapon::Shoot(double x, double z,double r) {
 		realRadianOnZ -= RandomDataWhenShoot::radianOnZ * targetRandom / 10;
 	}
 
-	return Ammo(initialSpeed, realRadianOnZ,realX,realZ,high,radianOnY,
-		ammoHandle);
+	return Ammo(initialSpeed, realRadianOnZ, realX, realZ, high, radianOnY,
+		ammoHandle, serialNumber);
 }
 
 bool Weapon::ReferShootable() {

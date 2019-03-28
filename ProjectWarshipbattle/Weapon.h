@@ -7,11 +7,11 @@ public:
 	Weapon();
 	Weapon(double RCX, double RCZ, double L, double W,
 		double ROZ, double ROY,int MHP,double AOS,double AOT,
-		int *aH,int iS,double H) :
+		int *aH,int iS,double H,int SN) :
 		relativeCoordX(RCX),relativeCoordZ(RCZ),length(L),
 		width(W),radianOnZ(ROZ),radianOnY(ROY),heartPoint(MHP),
 		maxHeartPoint(MHP),armorOntheSide(AOS),armorOntheTop(AOT),
-		ammoHandle(aH), initialSpeed(iS), high(H) {
+		ammoHandle(aH), initialSpeed(iS), high(H), serialNumber(SN) {
 		lastShootedTime = 0;
 	}
 	~Weapon();
@@ -47,6 +47,7 @@ private:
 	unsigned int reloadTime;//再装填の時間
 	unsigned int lastShootedTime;//前回射撃した時間
 	double calibre;
+	int serialNumber;
 
 	int *turrentHandle;//画像データ保存用
 	int *ammoHandle;

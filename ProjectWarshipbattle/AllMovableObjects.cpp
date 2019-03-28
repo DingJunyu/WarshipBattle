@@ -14,7 +14,7 @@ void AllMovableObjects::Move() {
 			FallingDown();
 			SpeedDownbyAirResistance();
 		}
-		coordY += speedOnY;
+		coord.y += speedOnY;
 	}
 
 	if (speedOnZ != 0 && radianChangePerFrame != 0) {
@@ -27,12 +27,12 @@ void AllMovableObjects::Move() {
 		radianOnZ += (MathAndPhysics::PI * 2);
 	}
 
-	coordX += speedOnZ * cos(radianOnZ);
-	coordZ += speedOnZ * sin(radianOnZ);
+	coord.x += speedOnZ * cos(radianOnZ);
+	coord.z += speedOnZ * sin(radianOnZ);
 }
 
 void AllMovableObjects::FallingDown() {
-	if (coordZ > 0 && flyable && !plane) {
+	if (coord.z > 0 && flyable && !plane) {
 		speedOnY -= MathAndPhysics::GRAVITATIONAL_ACCELERATION;
 	}
 }
@@ -92,14 +92,14 @@ void AllMovableObjects::DrawSub(Camera CM) {
 	int shadowDistanceOnX = 2;
 	int shadowDistanceOnZ = 2;
 
-	DrawRotaGraph3((int)(coordX - CM.ReferRealCameraX() + shadowDistanceOnX),
-		(int)(coordZ - CM.ReferRealCameraZ() + shadowDistanceOnZ),
+	DrawRotaGraph3((int)(coord.x - CM.ReferRealCameraX() + shadowDistanceOnX),
+		(int)(coord.z - CM.ReferRealCameraZ() + shadowDistanceOnZ),
 		(int)(length / 2), (int)(width / 2),
 		0.125, 0.125, radianOnZ,
 		*shadowHandle, TRUE, FALSE);
 
-	DrawRotaGraph3((int)(coordX - CM.ReferRealCameraX()),
-		(int)(coordZ - CM.ReferRealCameraZ()),
+	DrawRotaGraph3((int)(coord.x - CM.ReferRealCameraX()),
+		(int)(coord.z - CM.ReferRealCameraZ()),
 		(int)(length / 2), (int)(width / 2),
 		0.125, 0.125, radianOnZ,
 		*pictureHandle, TRUE, FALSE);

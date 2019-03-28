@@ -145,6 +145,9 @@ void ShipMain::TEST() {
 	currentRadian = 0;
 	minAccNeedatMaxSpeed = 0.0000001;
 
+	serialNumber = 1;
+	shipCrashR = 100;
+
 	/*エフェクト関連*/
 	bubblePointCount = 5;
 	smokePointCount = 2;
@@ -270,7 +273,7 @@ void ShipMain::SetWeaponTest(PictureLoader *PL) {
 	for (int i = 0; i < 8; i++) {
 		Weapon Weapon(20.0, 8.0 - i * 2, 10.0, 10.0,
 			0.0, 1.0, 100,
-			50, 12, PL->ReferAmmoHandle(0), 40, 1);
+			50, 12, PL->ReferAmmoHandle(0), 40, 1,serialNumber);
 		MainWeapon[i] = Weapon;
 		MainWeapon[i].SetCoolDownTime(1500);
 	}

@@ -61,6 +61,10 @@ public:
 	int *ReferButtonPressedHandle(int num) {
 		return &buttonPressedHandle[num];}
 
+	int *ReferButtonIntheGame(int num) { return &buttonIntheGame[num]; }
+	int *ReferButtonPressedIntheGame(int num){
+		return &buttonPressedIntheGame[num];}
+
 	//タイトル関係
 	int *ReferTitle() { return &title; }
 	int *ReferPressedToStart() { return &pressedToStart; }
@@ -131,6 +135,9 @@ private:
 	//ボタン
 	int *buttonHandle;
 	int *buttonPressedHandle;
+
+	int buttonIntheGame[CommandSerial::COUNT];
+	int buttonPressedIntheGame[CommandSerial::COUNT];
 
 	//タイトル関係
 	int title;

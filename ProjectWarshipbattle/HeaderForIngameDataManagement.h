@@ -21,3 +21,5 @@
 #include"EffectTemplate.h"
 #include"Effect.h"
 #include"SoundLoader.h"
+#include"OtherFunctions.h"
+#include"ClickableUserInterface.h"

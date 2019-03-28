@@ -5,6 +5,9 @@
 #include"DefinedData.h"
 #include"ButtonCollection.h"
 #include"FrameControl.h"
+/*もともとはこのクラスでメインメニューの操作を実現するだけが、
+実際にほかの画面のコントローラーの内容が重複しました、
+これからユーザーの操作はすべてほかのクラスに移行します。*/
 class MainMenuController
 {
 public:
@@ -22,12 +25,17 @@ public:
 	void DrawTitle();
 	void DrawMainMenu();
 	void DrawLoading();
-	void SetButtonPosition();
 
 	int CheckChoice();
 	void FREE();
 
 private:
+	void SetButtonPosition();
+
+	/*実際に画像保存クラスはここに宣言すべきではなかったが、
+	デザインのミスでここに宣言しました、このクラスの命名も間違いました、
+	MainMenuCOntrollerではなく、ClickableUserInterfaceに直すべきだ*/
+	/*改めてClickableUserInterfaceのクラスを作ります。*/
 	PictureLoader PL;
 	SoundLoader SL;
 	ButtonCollection BC;
