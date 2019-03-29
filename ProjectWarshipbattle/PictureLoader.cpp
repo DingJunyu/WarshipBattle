@@ -107,6 +107,28 @@ void PictureLoader::LoadPicture() {
 	"GraphicData/Button/Button_Pressed_EndGame.png");
 
 	//ÉQÅ[ÉÄíÜêgÇÃïîï™
+	buttonIntheGame[CommandSerial::INCREASE_OUTPUT] = LoadGraph(
+		"GraphicData/Interactive_User_Interface/buttons/speed_up_normal.png");
+	buttonPressedIntheGame[CommandSerial::INCREASE_OUTPUT] = LoadGraph(
+		"GraphicData/Interactive_User_Interface/buttons/speed_up_pressed.png");
+	buttonIntheGame[CommandSerial::DECREASE_OUTPUT] = LoadGraph(
+		"GraphicData/Interactive_User_Interface/buttons/speed_down_normal.png");
+	buttonPressedIntheGame[CommandSerial::DECREASE_OUTPUT] = LoadGraph(
+		"GraphicData/Interactive_User_Interface/buttons/speed_down_pressed.png");
+
+	buttonIntheGame[CommandSerial::TURN_RIGHT] = LoadGraph(
+		"GraphicData/Interactive_User_Interface/buttons/ship_turn_right_normal.png");
+	buttonPressedIntheGame[CommandSerial::TURN_RIGHT] = LoadGraph(
+		"GraphicData/Interactive_User_Interface/buttons/ship_turn_right_pressed.png");
+	buttonIntheGame[CommandSerial::TURN_LEFT] = LoadGraph(
+		"GraphicData/Interactive_User_Interface/buttons/ship_turn_left_normal.png");
+	buttonPressedIntheGame[CommandSerial::TURN_LEFT] = LoadGraph(
+		"GraphicData/Interactive_User_Interface/buttons/ship_turn_left_pressed.png");
+	buttonIntheGame[CommandSerial::TURN_RETURN] = LoadGraph(
+		"GraphicData/Interactive_User_Interface/buttons/ship_return_to_middle_normal.png");
+	buttonPressedIntheGame[CommandSerial::TURN_RETURN] = LoadGraph(
+		"GraphicData/Interactive_User_Interface/buttons/ship_return_to_middle_pressed.png");
+
 	buttonIntheGame[CommandSerial::SHOOT] = LoadGraph(
 	"GraphicData/Interactive_User_Interface/buttons/shoot_normal.png");
 	buttonPressedIntheGame[CommandSerial::SHOOT] = LoadGraph(
@@ -125,7 +147,7 @@ void PictureLoader::LoadPicture() {
 	"GraphicData/Interactive_User_Interface/buttons/pull_up_pressed.png");
 	buttonIntheGame[CommandSerial::TURRET_PULLDOWN] = LoadGraph(
 	"GraphicData/Interactive_User_Interface/buttons/pull_down_normal.png");
-	buttonPressedHandle[CommandSerial::TURRET_PULLDOWN] = LoadGraph(
+	buttonPressedIntheGame[CommandSerial::TURRET_PULLDOWN] = LoadGraph(
 	"GraphicData/Interactive_User_Interface/buttons/pull_down_pressed.png");
 
 	buttonIntheGame[CommandSerial::MENU] = LoadGraph(
@@ -138,7 +160,7 @@ void PictureLoader::LoadPicture() {
 	"GraphicData/Interactive_User_Interface/buttons/continue_pressed.png");
 	buttonIntheGame[CommandSerial::SETTING] = LoadGraph(
 	"GraphicData/Interactive_User_Interface/buttons/option_normal.png");
-	buttonPressedHandle[CommandSerial::SETTING] = LoadGraph(
+	buttonPressedIntheGame[CommandSerial::SETTING] = LoadGraph(
 	"GraphicData/Interactive_User_Interface/buttons/option_pressed.png");
 	buttonIntheGame[CommandSerial::EXIT] = LoadGraph(
 	"GraphicData/Interactive_User_Interface/buttons/endgame_normal.png");

@@ -21,7 +21,6 @@ enum CommandSerial {
 	TURRET_PULLUP,
 	TURRET_PULLDOWN,
 	MENU,
-	BACK,
 	CONTINUE,
 	SETTING,
 	EXIT,
@@ -133,6 +132,42 @@ namespace BUTTON_POSITION_INGAME {
 	const double MENU_MULTI = 0.08;
 	const double MENU_X = 0.85;
 	const double MENU_Z = 0.02;
+
+	const double CONTINUE_MULTI = 0.08;
+	const double CONTINUE_X = 0.85;
+	const double CONTINUE_Z = 0.08;
+
+	const double SETTING_MULTI = 0.08;
+	const double SETTING_X = .85;
+	const double SETTING_Z = .14;
+
+	const double EXIT_MULTI = .08;
+	const double EXIT_X = .85;
+	const double EXIT_Z = .20;
+
+	const double SHOOT_MULTI = .06;
+	const double SHOOT_X = .69;
+	const double SHOOT_Z = .82;
+
+	const double TURN_RIGHT_MULTI = .06;
+	const double TURN_RIGHT_X = 0.5 + .03;
+	const double TURN_RIGHT_Z = .7;
+
+	const double TURN_LEFT_MULTI = .06;
+	const double TURN_LEFT_X = 0.5 - 0.09;
+	const double TURN_LEFT_Z = .7;
+
+	const double TURN_RETURN_MULTI = .06;
+	const double TURN_RETURN_X = 0.5 - 0.03;
+	const double TURN_RETURN_Z = .7;
+
+	const double INCREASE_OUTPUT_MULTI = .06;
+	const double INCREASE_OUTPUT_X = 0.02;
+	const double INCREASE_OUTPUT_Z = 0.82;
+	
+	const double DECREASE_OUTPUT_MULTI = .06;
+	const double DECREASE_OUTPUT_X = 0.02;
+	const double DECREASE_OUTPUT_Z = 0.86;
 }
 
 enum AmmoType {

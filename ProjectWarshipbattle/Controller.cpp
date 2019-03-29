@@ -43,6 +43,10 @@ int Controller::GetCommand() {
 	if (KeyBuf[KEY_INPUT_C] && GetInputChar(TRUE)) {
 		PlaySoundMem(*shipHordLow, DX_PLAYTYPE_BACK, TRUE);
 	}
+
+	if (KeyBuf[KEY_INPUT_ESCAPE])
+		return CommandSerial::EXIT;
+
 	return CommandSerial::NONE_COMMAND;
 }
 

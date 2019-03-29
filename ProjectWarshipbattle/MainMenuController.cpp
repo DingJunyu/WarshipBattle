@@ -32,7 +32,7 @@ void MainMenuController::DrawTitle() {
 			Screen::SCREEN_X / 2 - titleSizeX / 4,
 			(int)(0.1*Screen::SCREEN_Z),
 			Screen::SCREEN_X / 2 + titleSizeX / 4,
-			0.1*Screen::SCREEN_Z + titleSizeZ / 2,
+			(int)(0.1*Screen::SCREEN_Z + titleSizeZ / 2),
 			*title,
 			TRUE
 		);
@@ -79,8 +79,11 @@ void MainMenuController::DrawMainMenu() {
 		BC.buttonContainer[i].DrawThisButton();
 	}
 
-	DrawExtendGraph(.67*Screen::SCREEN_X, .1*Screen::SCREEN_Z, 
-		.67*Screen::SCREEN_X + titleSizeX / 4, .1*Screen::SCREEN_Z + titleSizeZ / 4,
+	DrawExtendGraph(
+		(int)(.67*Screen::SCREEN_X), 
+		(int)(.1*Screen::SCREEN_Z), 
+		(int)(.67*Screen::SCREEN_X + titleSizeX / 4), 
+		(int)(.1*Screen::SCREEN_Z + titleSizeZ / 4),
 		*title, TRUE);
 
 	ScreenFlip();
@@ -97,7 +100,8 @@ void MainMenuController::DrawLoading() {
 	Cr = GetColor(255, 255, 255);
 	SetFontSize(30);
 
-	DrawString(0.85*Screen::SCREEN_X, 0.85*Screen::SCREEN_Z, "LOADING...", Cr);
+	DrawString((int)(0.85*Screen::SCREEN_X), 
+		(int)(0.85*Screen::SCREEN_Z), "LOADING...", Cr);
 
 	ScreenFlip();
 }

@@ -92,10 +92,9 @@ void SingleGame_DeathMatch_Progress() {
 	/*ゲームメインプログレス*/
 	while (!TDMC.GameOver(IDM.TeamDestroyed())) {
 		IDM.Update();
-		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
-			break;
-
 		if (ProcessMessage() == -1)//エラー処理
+			break;
+		if (IDM.ReferEndGame())
 			break;
 	}
 	/*結果発表*/

@@ -16,7 +16,10 @@
 class ClickableUserInterface
 {
 public:
-	ClickableUserInterface();
+	ClickableUserInterface() {
+		menuOpened = false;
+		lastClickTime = GetTickCount();
+	}
 	~ClickableUserInterface();
 
 	void IngameInif(PictureLoader *PL, SoundLoader *SL);
@@ -24,6 +27,18 @@ public:
 	int CheckChoice();
 	void Draw();
 	void SetNormalStatus();
+	void LetMeSeeMenu();
+	void CloseMenu();
+	bool CheckMenuOpened() { return menuOpened; }
+
+	void SetClickTime() { lastClickTime = GetTickCount(); }
+
+	bool ReferClickable() {
+		if (lastClickTime + inputDelay <= GetTickCount())
+			return true;
+		return false;
+	}
+
 
 	void Free();
 
@@ -35,6 +50,10 @@ private:
 
 	/*提示の点滅用カウント*/
 	int countForTitle;
+
+	bool menuOpened;
+	unsigned int lastClickTime;
+	const int inputDelay = 50;
 
 	ButtonCollection BC;
 

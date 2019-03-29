@@ -206,28 +206,28 @@ void IngameDataManagement::SIMPLE_USER_INTERFACE() {
 	SetFontSize(20);
 	ChangeFont("HG行書体");
 
-	DrawString(100, 600, "速度:", Cr);
+	DrawString(100, 650, "速度:", Cr);
 	if (ship->ReferSpeedOnZ()*28.0f > 0.5f)
 		_gcvt_s(CharNum, ship->ReferSpeedOnZ()*28.0f, 2);
 	else if (ship->ReferSpeedOnZ()*28.0f > 10.0f)
 		_gcvt_s(CharNum, ship->ReferSpeedOnZ()*28.0f, 3);
 	else
 		_gcvt_s(CharNum, 0.0f, 2);
-	DrawString(180, 600, CharNum, Cr);
-	DrawString(220, 600, "Kt", Cr);
+	DrawString(180, 650, CharNum, Cr);
+	DrawString(220, 650, "Kt", Cr);
 
-	DrawString(100, 620, "出力", Cr);
+	DrawString(100, 670, "出力", Cr);
 	_gcvt_s(CharNum, ship->ReferOutPutRate() * 100, 3);
-	DrawString(180, 620, CharNum, Cr);
-	DrawString(220, 620, "%", Cr);
+	DrawString(180, 670, CharNum, Cr);
+	DrawString(220, 670, "%", Cr);
 
-	DrawString(100, 660, "航行方向", Cr);
+	DrawString(100, 710, "航行方向", Cr);
 	if (ship->ReferChangingRadian() > 0)
-		DrawString(200, 660, "右へ", Cr);
+		DrawString(200, 710, "右へ", Cr);
 	else if (ship->ReferChangingRadian() < 0)
-		DrawString(200, 660, "左へ", Cr);
+		DrawString(200, 710, "左へ", Cr);
 	else
-		DrawString(200, 660, "前方", Cr);
+		DrawString(200, 710, "前方", Cr);
 }
 
 /****************************************************/
@@ -296,7 +296,20 @@ void IngameDataManagement::TEST_DRAW() {
 /****************************************************/
 /*コマンドを受け取って、新たなものを生成する*/
 void IngameDataManagement::Control() {
-	int answer = CT.GetCommand();
+	int answer;
+
+	answer = CUI.CheckChoice();
+
+
+	if (answer == CommandSerial::INCREASE_OUTPUT ||
+		answer == CommandSerial::DECREASE_OUTPUT ||
+		answer == CommandSerial::MENU ||
+		answer == CommandSerial::TURN_RETURN)
+		if (!CUI.ReferClickable())
+			return;
+
+	if (answer == -1)
+		answer = CT.GetCommand();
 
 
 	/*船を操作*/
@@ -308,9 +321,26 @@ void IngameDataManagement::Control() {
 		TestShoot();
 	}
 
+	/*UI関連*/
+	if (answer == CommandSerial::MENU) {
+		if (!CUI.CheckMenuOpened()) {
+			CUI.LetMeSeeMenu();
+		}
+		else {
+			CUI.CloseMenu();
+		}
+	}
+
 	/*テストビュー*/
 	if (answer == CommandSerial::TEST_VIEW_ON)
 		TEST_SHOW_ON = !TEST_SHOW_ON;
+
+	/*ゲーム終了*/
+	if (answer == CommandSerial::EXIT) {
+		GameOver = true;
+	}
+
+	CUI.SetClickTime();
 }
 
 /****************************************************/

@@ -6,6 +6,7 @@ class IngameDataManagement
 public:
 	IngameDataManagement() :MainCamera(CameraType::MAIN) {
 		TEST_SHOW_ON = false;
+		GameOver = false;
 	}
 	~IngameDataManagement();
 
@@ -46,6 +47,7 @@ public:
 	int ReferRemainedEnemiesNumInSky();
 
 	bool TeamDestroyed() { return false; }
+	bool ReferEndGame() { return GameOver; }
 
 	//統計データ
 	int ShootCount();//実現はあとでいい
@@ -97,6 +99,7 @@ private:
 	//テスト関連
 	bool TEST_SHOW_ON;
 	void SIMPLE_USER_INTERFACE();
+	bool GameOver;
 
 	/*音声関数*/
 	void CheckAndPlaySound();
