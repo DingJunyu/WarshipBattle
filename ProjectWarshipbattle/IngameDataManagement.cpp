@@ -38,8 +38,10 @@ void IngameDataManagement::DrawAll() {
 	DrawAmmo();
 //	DrawBomb();
 
-
+	/*UIŠÖ˜A*/
+	auto ship = alliesFleet.begin();
 	UI.DrawUI();
+	UI.DrawUINeedInput(&*ship);
 	DrawShipsOnMiniMap();
 
 	SIMPLE_USER_INTERFACE();
@@ -55,21 +57,41 @@ void IngameDataManagement::DrawAll() {
 
 void IngameDataManagement::DrawShips() {
 	//—FŒR‚ð•`‰æ‚·‚é 
-	for (auto mark = alliesFleet.begin();
-		mark != alliesFleet.end(); mark++) {
+	if (!alliesFleet.empty())
+		for (auto mark = alliesFleet.begin();
+			mark != alliesFleet.end(); mark++) {
 		if (mark->ReferAlive()) {
-			mark->Draw(MainCamera);
+			if (mark == alliesFleet.begin())
+				mark->Draw(MainCamera);
+			else
+				mark->DrawSub(MainCamera);
+		}
+	}
+	if(!enemyFleet.empty())
+		for (auto ship = enemyFleet.begin();
+			ship != enemyFleet.end(); ship++) {
+		if (ship->ReferAlive()) {
+			ship->DrawSub(MainCamera);
 		}
 	}
 }
 
 void IngameDataManagement::DrawShipsOnMiniMap() {
 	//—FŒRŠÍ‘à
-	for (auto mark = alliesFleet.begin();
-		mark != alliesFleet.end(); mark++) {
-		if (mark->ReferAlive()) {
-			UI.DrawShipOnTheMap(mark->ReferCoordX(),
-				mark->ReferCoordZ(), false);
+	if(!alliesFleet.empty())
+	for (auto ship = alliesFleet.begin();
+		ship != alliesFleet.end(); ship++) {
+		if (ship->ReferAlive()) {
+			UI.DrawShipOnTheMap(ship->ReferCoordX(),
+				ship->ReferCoordZ(), false);
+		}
+	}
+	if (!enemyFleet.empty())
+		for (auto ship = enemyFleet.begin();
+			ship != enemyFleet.end(); ship++) {
+		if (ship->ReferAlive()) {
+			UI.DrawShipOnTheMap(ship->ReferCoordX(),
+				ship->ReferCoordZ(), true);
 		}
 	}
 }
@@ -166,6 +188,7 @@ void IngameDataManagement::DrawSea() {
 /*‘D‚Ì‰º‚É‚ ‚éƒGƒtƒFƒNƒg‚ð•`‚­*/
 void IngameDataManagement::DrawEffectUnderShips() {
 	/*…–A‰‰o*/
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 90);
 	if (!bubbleList.empty())
 	for (auto bubble = bubbleList.begin();
 		bubble != bubbleList.end();
@@ -173,10 +196,12 @@ void IngameDataManagement::DrawEffectUnderShips() {
 		bubble->Draw((int)MainCamera.ReferRealCameraX(),
 			(int)MainCamera.ReferRealCameraZ());
 	}
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }
 
 /*‘D‚Ìã‚É‚ ‚éƒGƒtƒFƒNƒg‚ð•`‚­*/
 void IngameDataManagement::DrawEffectBeyondShips() {
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 240);
 	if (!smokeList.empty())
 	for (auto smoke = smokeList.begin();
 		smoke != smokeList.end();
@@ -184,6 +209,7 @@ void IngameDataManagement::DrawEffectBeyondShips() {
 		smoke->Draw((int)MainCamera.ReferRealCameraX(),
 			(int)MainCamera.ReferRealCameraZ());
 	}
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }
 
 void IngameDataManagement::DrawAmmo() {
@@ -246,6 +272,18 @@ void IngameDataManagement::TEST() {
 	ship->SetWidth(PL.ReferShipSizeZ());
 	ship->TEST();
 	ship->SetWeaponTest(&PL);
+
+	enemyFleet.push_back(ShipMain());
+	auto enemyShip = enemyFleet.begin();
+
+	enemyShip->InifThisShip(PL.ReferBattleCrusierHandle(4000),
+		PL.ReferBattleCrusierShadowHandle(4000), 4000, ET, &SL);
+	enemyShip->NewCoordX(3000);
+	enemyShip->NewCoordZ(1800);
+	enemyShip->SetLength(PL.ReferShipSizeX());
+	enemyShip->SetWidth(PL.ReferShipSizeZ());
+	enemyShip->TEST();
+	enemyShip->SetWeaponTest(&PL);
 }
 
 void IngameDataManagement::TEST_DRAW() {
@@ -353,8 +391,15 @@ void IngameDataManagement::MoveAll() {
 }
 
 void IngameDataManagement::MoveShips() {
+	if(!alliesFleet.empty())
 	for (auto ship = alliesFleet.begin();
 		ship != alliesFleet.end();
+		ship++) {
+		ship->Move();
+	}
+	if(!enemyFleet.empty())
+	for (auto ship = enemyFleet.begin();
+		ship != enemyFleet.end();
 		ship++) {
 		ship->Move();
 	}
@@ -417,26 +462,52 @@ void IngameDataManagement::CheckAndPlaySound() {
 /****************************************************/
 void IngameDataManagement::GetNewEffect() {
 	/*is’†‚Ì…–A¶¬*/
-	for (auto ship = alliesFleet.begin();
-		ship != alliesFleet.end();
-		ship++) {
-		if (ship->ReferSpeedOnZ() > 0.1 && rand() % 3==0 
-			&& rand()%100>ship->ReferSpeedOnZ()*10) {
-			bubbleList.push_back(ship->NewBubble(0));
-			bubbleList.push_back(ship->NewBubble(1));
-			bubbleList.push_back(ship->NewBubble(2));
-			bubbleList.push_back(ship->NewBubble(3));
-			bubbleList.push_back(ship->NewBubble(4));
+	if (!alliesFleet.empty()) {
+		for (auto ship = alliesFleet.begin();
+			ship != alliesFleet.end();
+			ship++) {
+			if (ship->ReferSpeedOnZ() > 0.1 && rand() % 3 == 0
+				&& rand() % 100 > ship->ReferSpeedOnZ() * 10) {
+				//for(int i = 0; i < ship->ReferBubbleCount(); i++)
+				for (int i = 0; i < 4; i++)
+					bubbleList.push_back(ship->NewBubble(i));
+			}
+		}
+		for (auto ship = alliesFleet.begin();
+			ship != alliesFleet.end();
+			ship++) {
+			if (ship->ReferOutPutRate() != 0) {
+				if ((rand() % 8 < ship->ReferSpeedOnZ() * 10)
+					&& rand() % 4 == 0) {
+					//for(int i = 0; i < ship->ReferSmokeCount(); i++)
+					for (int i = 0; i < 2; i++)
+						smokeList.push_back(ship->NewSmoke(i));
+				}
+			}
 		}
 	}
-	for (auto ship = alliesFleet.begin();
-		ship != alliesFleet.end();
-		ship++) {
-		if (ship->ReferOutPutRate() != 0) {
-			if ((rand() % 8 < ship->ReferSpeedOnZ() * 10)
-				&& rand() % 4 == 0) {
-				smokeList.push_back(ship->NewSmoke(0));
-				smokeList.push_back(ship->NewSmoke(1));
+
+	if (!enemyFleet.empty()) {
+		for (auto ship = enemyFleet.begin();
+			ship != enemyFleet.end();
+			ship++) {
+			if (ship->ReferSpeedOnZ() > 0.1 && rand() % 3 == 0
+				&& rand() % 100 > ship->ReferSpeedOnZ() * 10) {
+				//for(int i = 0; i < ship->ReferBubbleCount(); i++)
+				for (int i = 0; i < 4; i++)
+					bubbleList.push_back(ship->NewBubble(i));
+			}
+		}
+		for (auto ship = enemyFleet.begin();
+			ship != enemyFleet.end();
+			ship++) {
+			if (ship->ReferOutPutRate() != 0) {
+				if ((rand() % 8 < ship->ReferSpeedOnZ() * 10)
+					&& rand() % 4 == 0) {
+					//for(int i = 0; i < ship->ReferSmokeCount(); i++)
+					for (int i = 0; i < 2; i++)
+						smokeList.push_back(ship->NewSmoke(i));
+				}
 			}
 		}
 	}

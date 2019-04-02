@@ -3,12 +3,13 @@
 #include"PictureLoader.h"
 #include"DefinedData.h"
 #include"ButtonCollection.h"
+#include"ShipMain.h"
 #include<cmath>
 class UserInterface
 {
 public:
 	UserInterface() :
-		matStartX(0), matStartZ(Screen::SCREEN_Z / 4.5),
+		matStartX(0), matStartZ(Screen::SCREEN_Z / 4.25),
 		leftSCMStartX(0), leftSCMStartZ(0),
 		rightSCMStartX(0), rightSCMStartZ(0), mapMatSize(Screen::SCREEN_X / 8),
 		mapPaperSize(mapMatSize - 10) {}
@@ -17,6 +18,7 @@ public:
 	void InifUI(PictureLoader *PL);
 
 	void DrawUI();
+	void DrawUINeedInput(ShipMain *ship);
 
 	void DrawShipOnTheMap(double X, double Z, bool enemy);
 
@@ -24,8 +26,6 @@ public:
 	
 
 private:
-	ButtonCollection BC;
-
 	int *mat;
 	int *shipCardMat;
 
@@ -42,6 +42,7 @@ private:
 
 	double mapMatSize;
 	double mapPaperSize;
-	
+
+	int *handleList[UI_LIST::AMOUNT];
 };
 

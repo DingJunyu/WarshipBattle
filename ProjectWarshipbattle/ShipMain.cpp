@@ -121,11 +121,16 @@ void ShipMain::Alignment() {
 
 void ShipMain::ControlThisShip(int Command) {;
 	switch (Command) {
+	case CommandSerial::NONE_COMMAND:break;
 	case CommandSerial::INCREASE_OUTPUT:ChangeAccPercentage(true); break;
 	case CommandSerial::DECREASE_OUTPUT:ChangeAccPercentage(false); break;
 	case CommandSerial::TURN_RIGHT:ChangeDirect(true); break;
 	case CommandSerial::TURN_LEFT:ChangeDirect(false); break;
 	case CommandSerial::TURN_RETURN:ReturnDirectChange(); break;
+	case CommandSerial::TURRET_TURN_RIGHT:TurnMainWeapon(true); break;
+	case CommandSerial::TURRET_TURN_LEFT:TurnMainWeapon(false); break;
+	case CommandSerial::TURRET_PULLUP:PullMainWeapon(true); break;
+	case CommandSerial::TURRET_PULLDOWN:PullMainWeapon(false); break;
 	}
 	CalSpeed();
 	Alignment();
@@ -268,13 +273,28 @@ Ammo ShipMain::Shoot(int Num, bool Main) {
 
 void ShipMain::SetWeaponTest(PictureLoader *PL) {
 	MainWeaponCount = 8;
-
 	
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < MainWeaponCount; i++) {
 		Weapon Weapon(20.0, 8.0 - i * 2, 10.0, 10.0,
 			0.0, 1.0, 100,
 			50, 12, PL->ReferAmmoHandle(0), 40, 1,serialNumber);
 		MainWeapon[i] = Weapon;
-		MainWeapon[i].SetCoolDownTime(1500);
+		MainWeapon[i].SetCoolDownTime(3200);
 	}
+}
+
+
+bool ShipMain::TurnMainWeapon(bool right) {
+	for (int i = 0; i < MainWeaponCount; i++) {
+		MainWeapon[i].Turn(right);
+	}
+	return false;
+}
+
+bool ShipMain::PullMainWeapon(bool up) {
+	bool end;
+	for (int i = 0; i < MainWeaponCount; i++) {
+		end = MainWeapon[i].Pull(up);
+	}
+	return end;
 }

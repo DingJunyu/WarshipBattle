@@ -13,6 +13,7 @@ public:
 		maxHeartPoint(MHP),armorOntheSide(AOS),armorOntheTop(AOT),
 		ammoHandle(aH), initialSpeed(iS), high(H), serialNumber(SN) {
 		lastShootedTime = 0;
+		maxRadianOnY = MathAndPhysics::PI / 2;
 	}
 	~Weapon();
 
@@ -33,8 +34,13 @@ public:
 	double ReferArmorOntheTop() { return armorOntheTop; }
 
 	void SetCoolDownTime(int time) { reloadTime = time; }
-	void TurnRight() { radianOnZ += MathAndPhysics::PI * (5 / 180); }
-	void TurnLeft() { radianOnZ -= MathAndPhysics::PI*(5 / 180); }
+	void Turn(bool right) {
+		if (right)
+			radianOnZ += MathAndPhysics::PI * (1.0 / 180.0);
+		else
+			radianOnZ -= MathAndPhysics::PI * (1.0 / 180.0);
+	}
+	bool Pull(bool up);
 
 	//ó‘Ô–â‚¢‡‚í‚¹ŠÖ”
 	bool ReferShootable();//ËŒ‚‚Å‚«‚ê‚Îtrue‚ğ–ß‚·
@@ -60,6 +66,7 @@ private:
 	double width;
 	double radianOnZ;//…•½–Ê‚ÌŠp“x
 	double radianOnY;//–Cg‚ÌŠp“x-->‚±‚ê‚Å–C’e—‰ºˆÊ’u‚ğ„’è‚·‚é
+	double maxRadianOnY;
 
 	double high;
 

@@ -23,9 +23,6 @@ private:
 	int crashPartsCount;
 	int crashPartX;
 	int crashPartZ;
-
-
-
 };
 
 class ShipDataCollection {

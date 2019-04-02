@@ -55,6 +55,14 @@ public:
 	}
 	double ReferShipCrashR() { return shipCrashR; }
 	int ReferSerialNumber() { return serialNumber; }
+	double ReferMainWeaponRadianOnZ() {
+		return MainWeapon[0].ReferRadianOnZ();
+	}
+	double ReferMainWeaponCD() { return
+		GetTickCount() - MainWeapon[0].ReferLastShootedTime(); }
+	double ReferMainWeaponCoolDownTime() {
+		return MainWeapon[0].ReferReloadTime();
+	}
 
 	//エフェクト生成
 	Effect NewBubble(int num);
@@ -66,6 +74,8 @@ public:
 	int HowManyWeaponYouHave() { return MainWeaponCount; }
 	bool IsThisOneUsable(int Num, bool Main);
 	Ammo Shoot(int Num, bool Main);
+
+
 
 private:
 	ShipCrashParts * MainParts;
@@ -86,6 +96,10 @@ private:
 	int smokePointCount;
 
 	void MemorySecure();
+
+	/*砲のステータス変更*/
+	bool TurnMainWeapon(bool right);
+	bool PullMainWeapon(bool up);
 
 	double draft;//喫水:魚雷を使う時に使うデータです。
 	int shipType;

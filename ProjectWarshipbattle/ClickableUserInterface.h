@@ -4,6 +4,7 @@
 #include"PictureLoader.h"
 #include"DxLib.h"
 #include"SoundLoader.h"
+#include<cmath>
 /*今回のゲームでは、すべての操作をマウスでできるようにしたいです。
 メインメニューにも、ゲーム画面にも使えるクラスです。
 目標としては同じ構造を利用して、

@@ -42,7 +42,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//メニューから取ったコマンドに合わせて関数を呼び出す
 		switch (choice) {
 		case ButtonEvent::NEW_GAME:
-			SingleGame_DeathMatch_Progress(); break;
+		case ButtonEvent::CONTINUE_GAME :
+		case ButtonEvent::LOAD_GAME:
+			SingleGame_DeathMatch_Progress(); break;	
 		case ButtonEvent::GAME_OVER:endGame = true; break;
 		}
 	}

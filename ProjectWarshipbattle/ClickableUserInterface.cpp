@@ -40,6 +40,14 @@ void ClickableUserInterface::IngameInif(PictureLoader *PL, SoundLoader *SL) {
 
 	SetThisOne(CommandSerial::SHOOT, BUTTON_POSITION_INGAME::SHOOT_X,
 		BUTTON_POSITION_INGAME::SHOOT_Z, BUTTON_POSITION_INGAME::SHOOT_MULTI);
+	SetThisOne(CommandSerial::TURRET_TURN_RIGHT, BUTTON_POSITION_INGAME::TURRET_TURN_RIGHT_X,
+		BUTTON_POSITION_INGAME::TURRET_TURN_RIGHT_Z, BUTTON_POSITION_INGAME::TURRET_TURN_RIGHT_MULTI);
+	SetThisOne(CommandSerial::TURRET_TURN_LEFT, BUTTON_POSITION_INGAME::TURRET_TURN_LEFT_X,
+		BUTTON_POSITION_INGAME::TURRET_TURN_LEFT_Z, BUTTON_POSITION_INGAME::TURRET_TURN_LEFT_MULTI);
+	SetThisOne(CommandSerial::TURRET_PULLUP, BUTTON_POSITION_INGAME::TURRET_PULLUP_X,
+		BUTTON_POSITION_INGAME::TURRET_PULLUP_Z, BUTTON_POSITION_INGAME::TURRET_PULLUP_MULTI);
+	SetThisOne(CommandSerial::TURRET_PULLDOWN, BUTTON_POSITION_INGAME::TURRET_PULLDOWN_X,
+		BUTTON_POSITION_INGAME::TURRET_PULLDOWN_Z, BUTTON_POSITION_INGAME::TURRET_PULLDOWN_MULTI);
 
 	SetThisOne(CommandSerial::INCREASE_OUTPUT, BUTTON_POSITION_INGAME::INCREASE_OUTPUT_X,
 		BUTTON_POSITION_INGAME::INCREASE_OUTPUT_Z, BUTTON_POSITION_INGAME::INCREASE_OUTPUT_MULTI);
@@ -85,7 +93,7 @@ int ClickableUserInterface::CheckChoice() {
 			Screen::SCREEN_X + buttonPosition[i][2] * buttonPosition[i][4] &&
 			mouseZ > buttonPosition[i][1] * Screen::SCREEN_Z &&
 			mouseZ < buttonPosition[i][1] *
-			Screen::SCREEN_Z + buttonPosition[i][2] * buttonPosition[i][4] * 0.5) {
+			Screen::SCREEN_Z + buttonPosition[i][3] * buttonPosition[i][4]) {
 
 			BC.buttonContainer[i].ChangePressed();
 
@@ -123,6 +131,10 @@ void ClickableUserInterface::SetNormalStatus() {
 	buttonPosition[CommandSerial::TURN_RIGHT][5] = 0;
 	buttonPosition[CommandSerial::TURN_LEFT][5] = 0;
 	buttonPosition[CommandSerial::TURN_RETURN][5] = 0;
+	buttonPosition[CommandSerial::TURRET_TURN_RIGHT][5] = 0;
+	buttonPosition[CommandSerial::TURRET_TURN_LEFT][5] = 0;
+	buttonPosition[CommandSerial::TURRET_PULLUP][5] = 0;
+	buttonPosition[CommandSerial::TURRET_PULLDOWN][5] = 0;
 }
 
 void ClickableUserInterface::LetMeSeeMenu() {

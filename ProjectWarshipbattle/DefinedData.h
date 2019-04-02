@@ -119,6 +119,13 @@ enum ButtonEvent {
 	GAME_OVER
 };
 
+enum UI_LIST {
+	AMOUNT = 10,
+
+	RADAR = 0,
+	ARROW_RED
+};
+
 namespace BUTTON_POSITION {
 	const double START_POSITION_ON_X = .2;
 	const double NEW_GAME = .4;
@@ -146,8 +153,24 @@ namespace BUTTON_POSITION_INGAME {
 	const double EXIT_Z = .20;
 
 	const double SHOOT_MULTI = .06;
-	const double SHOOT_X = .69;
-	const double SHOOT_Z = .82;
+	const double SHOOT_X = .63;
+	const double SHOOT_Z = .88;
+
+	const double TURRET_TURN_LEFT_MULTI = .06;
+	const double TURRET_TURN_LEFT_X = .63;
+	const double TURRET_TURN_LEFT_Z = .91;
+	
+	const double TURRET_TURN_RIGHT_MULTI = .06;
+	const double TURRET_TURN_RIGHT_X = .70;
+	const double TURRET_TURN_RIGHT_Z = .91;
+
+	const double TURRET_PULLUP_MULTI = .06;
+	const double TURRET_PULLUP_X = .63;
+	const double TURRET_PULLUP_Z = .94;
+
+	const double TURRET_PULLDOWN_MULTI = .06;
+	const double TURRET_PULLDOWN_X = .70;
+	const double TURRET_PULLDOWN_Z = .94;
 
 	const double TURN_RIGHT_MULTI = .06;
 	const double TURN_RIGHT_X = 0.5 + .03;
@@ -168,6 +191,21 @@ namespace BUTTON_POSITION_INGAME {
 	const double DECREASE_OUTPUT_MULTI = .06;
 	const double DECREASE_OUTPUT_X = 0.02;
 	const double DECREASE_OUTPUT_Z = 0.86;
+}
+
+namespace USER_INTERFACE_POSITION {
+	const double RADAR_A_MULTI = .04;
+	const double RADAR_A_X = .665;
+	const double RADAR_A_Z = .79;
+
+	const double ARROW_RED_A_MULTI = .036;
+	const double ARROW_RED_A_X = .6928;
+	const double ARROW_RED_A_Z = .834;
+
+	const double SHOOT_CD_MAIN_X = .705;
+	const double SHOOT_CD_MAIN_Z = .885;
+	const int SHOOT_CD_MAIN_SIZE_X = 50;
+	const int SHOOT_CD_MAIN_SIZE_Z = 15;
 }
 
 enum AmmoType {
@@ -214,6 +252,7 @@ namespace MathAndPhysics {
 	const int GRAVITATIONAL_ACCELERATION_INT = 10;
 	const double MIN_AIR_RESISTANCE = 0.0005;
 	const double PI = 3.14159265358;
+	const double OneDegree = 1.0 / 180.0;
 }
 
 namespace MapSize {
@@ -223,8 +262,7 @@ namespace MapSize {
 }
 
 namespace RandomDataWhenShoot {
-	const double radianOnZ = MathAndPhysics::PI * (3 / 180);
-	const double radianOnY = MathAndPhysics::PI * (2 / 180);
+	const double radianOnZ = MathAndPhysics::PI * (1.0 / 180.0);
+	const double radianOnY = MathAndPhysics::PI * (1.0 / 180.0);
 	const double speed = 2;
 }
-

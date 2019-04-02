@@ -37,3 +37,23 @@ bool Weapon::ReferShootable() {
 	}
 	return false;
 }
+
+/*武器ステータス調整*/
+bool Weapon::Pull(bool up) {
+	if (up) {
+		if (radianOnY <= maxRadianOnY) {
+			radianOnY += MathAndPhysics::PI*(double)(1.0 / 180.0);
+			return false;
+		}
+		radianOnY = maxRadianOnY;
+		return true;
+	}
+	else {
+		if (radianOnY >= 0) {
+			radianOnY -= MathAndPhysics::PI*(double)(1.0 / 180.0);
+			return false;
+		}
+		radianOnY = 0;
+		return true;
+	}
+}

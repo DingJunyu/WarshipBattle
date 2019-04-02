@@ -16,7 +16,7 @@ public:
 	/*必ず最後に使う！！！*/
 	void FREE_ALL() { FreePicture(); FreeMemory(); }
 	void FREE_FOR_MAINMENU();
-	
+
 	//問い合わせ関数
 	//船
 	int ReferShipSizeX() { return shipSizeX; }
@@ -24,7 +24,7 @@ public:
 
 	int *ReferBattleCrusierHandle(int x) {
 		return &battleCruiserHandle
-		[x - ShipType::BATTLE_CRUISER*RESERVED_NUMBER_FOR_SHIPS]
+			[x - ShipType::BATTLE_CRUISER*RESERVED_NUMBER_FOR_SHIPS]
 		[SerialNumberOfShipHandle::SHIP_HANDLE];
 	}
 
@@ -51,6 +51,8 @@ public:
 
 	int *ReferMiniMapMatHandle() { return &miniMapMatHandle; }
 	int *ReferMiniMapPaperHandle() { return &miniMapPaperHandle; }
+
+	int *ReferUIList(int x) { return &UIList[x]; }
 
 	//エフェクト
 	int *ReferBubbleHandle() { return &bubbleHandle; }
@@ -123,6 +125,8 @@ private:
 	int shipCardMatHandleZ;
 	int miniMapMatHandle;
 	int miniMapPaperHandle;
+
+	int UIList[UI_LIST::AMOUNT];//すべてのＵＩソースを保存する
 
 	/*艦マーク*/
 	int **markForAllies;

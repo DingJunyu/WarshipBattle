@@ -114,3 +114,5 @@ private:
 	std::list<Effect> bubbleList;
 	std::list<Effect> smokeList;
 };
+
+void SetNewEffect(std::list<Effect> *effectList,std::list<ShipMain> shipList);

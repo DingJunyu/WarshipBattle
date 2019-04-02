@@ -67,6 +67,12 @@ void PictureLoader::LoadPicture() {
 	"GraphicData/User_Interface/Ship_Card_Mat.jpg");
 	GetGraphSize(shipCardMatHandle, &shipCardMatHandleX, &shipCardMatHandleZ);
 
+	/*レーダー*/
+	UIList[UI_LIST::RADAR] = LoadGraph(
+	"GraphicData/User_Interface/Radar.png");
+	UIList[UI_LIST::ARROW_RED] = LoadGraph(
+	"GraphicData/User_Interface/arrow_red.png");
+
 	/*ミニマップ*/
 	miniMapMatHandle = LoadGraph(
 	"GraphicData/User_Interface/MiniMap_Mat.jpg");
