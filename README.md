@@ -21,9 +21,13 @@
 -一人だけでも最高の海戦ゲームを作りたいです。  
 -よろしくお願いします。  
 
-##
-画像データ
-サンプル画面
+##画像データ  
+サンプル画面  
 ![Alt text](ゲーム発想/ゲームサンプル画面.jpg) 
+
+今の状況 2019-4-3
+![Alt text](capturedPicture/mainMenu.jpg)
+
+![Alt text](capturedPicture/game.jpg)
 
 -本ゲームは ＤＸライブラリ を使用しています。ライセンス等はDxLib.txtを参照のこと。
