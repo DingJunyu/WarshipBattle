@@ -1,5 +1,7 @@
 # WarshipBattle  
 自主制作  
+新しい場所に移動しました、これからの更新はここで行います.  
+https://github.com/DingJunyu/WarshipBattleRe  
 
 ##操作説明：
 -←：左に向かて行く  
